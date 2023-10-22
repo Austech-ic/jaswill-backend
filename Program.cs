@@ -1,0 +1,108 @@
+using CMS_appBackend.Context;
+using CMS_appBackend.Implementations.Repositories;
+using CMS_appBackend.Implementations.Services;
+using CMS_appBackend.Interface.Repositories;
+using CMS_appBackend.Interface.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Data;
+using System.Text;
+
+
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(a => a.AddPolicy("CorsPolicy", b => 
+ {
+     b
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+     .AllowAnyOrigin();
+ }));
+
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
+builder.Services.AddScoped<IBlogService, BlogService>();
+builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddHttpContextAccessor();
+
+// Add services to the container.
+
+builder.Services.AddControllers();
+var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
+builder.Services.AddDbContext<ApplicationContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication
+    (CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
+{
+    config.LoginPath = "/AuctionApplication/login";
+    config.Cookie.Name = "AuctionApplication";
+    config.LogoutPath = "/AuctionApplication/Logout";
+});
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
+
+app.UseStaticFiles();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+
+
+
+
+// builder.Services.AddScoped<IAdminService, AdminService>();
+// builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
+// builder.Services.AddScoped<IBlogService, BlogService>();
+// builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+
+// builder.Services.AddScoped<ICommentService, CommentService>();
+// builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+// builder.Services.AddScoped<ICategoryService, CategoryService>();
+// builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+// builder.Services.AddScoped<IPostService, PostService>();
+// builder.Services.AddScoped<IPostRepository, PostRepository>();
+
+// builder.Services.AddScoped<IUserService, UserService>();
+// builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
