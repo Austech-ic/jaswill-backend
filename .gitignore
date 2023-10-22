@@ -1,4 +1,5 @@
-// Database
-./Migrations
-./appsettings.json
-./appsettings.Development.json
+# dependencies
+appsettings.Development.json
+appsettings.json
+
+Migrations
