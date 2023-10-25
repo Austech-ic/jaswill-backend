@@ -7154,11 +7154,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/CMS_appBackend.csproj",
+      "projectUniqueName": "/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/CMS_appBackend.csproj",
       "projectName": "CMS_appBackend",
-      "projectPath": "/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/CMS_appBackend.csproj",
+      "projectPath": "/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/CMS_appBackend.csproj",
       "packagesPath": "/home/fullstackbeast/.nuget/packages/",
-      "outputPath": "/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/obj/",
+      "outputPath": "/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/fullstackbeast/.nuget/NuGet/NuGet.Config"

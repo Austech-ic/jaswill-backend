@@ -3,7 +3,7 @@ using CMS_appBackend.Entities.Identity;
 
 namespace CMS_appBackend.Entities
 {
-    public class Comment : AuditableEntity // donors comments on ngos
+    public class Comment : AuditableEntity
     {
         public string Detail { get; set; }
         public int BlogId { get; set; }

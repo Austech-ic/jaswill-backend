@@ -1,0 +1,69 @@
+using CMS_appBackend.DTOs.RequestModels;
+using CMS_appBackend.Interface.Repositories;
+using CMS_appBackend.Interface.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+namespace jaswill_backend.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class CustomerController : Controller
+    {
+        private readonly ICustomerService _customerService;
+        private readonly IUserService _userService;
+
+        public CustomerController(ICustomerService customerService, IUserService userService)
+        {
+            _customerService = customerService;
+            _userService = userService;
+        }
+
+        [HttpPost("CreateCustomer")]
+        public async Task<IActionResult> CreateCustomer(CreateCustomerRequestModel model)
+        {
+            var customer = await _customerService.CreateCustomer(model);
+            if (customer.Success == true)
+            {
+                return Content(customer.Message);
+            }
+            return Content(customer.Message);
+        }
+
+        [HttpGet("GetAllCustomers")]
+        public async Task<IActionResult> GetAllCustomers()
+        {
+            var customers = await _customerService.GetAll();
+            if(customers.Success == true)
+            {
+                return Content(customers.Message);
+            }
+            return Content(customers.Message);
+        }
+
+        [HttpGet("GetCustomer/{id}")]
+        public async Task<IActionResult> GetCustomer(int id)
+        {
+            var customer = await _customerService.GetCustomer(id);
+            if(customer.Success == true)
+            {
+                return Content(customer.Message);
+            }
+            return Content(customer.Message);
+        }
+
+        [HttpGet("GetCustomerByTypeOfPartner/{typeOfPartner}")]
+        public async Task<IActionResult> GetCustomerByTypeOfPartner(string typeOfPartner)
+        {
+            var customer = await _customerService.GetCustomerByTypeOfPartner(typeOfPartner);
+            if(customer.Success == true)
+            {
+                return Content(customer.Message);
+            }
+            return Content(customer.Message);
+        }
+        
+    }
+}
