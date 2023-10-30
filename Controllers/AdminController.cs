@@ -38,6 +38,17 @@ namespace CMS_appBackend.Controllers
             return Content(admin.Message);
         }
 
+        [HttpPost("AddUserRole")]
+        public async Task<IActionResult> AddUserRole(int UserId, int RoleId)
+        {
+            var userRole = await _adminService.AddUserRole(UserId, RoleId);
+            if (userRole.Success == true)
+            {
+                return Content(userRole.Message);
+            }
+            return Content(userRole.Message);
+        }
+
         [HttpDelete("DeleteAdmin/{id}")]
         public async Task<IActionResult> DeleteAdmin(int id)
         {

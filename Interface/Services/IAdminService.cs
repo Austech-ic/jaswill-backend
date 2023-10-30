@@ -14,5 +14,6 @@ namespace CMS_appBackend.Interface.Services
         Task<BaseResponse> ApproveAdmin(int Id);
         Task<BaseResponse> DeleteAdmin(int Id);
         Task<AdminsResponseModel> GetAllAdmin();
+        Task<BaseResponse> AddUserRole(int UserId, int RoleId);
     }
 }

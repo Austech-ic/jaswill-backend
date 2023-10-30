@@ -5,6 +5,8 @@ using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.Interface.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using CMS_appBackend.Entities.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.Data;
 using System.Text;
 
@@ -42,6 +44,9 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<DatabaseInitializer>();
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
@@ -70,6 +75,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
@@ -82,6 +88,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+    var initializer = serviceProvider.GetRequiredService<DatabaseInitializer>();
+    initializer.Initialize().Wait();
+}
 app.Run();
 
 

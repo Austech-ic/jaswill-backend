@@ -10,9 +10,28 @@ namespace CMS_appBackend.DTOs.RequestModels
         [Required]
         [DataType(DataType.Password, ErrorMessage = "")]
         public string Password { get; set; }
-        // public string Username { get; set; }
-        // public string FirstName { get; set; }
-        // public string LastName { get; set; }
-        // public string PhoneNumber { get; set; }
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+    }
+
+    // public class CreateAdminRequestModelValidator : AbstractValidator<CreateAdminRequestModel>
+    // {
+    //     public CreateAdminRequestModelValidator()
+    //     {
+    //         RuleFor(x => x.Email).NotEmpty().EmailAddress();
+    //         RuleFor(x => x.Password).NotEmpty().MinimumLength(6);
+    //     }
+    // }
+
+    public class ChnagePasswordRequestModel
+    {
+        [Required]
+        [DataType(DataType.Password, ErrorMessage = "")]
+        public string NewPassword { get; set; }
+        [Required]
+        [DataType(DataType.Password, ErrorMessage = "")]
+        public string ConfirmPassword { get; set; }
     }
 }
