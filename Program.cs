@@ -3,6 +3,7 @@ using CMS_appBackend.Implementations.Repositories;
 using CMS_appBackend.Implementations.Services;
 using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.Interface.Services;
+using CMS_appBackend.Email;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Entities.Identity;
@@ -45,6 +46,8 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<DatabaseInitializer>();
 builder.Services.AddHttpContextAccessor();
@@ -62,9 +65,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAuthentication
     (CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
 {
-    config.LoginPath = "/AuctionApplication/login";
-    config.Cookie.Name = "AuctionApplication";
-    config.LogoutPath = "/AuctionApplication/Logout";
+    config.LoginPath = "/CMS_appBackend/login";
+    config.Cookie.Name = "CMS_appBackend";
+    config.LogoutPath = "/CMS_appBackend/Logout";
 });
 var app = builder.Build();
 

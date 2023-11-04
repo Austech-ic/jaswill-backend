@@ -344,6 +344,9 @@ namespace CMSappBackend.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("VerificationCode")
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");

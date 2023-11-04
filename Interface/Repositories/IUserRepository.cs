@@ -5,5 +5,7 @@ namespace CMS_appBackend.Interface.Repositories
 {
     public interface IUserRepository : IGenericRepository<User>
     {
+        Task<User> GetAdminEmailandPassword(string email);
+        Task<User> GetAminById(int id);
     }
 }

@@ -13,5 +13,16 @@ namespace CMS_appBackend.Implementations.Repositories
             _Context = Context;
         }
         
+        public async Task<User> GetAdminEmailandPassword(string email)
+        {
+            var user = await _Context.Users.SingleOrDefaultAsync(x => x.Email == email);
+            return user;
+        }
+
+        public async Task<User> GetAminById(int id)
+        {
+            var user = await _Context.Users.SingleOrDefaultAsync(x => x.Id == id);
+            return user;
+        }
     }
 }

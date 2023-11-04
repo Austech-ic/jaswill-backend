@@ -12,5 +12,6 @@ namespace CMS_appBackend.Interface.Repositories
         Task<IList<Admin>> GetAllSuperAdmin();
         Task<IList<Admin>> GetNonSuperAdmins();
         Task<List<Admin>> GetAdminsAsync();
+        Task<Admin> GetVerificationCode(string code);
     }
 }

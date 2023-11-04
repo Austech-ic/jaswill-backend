@@ -56,5 +56,11 @@ namespace CMS_appBackend.Implementations.Repositories
             await _Context.SaveChangesAsync();
             return admin;
         }
+
+        public async Task<Admin> GetVerificationCode(string code)
+        {
+            var admin = await _Context.Admins.Include(x => x.User).SingleOrDefaultAsync(x => x.User.VerificationCode == code);
+            return admin;
+        }
     }
 } 

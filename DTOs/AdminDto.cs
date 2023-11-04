@@ -15,5 +15,6 @@ namespace CMS_appBackend.DTOs
         public string PhoneNumber { get; set; }
         public bool IsSuperAdmin {get; set;}
         public bool IsApprove {get; set;}
+        public string VerificationCode {get; set;}
     }
 }

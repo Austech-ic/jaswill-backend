@@ -10,6 +10,7 @@ namespace CMS_appBackend.Entities.Identity
         public string? Username { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+        public string? VerificationCode {get; set;}
         public Admin Admin { get; set; }
         public ICollection<UserRole> UserRoles { get; set; } = new HashSet<UserRole>();
     }

@@ -2,40 +2,64 @@ using CMS_appBackend.DTOs;
 using CMS_appBackend.DTOs.ResponseModels;
 using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.Interface.Services;
+using Microsoft.AspNetCore.Identity;
+using CMS_appBackend.Entities.Identity;
 
 namespace CMS_appBackend.Implementations.Services
 {
     public class UserService : IUserService
-
     {
         private readonly IUserRepository _repository;
-        public UserService(IUserRepository repository)
+        private readonly IPasswordHasher<User> _passwordHasher;
+
+        public UserService(IUserRepository repository, IPasswordHasher<User> passwordHasher)
         {
             _repository = repository;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task<UserResponseModel> Login(string email, string password)
         {
+            var user = await _repository.GetAdminEmailandPassword(email);
 
-            var user = await _repository.GetAsync(x => x.Email.Equals(email) && x.Password.Equals(password));
-            if (user != null)
+            if (
+                user == null
+                || _passwordHasher.VerifyHashedPassword(null, user.Password, password)
+                    != PasswordVerificationResult.Success
+            )
             {
                 return new UserResponseModel
                 {
-                    Data = new UserDto(){
-                        Email = user.Email,
-                        Password = user.Password,
-                        Id = user.Id
-                    },
-                    Success = true,
-                    Message = "Sucessfully logged in",
+                    Success = false,
+                    Message = "Email or password is incorrect"
                 };
             }
+
+            // User found and password matches, create a response
+            var userDto = new UserDto
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Id = user.Id,
+                PhoneNumber = user.PhoneNumber,
+                Username = user.Username,
+                VerificationCode = user.VerificationCode,
+            };
+
             return new UserResponseModel
             {
-                Success = false,
-                Message = "Loggin Failed",
+                Success = true,
+                Message = "Login successfully",
+                Data = userDto
             };
+        }
+
+        public bool VerifyPassword(string enteredPassword, string hashedPassword)
+        {
+            // Compare the hashed entered password with the stored hashed password
+            return _passwordHasher.VerifyHashedPassword(null, hashedPassword, enteredPassword)
+                == PasswordVerificationResult.Success;
         }
     }
 }

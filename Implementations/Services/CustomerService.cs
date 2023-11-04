@@ -5,6 +5,8 @@ using CMS_appBackend.Entities.Identity;
 using CMS_appBackend.DTOs.RequestModels;
 using CMS_appBackend.DTOs;
 using CMS_appBackend.Interface.Services;
+using Microsoft.AspNetCore.Identity;
+using CMS_appBackend.Email;
 
 namespace CMS_appBackend.Implementations.Services
 {
@@ -12,14 +14,19 @@ namespace CMS_appBackend.Implementations.Services
     {
         private readonly ICustomerRepository _customerRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IEmailSender _email;
 
         public CustomerService(
             ICustomerRepository customerRepository,
-            IUserRepository userRepository
+            IUserRepository userRepository, IEmailSender email,
+            IPasswordHasher<User> passwordHasher
         )
         {
             _customerRepository = customerRepository;
             _userRepository = userRepository;
+            _passwordHasher = passwordHasher;
+            _email = email;
         }
 
         public async Task<BaseResponse> CreateCustomer(CreateCustomerRequestModel model)
@@ -32,12 +39,13 @@ namespace CMS_appBackend.Implementations.Services
             var newCustomer = new User
             {
                 Email = model.Email,
-                Password = model.Password,
+                Password = _passwordHasher.HashPassword(null, model.Password),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
                 Username = model.Username,
             };
+            newCustomer.Password = _passwordHasher.HashPassword(newCustomer, model.Password);
             var adduser = await _userRepository.CreateAsync(newCustomer);
             var customer = new Customer
             {
@@ -158,6 +166,40 @@ namespace CMS_appBackend.Implementations.Services
                 },
             };
             return customerResponse;
+        }
+
+        public async Task<BaseResponse> ForgetPassword(ForgetPasswordRequestModel model, string email)
+        {
+            var user = await _userRepository.GetAsync(x => x.Email.Equals(email));
+            if (user == null)
+            {
+                return new BaseResponse { Message = "User not found", Success = false, };
+            }
+            var code = Guid.NewGuid().ToString();
+            user.VerificationCode = code;
+            var mail = new EmailRequestModel
+            {
+                ReceiverEmail = model.Email,
+                ReceiverName = model.Email,
+                Message = $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
+                Subject = "Relief-CMS Email Verification",
+            };
+            await _email.SendEmail(mail);
+            await _userRepository.UpdateAsync(user);
+            return new BaseResponse { Message = "Forget password successfully", Success = true, };
+        }
+
+        public async Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model, string code)
+        {
+            var user = await _userRepository.GetAsync(x => x.VerificationCode.Equals(code));
+            if (user == null)
+            {
+                return new BaseResponse { Message = "User not found", Success = false, };
+            }
+            user.Password = model.NewPassword;
+            user.Password = model.ConfirmPassword;
+            await _userRepository.UpdateAsync(user);
+            return new BaseResponse { Message = "Reset password successfully", Success = true, };
         }
     }
 }

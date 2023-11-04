@@ -95,7 +95,6 @@ namespace CMS_appBackend.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, (login.Data.Id).ToString()),
                 new Claim(ClaimTypes.NameIdentifier, login.Data.Email),
-                new Claim(ClaimTypes.NameIdentifier, login.Data.Password),
             };
             var claimsIdentity = new ClaimsIdentity(
                 claims,
@@ -115,6 +114,39 @@ namespace CMS_appBackend.Controllers
         public async Task<IActionResult> UpdateAdmin(UpdateAdminRequestModels model)
         {
             var admin = await _adminService.UpdateAdmin(model);
+            if (admin.Success == true)
+            {
+                return Content(admin.Message);
+            }
+            return Content(admin.Message);
+        }
+
+        [HttpPost("UpdateAdminPassword")]
+        public async Task<IActionResult> UpdateAdminPassword(ChangePasswordRequestModel model, int id)
+        {
+            var admin = await _adminService.ChangePassword(model, id);
+            if (admin.Success == true)
+            {
+                return Content(admin.Message);
+            }
+            return Content(admin.Message);
+        }
+
+        [HttpPost("ForgetPassword")]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordRequestModel model, int Id)
+        {
+            var admin = await _adminService.ForgetPassword(model, Id);
+            if (admin.Success == true)
+            {
+                return Content(admin.Message);
+            }
+            return Content(admin.Message);
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequestModel model, string code)
+        {
+            var admin = await _adminService.ResetPassword(model, code);
             if (admin.Success == true)
             {
                 return Content(admin.Message);

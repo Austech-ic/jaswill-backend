@@ -64,6 +64,28 @@ namespace jaswill_backend.Controllers
             }
             return Content(customer.Message);
         }
+
+        [HttpPost("ForgetPassword")]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordRequestModel model)
+        {
+            var customer = await _customerService.ForgetPassword(model, model.Email);
+            if(customer.Success == true)
+            {
+                return Content(customer.Message);
+            }
+            return Content(customer.Message);
+        }
+
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequestModel model)
+        {
+            var customer = await _customerService.ResetPassword(model, model.Code);
+            if(customer.Success == true)
+            {
+                return Content(customer.Message);
+            }
+            return Content(customer.Message);
+        }
         
     }
 }

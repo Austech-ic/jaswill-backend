@@ -9,6 +9,8 @@ using CMS_appBackend.DTOs.ResponseModels;
 using CMS_appBackend.Entities;
 using CMS_appBackend.Entities.Identity;
 using CMS_appBackend.Interface.Repositories;
+using Microsoft.AspNetCore.Identity;
+using CMS_appBackend.Email;
 
 namespace CMS_appBackend.Implementations.Services
 {
@@ -17,16 +19,22 @@ namespace CMS_appBackend.Implementations.Services
         private readonly IUserRepository _userRepository;
         private readonly IAdminRepository _adminRepository;
         private readonly IRoleRepository _roleRepository;
+        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IEmailSender _email;
 
         public AdminService(
             IUserRepository userRepository,
             IAdminRepository adminRepository,
-            IRoleRepository roleRepository
+            IRoleRepository roleRepository,
+            IEmailSender email,
+            IPasswordHasher<User> passwordHasher
         )
         {
             _userRepository = userRepository;
             _adminRepository = adminRepository;
             _roleRepository = roleRepository;
+            _passwordHasher = passwordHasher;
+            _email = email;
         }
 
         public async Task<BaseResponse> AddAdmin(CreateAdminRequestModel model)
@@ -39,7 +47,7 @@ namespace CMS_appBackend.Implementations.Services
             var newUser = new User
             {
                 Email = model.Email,
-                Password = model.Password,
+                Password = _passwordHasher.HashPassword(null, model.Password),
                 FirstName = model.FirstName,
                 Username = model.Username,
                 LastName = model.LastName,
@@ -156,6 +164,53 @@ namespace CMS_appBackend.Implementations.Services
             admin.User.PhoneNumber = model.PhoneNumber;
             await _adminRepository.UpdateAsync(admin);
             return new BaseResponse { Message = "Admin Updated Successfully", Success = true };
+        }
+
+        public async Task<BaseResponse> ForgetPassword(ForgetPasswordRequestModel model, int Id)
+        {
+            var user = await _userRepository.GetAminById(Id);
+            if (user == null)
+            {
+                return new BaseResponse { Message = "User not found", Success = false };
+            }
+            var code = Guid.NewGuid().ToString();
+            user.VerificationCode = code;
+             var mail = new EmailRequestModel
+            {
+                ReceiverEmail = model.Email,
+                ReceiverName = model.Email,
+                Message = $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
+                Subject = "Jaswill-Real Estate Email Verification",
+            };
+            await _email.SendEmail(mail);
+            await _userRepository.UpdateAsync(user);
+            return new BaseResponse { Message = "Verification Code Sent Successfully", Success = true };
+        }
+
+        public async Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model, String code)
+        {
+            var user = await _userRepository.GetAsync(x => x.VerificationCode == code);
+            if (user == null)
+            {
+                return new BaseResponse { Message = "User not found", Success = false };
+            }
+            user.Password = _passwordHasher.HashPassword(null, model.NewPassword);
+            user.Password = _passwordHasher.HashPassword(null, model.ConfirmPassword);
+            await _userRepository.UpdateAsync(user);
+            return new BaseResponse { Message = "Password Reset Successfully", Success = true };
+        }
+
+        public async Task<BaseResponse> ChangePassword(ChangePasswordRequestModel model, int id)
+        {
+            var user = await _userRepository.GetAsync(x => x.Id == id);
+            if (user == null)
+            {
+                return new BaseResponse { Message = "User not found", Success = false };
+            }
+            user.Password = _passwordHasher.HashPassword(null, model.NewPassword);
+            user.Password = _passwordHasher.HashPassword(null, model.ConfirmPassword);
+            await _userRepository.UpdateAsync(user);
+            return new BaseResponse { Message = "Password Changed Successfully", Success = true };
         }
     }
 }

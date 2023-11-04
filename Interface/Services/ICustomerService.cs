@@ -10,5 +10,7 @@ namespace CMS_appBackend.Interface.Services
         Task<CustomersResponseModel> GetAll();
         Task<CustomerResponseModel> GetCustomer(int id);
         Task<CustomerResponseModel> GetCustomerByTypeOfPartner(string typeOfPartner);
+        Task<BaseResponse> ForgetPassword(ForgetPasswordRequestModel model, String email);
+        Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model, String code);
     }
 }

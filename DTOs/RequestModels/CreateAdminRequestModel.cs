@@ -7,6 +7,7 @@ namespace CMS_appBackend.DTOs.RequestModels
         [Required]
         [DataType(DataType.EmailAddress, ErrorMessage = "")]
         public string Email { get; set; }
+
         [Required]
         [DataType(DataType.Password, ErrorMessage = "")]
         public string Password { get; set; }
@@ -25,11 +26,12 @@ namespace CMS_appBackend.DTOs.RequestModels
     //     }
     // }
 
-    public class ChnagePasswordRequestModel
+    public class ChangePasswordRequestModel
     {
         [Required]
         [DataType(DataType.Password, ErrorMessage = "")]
         public string NewPassword { get; set; }
+
         [Required]
         [DataType(DataType.Password, ErrorMessage = "")]
         public string ConfirmPassword { get; set; }
