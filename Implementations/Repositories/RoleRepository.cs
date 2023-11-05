@@ -1,6 +1,6 @@
 
 using CMS_appBackend.Context;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

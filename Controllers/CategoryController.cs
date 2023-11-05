@@ -15,10 +15,10 @@ namespace CMS_appBackend.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpPost("AddCategory")]
-        public async Task<IActionResult> AddCategory([FromForm] CreateCategoryRequestModel model)
+        [HttpPost("CreateCategory")]
+        public async Task<IActionResult> CreateCategory(CreateCategoryRequestModel model)
         {
-            var add = await _categoryService.AddCategory(model);
+            var add = await _categoryService.CreateCategory(model);
             if (add.Success == false)
             {
                 return BadRequest(add);
@@ -26,10 +26,10 @@ namespace CMS_appBackend.Controllers
             return Ok(add);
         }
 
-        [HttpPut("UpdateCategory/{id}")]
-        public async Task<IActionResult> UpdateCategory([FromForm] UpdateCategoryRequestModel model, [FromRoute]int id)
+        [HttpPut("UpdateCategory")]
+        public async Task<IActionResult> UpdateCategory(UpdateCategoryRequestModel model)
         {
-            var update = await _categoryService.UpdateCategory(model, id);
+            var update = await _categoryService.UpdateCategory(model);
             if (update.Success == false)
             {
                 return BadRequest(update);

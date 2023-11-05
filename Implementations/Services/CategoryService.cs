@@ -16,9 +16,9 @@ namespace CMS_appBackend.Implementations.Services
             _categoryRepository = categoryRepository;
             _blogRepository = blogRepository;
         }
-        public async Task<BaseResponse> AddCategory(CreateCategoryRequestModel model)
+        public async Task<BaseResponse> CreateCategory(CreateCategoryRequestModel model)
         {
-            var check = await _categoryRepository.GetAsync(x => x.CategoryName == model.Name);
+            var check = await _categoryRepository.GetAsync(x => x.CategoryName == model.CategoryName);
             if (check != null)
             {
                 return new BaseResponse
@@ -29,10 +29,7 @@ namespace CMS_appBackend.Implementations.Services
             }
             var category = new Category
             {
-                
-                CategoryName = model.Name,
-                CreatedOn = DateTime.Now,
-                IsDeleted = false
+                CategoryName = model.CategoryName,
             };
             await _categoryRepository.CreateAsync(category);
             return new BaseResponse
@@ -182,17 +179,9 @@ namespace CMS_appBackend.Implementations.Services
             };
         }
 
-        public async Task<BaseResponse> UpdateCategory(UpdateCategoryRequestModel model, int id)
+        public async Task<BaseResponse> UpdateCategory(UpdateCategoryRequestModel model)
         {
-            if (model == null)
-            {
-                return new BaseResponse
-                {
-                    Message = "Category already existed!",
-                    Success = false
-                };
-            }
-            var category = await _categoryRepository.GetAsync(x => x.Id == id);
+            var category = await _categoryRepository.GetById(model.Id);
             if (category == null)
             {
                 return new BaseResponse

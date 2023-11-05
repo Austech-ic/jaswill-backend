@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CMS_appBackend.Entities;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CMS_appBackend.Context

@@ -1,6 +1,6 @@
 using CMS_appBackend.Context;
 using CMS_appBackend.Entities;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using CMS_appBackend.Interface.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +15,7 @@ namespace CMS_appBackend.Implementations.Repositories
         
         public async Task<User> GetAdminEmailandPassword(string email)
         {
-            var user = await _Context.Users.SingleOrDefaultAsync(x => x.Email == email);
+            var user = await _Context.Users.FirstOrDefaultAsync(x => x.Email == email);
             return user;
         }
 

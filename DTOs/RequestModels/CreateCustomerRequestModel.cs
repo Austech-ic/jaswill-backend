@@ -1,8 +1,17 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace CMS_appBackend.DTOs.RequestModels
 {
     public class CreateCustomerRequestModel
     {
         public string BankName { get; set; }
+
+        [Required(ErrorMessage = "Account number is required.")]
+        [StringLength(10, ErrorMessage = "Account number must be 10 digits.")]
+        [RegularExpression(
+            "^[0-9]{1,10}$",
+            ErrorMessage = "Account number must be a numeric value with a maximum of 10 digits."
+        )]
         public string AccountNumber { get; set; }
         public string AccountName { get; set; }
         public string Address { get; set; }

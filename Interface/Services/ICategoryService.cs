@@ -5,8 +5,8 @@ namespace CMS_appBackend.Interface.Services
 {
     public interface ICategoryService
     {
-        Task<BaseResponse> AddCategory(CreateCategoryRequestModel model);
-        Task<BaseResponse> UpdateCategory(UpdateCategoryRequestModel model, int id);
+        Task<BaseResponse> CreateCategory(CreateCategoryRequestModel model);
+        Task<BaseResponse> UpdateCategory(UpdateCategoryRequestModel model);
         Task<CategoriesResponseModel> GetAll();
         Task<CategoryResponseModel> GetById(int id);
         Task<CategoriesResponseModel> GetCategoriesByName(string name);

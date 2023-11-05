@@ -1,5 +1,5 @@
 using CMS_appBackend.Entities;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 
 namespace CMS_appBackend.Interface.Repositories
 {

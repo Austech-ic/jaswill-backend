@@ -1,4 +1,4 @@
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using CMS_appBackend.Interface.Repositories;
 using Microsoft.AspNetCore.Identity;
 using CMS_appBackend.Entities;

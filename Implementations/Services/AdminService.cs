@@ -7,7 +7,7 @@ using CMS_appBackend.Interface.Services;
 using CMS_appBackend.DTOs.RequestModels;
 using CMS_appBackend.DTOs.ResponseModels;
 using CMS_appBackend.Entities;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using CMS_appBackend.Interface.Repositories;
 using Microsoft.AspNetCore.Identity;
 using CMS_appBackend.Email;
@@ -60,29 +60,46 @@ namespace CMS_appBackend.Implementations.Services
             return new BaseResponse { Message = "Admin Added Successfully", Success = true, };
         }
 
-        public async Task<BaseResponse> AddUserRole(int UserId, int RoleId)
+        public async Task<BaseResponse> AddUserRole(int userId, int roleId)
         {
-            var user = await _userRepository.GetAsync(x => x.Id == UserId);
+            // Check if the user exists
+            var user = await _userRepository.GetAsync(x => x.Id == userId);
             if (user == null)
             {
                 return new BaseResponse { Message = "User not found", Success = false };
             }
-            var role = await _roleRepository.GetAsync(x => x.Id == RoleId);
+
+            // Check if the role exists
+            var role = await _roleRepository.GetAsync(x => x.Id == roleId);
             if (role == null)
             {
                 return new BaseResponse { Message = "Role not found", Success = false };
             }
-            var userRole = new UserRole { UserId = user.Id, RoleId = role.Id, };
+
+            // Check if the user already has the role
+            var check = _adminRepository.VerifyAdminRole(roleId);
+            if (check != null)
+            {
+                return new BaseResponse
+                {
+                    Message = "User already has the specified role",
+                    Success = false
+                };
+            }
+
+            // If not, add the role to the user
+            var userRole = new UserRole { UserId = user.Id, RoleId = role.Id };
             user.UserRoles.Add(userRole);
+
+            // Update the user in the repository
             await _userRepository.UpdateAsync(user);
+
             return new BaseResponse { Message = "User Role Added Successfully", Success = true };
         }
 
         public async Task<BaseResponse> DeleteAdmin(int Id)
         {
-            var admin = await _adminRepository.GetAsync(
-                admins => admins.IsDeleted == false && admins.Id == Id
-            );
+            var admin = await _adminRepository.GetAdminInfo(Id);
             if (admin == null)
             {
                 return new BaseResponse { Message = "Admin not found", Success = false };
@@ -126,13 +143,13 @@ namespace CMS_appBackend.Implementations.Services
             }
 
             var adminDtos = admins
-                .Where(administrator => administrator.User != null) 
+                .Where(administrator => administrator.User != null)
                 .Select(
                     administrator =>
                         new AdminDto
                         {
                             Id = administrator.Id,
-                            UserName = administrator.User!.Username, 
+                            UserName = administrator.User!.Username,
                             FirstName = administrator.User!.FirstName,
                             LastName = administrator.User!.LastName,
                             Email = administrator.User!.Email,
@@ -175,16 +192,21 @@ namespace CMS_appBackend.Implementations.Services
             }
             var code = Guid.NewGuid().ToString();
             user.VerificationCode = code;
-             var mail = new EmailRequestModel
+            var mail = new EmailRequestModel
             {
                 ReceiverEmail = model.Email,
                 ReceiverName = model.Email,
-                Message = $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
+                Message =
+                    $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
                 Subject = "Jaswill-Real Estate Email Verification",
             };
             await _email.SendEmail(mail);
             await _userRepository.UpdateAsync(user);
-            return new BaseResponse { Message = "Verification Code Sent Successfully", Success = true };
+            return new BaseResponse
+            {
+                Message = "Verification Code Sent Successfully",
+                Success = true
+            };
         }
 
         public async Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model, String code)

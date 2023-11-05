@@ -6,6 +6,7 @@ namespace CMS_appBackend.Interface.Repositories
     {
         Task<Customer> GetCustomer(int id);
         Task<IList<Customer>> GetAll();
+        Task<Customer> GetCustomerByEmail(string email);
         Task<Customer> GetCutomerByTypeOfPartner(string typeOfPartner);
         Task<Customer> GetVerificationCode(string code);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CMS_appBackend.Contracts;
-namespace CMS_appBackend.Entities.Identity;
+namespace CMS_appBackend.Identity;
 public class Role : AuditableEntity
 {
     public string Name {get; set;}

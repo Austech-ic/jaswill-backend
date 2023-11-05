@@ -1,5 +1,5 @@
 using CMS_appBackend.Entities;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 namespace CMS_appBackend.Interface.Repositories
@@ -13,5 +13,6 @@ namespace CMS_appBackend.Interface.Repositories
         Task<IList<Admin>> GetNonSuperAdmins();
         Task<List<Admin>> GetAdminsAsync();
         Task<Admin> GetVerificationCode(string code);
+        Task<Admin> VerifyAdminRole(int roleId);
     }
 }

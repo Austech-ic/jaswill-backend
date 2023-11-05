@@ -3,7 +3,7 @@ using CMS_appBackend.DTOs.ResponseModels;
 using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.Interface.Services;
 using Microsoft.AspNetCore.Identity;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 
 namespace CMS_appBackend.Implementations.Services
 {

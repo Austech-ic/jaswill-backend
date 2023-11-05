@@ -6,7 +6,7 @@ using CMS_appBackend.Interface.Services;
 using CMS_appBackend.Email;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
 using System.Text;

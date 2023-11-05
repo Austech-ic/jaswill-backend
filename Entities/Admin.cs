@@ -1,8 +1,8 @@
 using CMS_appBackend.Contracts;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 namespace CMS_appBackend.Entities
 {
-    public class Admin : AuditableEntity
+    public class Admin : BaseUser
 {
     public bool IsSuperAdmin { get; set; }
     public int? UserId {get; set;}

@@ -1,8 +1,8 @@
 using CMS_appBackend.Contracts;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 namespace CMS_appBackend.Entities
 {
-    public class Customer : AuditableEntity
+    public class Customer : BaseUser
     {
         public string BankName {get; set;}
         public string AccountNumber {get; set;}

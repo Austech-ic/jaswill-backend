@@ -1,7 +1,7 @@
 using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.DTOs.ResponseModels;
 using CMS_appBackend.Entities;
-using CMS_appBackend.Entities.Identity;
+using CMS_appBackend.Identity;
 using CMS_appBackend.DTOs.RequestModels;
 using CMS_appBackend.DTOs;
 using CMS_appBackend.Interface.Services;
@@ -19,7 +19,8 @@ namespace CMS_appBackend.Implementations.Services
 
         public CustomerService(
             ICustomerRepository customerRepository,
-            IUserRepository userRepository, IEmailSender email,
+            IUserRepository userRepository,
+            IEmailSender email,
             IPasswordHasher<User> passwordHasher
         )
         {
@@ -31,10 +32,10 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BaseResponse> CreateCustomer(CreateCustomerRequestModel model)
         {
-            var user = await _customerRepository.GetAsync(x => x.User.Email.Equals(model.Email));
-            if (user == null)
+            var admin = await _customerRepository.GetAsync(a => a.User.Email == model.Email);
+            if (admin != null)
             {
-                return new BaseResponse { Message = "User not found", Success = false, };
+                return new BaseResponse { Message = "User Already Exist", Success = false, };
             }
             var newCustomer = new User
             {
@@ -88,11 +89,11 @@ namespace CMS_appBackend.Implementations.Services
                                 AccountNumber = x.AccountNumber,
                                 AccountName = x.AccountName,
                                 TypeOfPartner = x.TypeOfPartner,
-                                FirstName = x.User!.FirstName,
-                                LastName = x.User!.LastName,
-                                Email = x.User!.Email,
-                                PhoneNumber = x.User!.PhoneNumber,
-                                Username = x.User!.Username,
+                                FirstName = x.FirstName,
+                                LastName = x.LastName,
+                                Email = x.Email,
+                                PhoneNumber = x.PhoneNumber,
+                                Username = x.Username,
                             }
                     )
                     .ToList(),
@@ -102,7 +103,8 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<CustomerResponseModel> GetCustomer(int id)
         {
-            var customer = await _customerRepository.GetAsync(x => x.Id == id);
+            var customer = await _customerRepository.GetCustomer(id);
+
             if (customer == null)
             {
                 return new CustomerResponseModel
@@ -111,10 +113,8 @@ namespace CMS_appBackend.Implementations.Services
                     Success = false,
                 };
             }
-            var customerResponse = new CustomerResponseModel
+            return new CustomerResponseModel
             {
-                Message = "Get customer successfully",
-                Success = true,
                 Data = new CustomerDto
                 {
                     Id = customer.Id,
@@ -128,16 +128,16 @@ namespace CMS_appBackend.Implementations.Services
                     Email = customer.User.Email,
                     PhoneNumber = customer.User.PhoneNumber,
                     Username = customer.User.Username,
+                    DateOfReg = customer.DateOfReg,
                 },
+                Message = "Get customer successfully",
+                Success = true,
             };
-            return customerResponse;
         }
 
         public async Task<CustomerResponseModel> GetCustomerByTypeOfPartner(string typeOfPartner)
         {
-            var customer = await _customerRepository.GetAsync(
-                x => x.TypeOfPartner.Equals(typeOfPartner)
-            );
+            var customer = await _customerRepository.GetCutomerByTypeOfPartner(typeOfPartner);
             if (customer == null)
             {
                 return new CustomerResponseModel
@@ -163,12 +163,16 @@ namespace CMS_appBackend.Implementations.Services
                     Email = customer.User.Email,
                     PhoneNumber = customer.User.PhoneNumber,
                     Username = customer.User.Username,
+                    DateOfReg = customer.DateOfReg,
                 },
             };
             return customerResponse;
         }
 
-        public async Task<BaseResponse> ForgetPassword(ForgetPasswordRequestModel model, string email)
+        public async Task<BaseResponse> ForgetPassword(
+            ForgetPasswordRequestModel model,
+            string email
+        )
         {
             var user = await _userRepository.GetAsync(x => x.Email.Equals(email));
             if (user == null)
@@ -181,7 +185,8 @@ namespace CMS_appBackend.Implementations.Services
             {
                 ReceiverEmail = model.Email,
                 ReceiverName = model.Email,
-                Message = $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
+                Message =
+                    $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
                 Subject = "Relief-CMS Email Verification",
             };
             await _email.SendEmail(mail);

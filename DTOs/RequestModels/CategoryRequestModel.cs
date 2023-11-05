@@ -2,19 +2,14 @@
 
 namespace CMS_appBackend.DTOs.RequestModel
 {
-    public class CategoryRequestModel
-    {
-       
-    }
     public class CreateCategoryRequestModel
     {
-        [Required]
-        [StringLength(maximumLength: 30, MinimumLength = 5)]
-        public string Name { get; set; }
+        public string CategoryName { get; set; }
     }
 
     public class UpdateCategoryRequestModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

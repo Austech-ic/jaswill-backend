@@ -42,8 +42,8 @@ namespace CMS_appBackend.Controllers
             return Content(post.Message);
         }
 
-        [HttpGet("GetPostsById")]
-        public async Task<IActionResult> GetPostsById(int id)
+        [HttpGet("GetPostById")]
+        public async Task<IActionResult> GetPostById(int id)
         {
             var bidding = await _postService.GetPostByIdAsync(id);
             if (bidding.Success == true)
@@ -64,7 +64,7 @@ namespace CMS_appBackend.Controllers
             return Content(post.Message);
         }
 
-        [HttpGet("GetAppPosts")]
+        [HttpGet("GetAllPosts")]
         public async Task<IActionResult> GetAllPosts()
         {
             var posts = await _postService.GetAllPost();

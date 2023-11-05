@@ -1,5 +1,6 @@
 using CMS_appBackend.Contracts;
-namespace CMS_appBackend.Entities.Identity;
+
+namespace CMS_appBackend.Identity;
 public class UserRole: AuditableEntity
 {
     public int UserId {get; set;}
