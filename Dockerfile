@@ -27,7 +27,7 @@ ENV MYSQL_HOST=localhost
 ENV MYSQL_PORT=3306
 ENV MYSQL_DATABASE=JaswillRealEstate
 ENV MYSQL_USER=root
-ENV MYSQL_PASSWORD=/run/secrets/mysql_password_secret
+ENV MYSQL_PASSWORD=html12345
 
 # Define the entry point for your application
 ENTRYPOINT ["dotnet", "CMS_appBackend.dll"]
