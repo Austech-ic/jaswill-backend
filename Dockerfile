@@ -1,13 +1,14 @@
-# Use the official ASP.NET Core runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:3.1
+# Use the official ASP.NET image as a parent image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 
-# Set the working directory to /app
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the published output of your ASP.NET Core application into the container
-COPY ./out/ .
+# Copy the published output of your MVC application to the container
+COPY ./bin/Debug/net6.0 .
 
-# Expose the port that your application will run on
+# Expose port 80 for HTTP traffic
 EXPOSE 80
-# Define the command to run your application
-CMD ["./CMS_appBackend"]
+
+# Set the entry point for the container
+ENTRYPOINT ["dotnet", "CMS_appBackend.dll"]
