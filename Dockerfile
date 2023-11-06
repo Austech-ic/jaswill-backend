@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y mariadb-client
 EXPOSE 80
 
 # Set environment variables for MySQL connection
-ENV MYSQL_HOST=localhost
+ENV MYSQL_HOST=mysqlinstance
 ENV MYSQL_PORT=3306
 ENV MYSQL_DATABASE=JaswillRealEstate
 ENV MYSQL_USER=root
