@@ -1,7 +1,7 @@
 services:
   - name: jaswillbackend
     buildCommand: "npm install && npm run build"
-    startCommand: "node dist/server.js"
+    startCommand: "node out/server.js"
     env:
       - key: MYSQL_HOST
         fromDatabase:
