@@ -5,4 +5,5 @@ appsettings.json
 Migrations
 Email
 docker-compose.yml
+mysql.env
 ```
