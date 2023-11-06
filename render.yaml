@@ -1,0 +1,9 @@
+services:
+  - name: jaswillbackend
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: production
+      - key: ConnectionStrings__ApplicationContext
+        fromDatabase:
+          name: JaswillRealEstate
+          property: connectionString
