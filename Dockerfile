@@ -15,15 +15,11 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app/out .
 
-# Install MySQL client
-RUN apt-get update && apt-get install -y mariadb-client
-
-
 # Expose the port your application is running on
-EXPOSE 80
+EXPOSE 3000
 
 # Set environment variables for MySQL connection
-ENV MYSQL_HOST=30c4d7a62b4d
+ENV MYSQL_HOST=localhost
 ENV MYSQL_PORT=3306
 ENV MYSQL_DATABASE=JaswillRealEstate
 ENV MYSQL_USER=root

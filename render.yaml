@@ -1,9 +1,25 @@
 services:
   - name: jaswillbackend
-    envVars:
-      - key: ASPNETCORE_ENVIRONMENT
-        value: production
-      - key: ConnectionStrings__ApplicationContext
+    buildCommand: "npm install && npm run build"
+    startCommand: "node dist/server.js"
+    env:
+      - key: MYSQL_HOST
         fromDatabase:
           name: JaswillRealEstate
-          property: connectionString
+          property: localhost
+      - key: MYSQL_PORT
+        fromDatabase:
+          name: JaswillRealEstate
+          property: 3306
+      - key: MYSQL_DATABASE
+        fromDatabase:
+          name: JaswillRealEstate
+          property: jaswillbackend
+      - key: MYSQL_USER
+        fromDatabase:
+          name: JaswillRealEstate
+          property: root
+      - key: MYSQL_PASSWORD
+        fromDatabase:
+          name: JaswillRealEstate
+          property: html12345
