@@ -5,10 +5,9 @@ FROM mcr.microsoft.com/dotnet/aspnet:3.1
 WORKDIR /app
 
 # Copy the published output of your ASP.NET Core application into the container
-COPY ./bin/Release/netcoreapp3.1/publish/ .
+COPY ./out/ .
 
 # Expose the port that your application will run on
 EXPOSE 80
-
 # Define the command to run your application
 CMD ["./CMS_appBackend"]
