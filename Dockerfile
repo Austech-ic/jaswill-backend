@@ -2,8 +2,11 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-# Install the dotenv tool
-RUN dotnet tool install -g dotnet-dotenv
+# Copy the .env file into the image
+COPY .env .env
+
+# Load environment variables from the .env file
+RUN export $(grep -v '^#' .env | xargs)
 
 # Copy the project files and restore dependencies
 COPY *.csproj ./
@@ -11,9 +14,6 @@ RUN dotnet restore
 
 # Copy the remaining files and build the application
 COPY . ./
-
-# Load environment variables from the .env file
-RUN dotnet dotenv add -p .
 
 # Run dotnet publish
 RUN dotnet publish -c Release -o out
