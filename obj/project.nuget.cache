@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "v5GBBl71uURQckZBbmz8DMSUsOFpLe/PXla8pjfST1aKxM5DMHryttfmAu7mEEgln42/rik8Ft2mlyDCLT3AWg==",
-  "success": true,
+  "dgSpecHash": "pn5Q7d8utLBNYFO8+KawtqPsfocgMEe5RUKDhHEMi3zTL1fA/b5d4lx6gEgYAPxX3C+xVeYcXi3GasenKklJ+g==",
+  "success": false,
   "projectFilePath": "/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/CMS_appBackend.csproj",
   "expectedPackageFiles": [
     "/home/fullstackbeast/.nuget/packages/fsharp.core/4.0.1.7-alpha/fsharp.core.4.0.1.7-alpha.nupkg.sha512",
@@ -9,10 +9,10 @@
     "/home/fullstackbeast/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.0/microsoft.aspnetcore.authentication.jwtbearer.3.1.0.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/microsoft.entityframeworkcore/7.0.2/microsoft.entityframeworkcore.7.0.2.nupkg.sha512",
-    "/home/fullstackbeast/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.2/microsoft.entityframeworkcore.abstractions.7.0.2.nupkg.sha512",
+    "/home/fullstackbeast/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.11/microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.2/microsoft.entityframeworkcore.analyzers.7.0.2.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/microsoft.entityframeworkcore.design/7.0.2/microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512",
-    "/home/fullstackbeast/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.2/microsoft.entityframeworkcore.relational.7.0.2.nupkg.sha512",
+    "/home/fullstackbeast/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.11/microsoft.entityframeworkcore.relational.7.0.11.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
@@ -43,6 +43,8 @@
     "/home/fullstackbeast/.nuget/packages/mysqlconnector/2.2.5/mysqlconnector.2.2.5.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/netstandard.library/1.6.1/netstandard.library.1.6.1.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/newtonsoft.json/10.0.3/newtonsoft.json.10.0.3.nupkg.sha512",
+    "/home/fullstackbeast/.nuget/packages/npgsql/7.0.6/npgsql.7.0.6.nupkg.sha512",
+    "/home/fullstackbeast/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.11/npgsql.entityframeworkcore.postgresql.7.0.11.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/owin/1.0.0/owin.1.0.0.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/pomelo.entityframeworkcore.mysql/7.0.0/pomelo.entityframeworkcore.mysql.7.0.0.nupkg.sha512",
     "/home/fullstackbeast/.nuget/packages/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl/4.3.0/runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
@@ -197,6 +199,15 @@
       "warningLevel": 1,
       "message": "Package 'Owin 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
       "libraryId": "Owin",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Detected package downgrade: Microsoft.EntityFrameworkCore from 7.0.11 to 7.0.2. Reference the package directly from the project to select a different version. \n CMS_appBackend -> Npgsql.EntityFrameworkCore.PostgreSQL 7.0.11 -> Microsoft.EntityFrameworkCore (>= 7.0.11 && < 8.0.0) \n CMS_appBackend -> Microsoft.EntityFrameworkCore (>= 7.0.2)",
+      "libraryId": "Microsoft.EntityFrameworkCore",
       "targetGraphs": [
         "net6.0"
       ]

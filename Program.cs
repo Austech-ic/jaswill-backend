@@ -7,6 +7,7 @@ using CMS_appBackend.Email;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Identity;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
 using System.Text;
@@ -56,7 +57,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
-builder.Services.AddDbContext<ApplicationContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
