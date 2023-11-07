@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Identity;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Rewrite;
 using System.Data;
 using System.Text;
 
@@ -80,6 +81,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var rewriteOptions = new RewriteOptions()
+    .AddRedirect("^$", "swagger");  // Redirect from root to Swagger UI
+
+app.UseRewriter(rewriteOptions);
 
 app.UseHttpsRedirection();
 
