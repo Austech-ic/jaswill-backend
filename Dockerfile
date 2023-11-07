@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
 # Copy the .env file into the image
-COPY .env .env
+COPY .env .
 
 # Load environment variables from the .env file
 RUN export $(grep -v '^#' .env | xargs)
