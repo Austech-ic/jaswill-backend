@@ -25,4 +25,4 @@ EXPOSE 80
 ENV DATABASE_URL=postgres://jaswillbackend_user:1Pzo6Mbzt4SwYYaoaMc1lCpPphqwRU4n@dpg-cl50f8s72pts739olh2g-a.oregon-postgres.render.com/jaswillbackend=myrenderdbname.render.com;Port=5432;Database=jaswillbackend;User Id=jaswillbackend_user;Password=1Pzo6Mbzt4SwYYaoaMc1lCpPphqwRU4n;
 
 # Define the entry point for your application
-ENTRYPOINT ["dotnet", "YourCSharpApp.dll"]
+ENTRYPOINT ["dotnet", "CMS_appBackend.dll"]
