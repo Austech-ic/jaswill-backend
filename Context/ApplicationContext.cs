@@ -14,22 +14,6 @@ namespace CMS_appBackend.Context
         {
 
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
-        {
-            // Use environment variables to set the connection string
-            string host = Environment.GetEnvironmentVariable("Render_PostgreSQL_Host");
-            string port = Environment.GetEnvironmentVariable("Render_PostgreSQL_Port");
-            string database = Environment.GetEnvironmentVariable("Render_PostgreSQL_Database");
-            string username = Environment.GetEnvironmentVariable("Render_PostgreSQL_Username");
-            string password = Environment.GetEnvironmentVariable("Render_PostgreSQL_Password");
-
-            string connectionString = $"Host={host};Port={port};Database={database};Username={username};Password={password}";
-
-            optionsBuilder.UseNpgsql(connectionString);
-        }
-    }
         public DbSet<User> Users { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
