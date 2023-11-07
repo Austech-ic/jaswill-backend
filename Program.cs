@@ -56,8 +56,20 @@ builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 
 builder.Services.AddControllers();
-var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
+string host = Environment.GetEnvironmentVariable("Render_PostgreSQL_Host");
+    string port = Environment.GetEnvironmentVariable("Render_PostgreSQL_Port");
+    string database = Environment.GetEnvironmentVariable("Render_PostgreSQL_Database");
+    string username = Environment.GetEnvironmentVariable("Render_PostgreSQL_Username");
+    string password = Environment.GetEnvironmentVariable("Render_PostgreSQL_Password");
+
+    string connectionString = builder.Configuration.GetConnectionString("ApplicationContext")
+        .Replace("{Host}", host)
+        .Replace("{Port}", port)
+        .Replace("{Database}", database)
+        .Replace("{Username}", username)
+        .Replace("{Password}", password);
+
+    builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
