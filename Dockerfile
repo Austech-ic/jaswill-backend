@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y postgresql-client
 EXPOSE 80
 
 # Set environment variables for PostgreSQL connection
-ENV Host=1Pzo6Mbzt4SwYYaoaMc1lCpPphqwRU4n@dpg-cl50f8s72pts739olh2g-a.oregon-postgres.render.com
+ENV Host=dpg-cl50f8s72pts739olh2g-a.oregon-postgres.render.com
 ENV Port=5432
 ENV Database=jaswillbackend
 ENV User Id=jaswillbackend_user
