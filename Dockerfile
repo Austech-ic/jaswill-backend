@@ -6,7 +6,7 @@ WORKDIR /app
 COPY .env .
 
 # Load environment variables from the .env file
-RUN export $(grep -v '^#' .env | xargs)
+RUN export $(cat .env | xargs)
 
 # Copy the project files and restore dependencies
 COPY *.csproj ./
