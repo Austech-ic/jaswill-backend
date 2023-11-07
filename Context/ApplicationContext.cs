@@ -24,6 +24,19 @@ namespace CMS_appBackend.Context
         public DbSet<Comment> Comments{get;set;}
         public DbSet<Customer> Customers{get;set;}
         
-        
+         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                string connectionString = configuration.GetConnectionString("ApplicationContext");
+
+                optionsBuilder.UseNpgsql(connectionString);
+            }
+        }
     }
 }
