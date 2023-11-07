@@ -5,4 +5,5 @@ appsettings.json
 Migrations
 Email
 .env
+Dockerfile
 ```

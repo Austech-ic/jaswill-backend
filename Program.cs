@@ -12,16 +12,17 @@ using Microsoft.AspNetCore.Identity;
 using System.Data;
 using System.Text;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCors(a => a.AddPolicy("CorsPolicy", b => 
- {
-     b
-     .AllowAnyMethod()
-     .AllowAnyHeader()
-     .AllowAnyOrigin();
- }));
+builder.Services.AddCors(
+    a =>
+        a.AddPolicy(
+            "CorsPolicy",
+            b =>
+            {
+                b.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+            }
+        )
+);
 
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IAdminRepository, AdminRepository>();
@@ -56,32 +57,21 @@ builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 
 builder.Services.AddControllers();
-string host = Environment.GetEnvironmentVariable("Render_PostgreSQL_Host");
-    string port = Environment.GetEnvironmentVariable("Render_PostgreSQL_Port");
-    string database = Environment.GetEnvironmentVariable("Render_PostgreSQL_Database");
-    string username = Environment.GetEnvironmentVariable("Render_PostgreSQL_Username");
-    string password = Environment.GetEnvironmentVariable("Render_PostgreSQL_Password");
-
-    string connectionString = builder.Configuration.GetConnectionString("ApplicationContext")
-        .Replace("{Host}", host)
-        .Replace("{Port}", port)
-        .Replace("{Database}", database)
-        .Replace("{Username}", username)
-        .Replace("{Password}", password);
-
-    builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication
-    (CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(config =>
-{
-    config.LoginPath = "/CMS_appBackend/login";
-    config.Cookie.Name = "CMS_appBackend";
-    config.LogoutPath = "/CMS_appBackend/Logout";
-});
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(config =>
+    {
+        config.LoginPath = "/CMS_appBackend/login";
+        config.Cookie.Name = "CMS_appBackend";
+        config.LogoutPath = "/CMS_appBackend/Logout";
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -90,7 +80,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 app.UseHttpsRedirection();
 
@@ -108,13 +97,9 @@ using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;
     var initializer = serviceProvider.GetRequiredService<DatabaseInitializer>();
-    initializer.Initialize().Wait();
+    await initializer.Initialize().ConfigureAwait(false);
 }
 app.Run();
-
-
-
-
 
 // builder.Services.AddScoped<IAdminService, AdminService>();
 // builder.Services.AddScoped<IAdminRepository, AdminRepository>();
