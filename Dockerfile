@@ -22,11 +22,11 @@ RUN apt-get update && apt-get install -y postgresql-client
 EXPOSE 80
 
 # Set environment variables for PostgreSQL connection
-ENV Host=dpg-cl50f8s72pts739olh2g-a.oregon-postgres.render.com
-ENV Port=5432
-ENV Database=jaswillbackend
-ENV User Id=jaswillbackend_user
-ENV Password=1Pzo6Mbzt4SwYYaoaMc1lCpPphqwRU4n
+ENV Host=${Host}
+ENV Port=${Port}
+ENV Database=${Database}
+ENV Username=${Username}
+ENV Password=${Password}
 
 # Define the entry point for your application
 ENTRYPOINT ["dotnet", "CMS_appBackend.dll"]
