@@ -1,0 +1,7 @@
+services:
+  - name: jaswillbackend
+    env:
+      - key: postgres://jaswillbackend_user:1Pzo6Mbzt4SwYYaoaMc1lCpPphqwRU4n@dpg-cl50f8s72pts739olh2g-a.oregon-postgres.render.com/jaswillbackend
+        fromDatabase:
+          name: jaswillbackend
+          property: connectionString
