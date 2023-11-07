@@ -132,3 +132,5 @@
 /home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/obj/Debug/net6.0/CMS_appBackend.pdb
 /home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/obj/Debug/net6.0/CMS_appBackend.genruntimeconfig.cache
 /home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/obj/Debug/net6.0/ref/CMS_appBackend.dll
+/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/bin/Debug/net6.0/Npgsql.dll
+/home/fullstackbeast/Desktop/Musodiq/CMS_appBackend/jaswill-backend/bin/Debug/net6.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll

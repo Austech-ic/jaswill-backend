@@ -10,10 +10,11 @@
         "dependencies": {
           "FSharp.Core": "4.0.1.7-alpha",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.0",
-          "Microsoft.EntityFrameworkCore": "7.0.2",
+          "Microsoft.EntityFrameworkCore": "7.0.13",
           "Microsoft.EntityFrameworkCore.Design": "7.0.2",
           "Microsoft.Owin.Host.SystemWeb": "4.2.2",
           "Microsoft.Owin.Security.Jwt": "4.2.2",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11",
           "Pomelo.EntityFrameworkCore.MySql": "7.0.0",
           "Swashbuckle.AspNetCore": "6.2.3",
           "System.IdentityModel.Tokens.Jwt": "6.27.0"
@@ -63,34 +64,34 @@
         }
       },
       "Microsoft.CSharp/4.5.0": {},
-      "Microsoft.EntityFrameworkCore/7.0.2": {
+      "Microsoft.EntityFrameworkCore/7.0.13": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.2",
-          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.2",
+          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.13",
+          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.13",
           "Microsoft.Extensions.Caching.Memory": "7.0.0",
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Microsoft.Extensions.Logging": "7.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.dll": {
-            "assemblyVersion": "7.0.2.0",
-            "fileVersion": "7.0.222.58006"
+            "assemblyVersion": "7.0.13.0",
+            "fileVersion": "7.0.1323.51806"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/7.0.2": {
+      "Microsoft.EntityFrameworkCore.Abstractions/7.0.13": {
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
-            "assemblyVersion": "7.0.2.0",
-            "fileVersion": "7.0.222.58006"
+            "assemblyVersion": "7.0.13.0",
+            "fileVersion": "7.0.1323.51806"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/7.0.2": {},
+      "Microsoft.EntityFrameworkCore.Analyzers/7.0.13": {},
       "Microsoft.EntityFrameworkCore.Design/7.0.2": {
         "dependencies": {
           "Humanizer.Core": "2.14.1",
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.2",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.11",
           "Microsoft.Extensions.DependencyModel": "7.0.0",
           "Mono.TextTemplating": "2.2.1"
         },
@@ -101,15 +102,15 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/7.0.2": {
+      "Microsoft.EntityFrameworkCore.Relational/7.0.11": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "7.0.2",
+          "Microsoft.EntityFrameworkCore": "7.0.13",
           "Microsoft.Extensions.Configuration.Abstractions": "7.0.0"
         },
         "runtime": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Relational.dll": {
-            "assemblyVersion": "7.0.2.0",
-            "fileVersion": "7.0.222.58006"
+            "assemblyVersion": "7.0.11.0",
+            "fileVersion": "7.0.1123.40906"
           }
         }
       },
@@ -466,6 +467,32 @@
           }
         }
       },
+      "Npgsql/7.0.6": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Npgsql.dll": {
+            "assemblyVersion": "7.0.6.0",
+            "fileVersion": "7.0.6.0"
+          }
+        }
+      },
+      "Npgsql.EntityFrameworkCore.PostgreSQL/7.0.11": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.13",
+          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.13",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.11",
+          "Npgsql": "7.0.6"
+        },
+        "runtime": {
+          "lib/net6.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
+            "assemblyVersion": "7.0.11.0",
+            "fileVersion": "7.0.11.0"
+          }
+        }
+      },
       "Owin/1.0.0": {
         "runtime": {
           "lib/net40/Owin.dll": {
@@ -476,7 +503,7 @@
       },
       "Pomelo.EntityFrameworkCore.MySql/7.0.0": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "7.0.2",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.11",
           "MySqlConnector": "2.2.5"
         },
         "runtime": {
@@ -1355,26 +1382,26 @@
       "path": "microsoft.csharp/4.5.0",
       "hashPath": "microsoft.csharp.4.5.0.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore/7.0.2": {
+    "Microsoft.EntityFrameworkCore/7.0.13": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5QEspjTHk/cgM98AaB12mDXF7jlInlYhG0gxS6X8ZJ2rzmyIAsvYNEwoOUifd/gt5v5HblYClYfZ9YYIEjSkew==",
-      "path": "microsoft.entityframeworkcore/7.0.2",
-      "hashPath": "microsoft.entityframeworkcore.7.0.2.nupkg.sha512"
+      "sha512": "sha512-fACONzJtzLJQ29soFqBr0OzgmIYMHV7y9AEZ18hqGx2K0FMJNqezAcfzovc4WI+kT9IvOFQKhDNTl5DMimgkMA==",
+      "path": "microsoft.entityframeworkcore/7.0.13",
+      "hashPath": "microsoft.entityframeworkcore.7.0.13.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/7.0.2": {
+    "Microsoft.EntityFrameworkCore.Abstractions/7.0.13": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nszewdtuQAk2DbhNnGssRCYVxyBhm0DZHJobU8Bc4RGPuybraCv/lovFWPUeZlTT3bQndyV8Ko2NHKSc4qsKCg==",
-      "path": "microsoft.entityframeworkcore.abstractions/7.0.2",
-      "hashPath": "microsoft.entityframeworkcore.abstractions.7.0.2.nupkg.sha512"
+      "sha512": "sha512-VxChscv7EsedfuhMAqJ82IxWBYyScCnMwMb1j4+264rIZteeWhj0CJX+u139JCCE9TcvoT97IsCmbb5Jcav5tg==",
+      "path": "microsoft.entityframeworkcore.abstractions/7.0.13",
+      "hashPath": "microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/7.0.2": {
+    "Microsoft.EntityFrameworkCore.Analyzers/7.0.13": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-75dDCNXzoQFM86Mk/iY7lQ+XHb2DbpAh53hbAJUlxkL3XUVoCq6rWgO4y1EX7DdyKMF61dsdEKlF4/bmpi4urA==",
-      "path": "microsoft.entityframeworkcore.analyzers/7.0.2",
-      "hashPath": "microsoft.entityframeworkcore.analyzers.7.0.2.nupkg.sha512"
+      "sha512": "sha512-3GiAd0b30L+31/86mtpLDf0Hf4Fnze4yx7hVXaW4wBd6KomIqacGaf+s9rMYNdJZEyKvUJPaBsghY+FgKOoAHg==",
+      "path": "microsoft.entityframeworkcore.analyzers/7.0.13",
+      "hashPath": "microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore.Design/7.0.2": {
       "type": "package",
@@ -1383,12 +1410,12 @@
       "path": "microsoft.entityframeworkcore.design/7.0.2",
       "hashPath": "microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Relational/7.0.2": {
+    "Microsoft.EntityFrameworkCore.Relational/7.0.11": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-TbTGOdaGtjps3GP7rLWXEXzmP+EXhV8AwPE/ov0QYhs5i5vKZX5ZpVLMnco2MeMtiPgLyxE7DhQT8s1wlu190g==",
-      "path": "microsoft.entityframeworkcore.relational/7.0.2",
-      "hashPath": "microsoft.entityframeworkcore.relational.7.0.2.nupkg.sha512"
+      "sha512": "sha512-yHEEyah1XARStV1SJOsdKj8ieoMCZ0MkNuQaLfWONMWmbqwuDohfGQZk/FuzdT4aO/lJrUYiXbBSFv0ACzphEw==",
+      "path": "microsoft.entityframeworkcore.relational/7.0.11",
+      "hashPath": "microsoft.entityframeworkcore.relational.7.0.11.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
       "type": "package",
@@ -1599,6 +1626,20 @@
       "sha512": "sha512-hSXaFmh7hNCuEoC4XNY5DrRkLDzYHqPx/Ik23R4J86Z7PE/Y6YidhG602dFVdLBRSdG6xp9NabH3dXpcoxWvww==",
       "path": "newtonsoft.json/10.0.3",
       "hashPath": "newtonsoft.json.10.0.3.nupkg.sha512"
+    },
+    "Npgsql/7.0.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TAqvwRnm3NJ0QvN7cvu6geJkbI0XPzGVRElVY5hF4gsgA+BnE12x6GM1TLhdeq+7ZKvvo3BD8jXKnXmr3tvdEw==",
+      "path": "npgsql/7.0.6",
+      "hashPath": "npgsql.7.0.6.nupkg.sha512"
+    },
+    "Npgsql.EntityFrameworkCore.PostgreSQL/7.0.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cHEgEz0ldXc9wVANs8sJqC+3eilqefrkasCBgaVT0tyj8tb1p3/pwy2ngjboNkDG3M0z+xJsJ4jC5p8wySAM3w==",
+      "path": "npgsql.entityframeworkcore.postgresql/7.0.11",
+      "hashPath": "npgsql.entityframeworkcore.postgresql.7.0.11.nupkg.sha512"
     },
     "Owin/1.0.0": {
       "type": "package",

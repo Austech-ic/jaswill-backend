@@ -69,11 +69,11 @@
           "lib/netcoreapp2.0/_._": {}
         }
       },
-      "Microsoft.EntityFrameworkCore/7.0.2": {
+      "Microsoft.EntityFrameworkCore/7.0.13": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.2",
-          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.2",
+          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.13",
+          "Microsoft.EntityFrameworkCore.Analyzers": "7.0.13",
           "Microsoft.Extensions.Caching.Memory": "7.0.0",
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Microsoft.Extensions.Logging": "7.0.0"
@@ -92,7 +92,7 @@
           "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props": {}
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/7.0.11": {
+      "Microsoft.EntityFrameworkCore.Abstractions/7.0.13": {
         "type": "package",
         "compile": {
           "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
@@ -105,7 +105,7 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/7.0.2": {
+      "Microsoft.EntityFrameworkCore.Analyzers/7.0.13": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/_._": {}
@@ -2528,10 +2528,10 @@
         "version.txt"
       ]
     },
-    "Microsoft.EntityFrameworkCore/7.0.2": {
-      "sha512": "5QEspjTHk/cgM98AaB12mDXF7jlInlYhG0gxS6X8ZJ2rzmyIAsvYNEwoOUifd/gt5v5HblYClYfZ9YYIEjSkew==",
+    "Microsoft.EntityFrameworkCore/7.0.13": {
+      "sha512": "fACONzJtzLJQ29soFqBr0OzgmIYMHV7y9AEZ18hqGx2K0FMJNqezAcfzovc4WI+kT9IvOFQKhDNTl5DMimgkMA==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore/7.0.2",
+      "path": "microsoft.entityframeworkcore/7.0.13",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2539,35 +2539,35 @@
         "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props",
         "lib/net6.0/Microsoft.EntityFrameworkCore.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.7.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.7.0.13.nupkg.sha512",
         "microsoft.entityframeworkcore.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/7.0.11": {
-      "sha512": "IoOnhycZ0/VtLowf0HgB0cujxwksokzkS3/5108AHOcbntHUTqwxtCjG4E4FCly/45G+mxb+4PxBdFZhA49lwQ==",
+    "Microsoft.EntityFrameworkCore.Abstractions/7.0.13": {
+      "sha512": "VxChscv7EsedfuhMAqJ82IxWBYyScCnMwMb1j4+264rIZteeWhj0CJX+u139JCCE9TcvoT97IsCmbb5Jcav5tg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.abstractions/7.0.11",
+      "path": "microsoft.entityframeworkcore.abstractions/7.0.13",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll",
         "lib/net6.0/Microsoft.EntityFrameworkCore.Abstractions.xml",
-        "microsoft.entityframeworkcore.abstractions.7.0.11.nupkg.sha512",
+        "microsoft.entityframeworkcore.abstractions.7.0.13.nupkg.sha512",
         "microsoft.entityframeworkcore.abstractions.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/7.0.2": {
-      "sha512": "75dDCNXzoQFM86Mk/iY7lQ+XHb2DbpAh53hbAJUlxkL3XUVoCq6rWgO4y1EX7DdyKMF61dsdEKlF4/bmpi4urA==",
+    "Microsoft.EntityFrameworkCore.Analyzers/7.0.13": {
+      "sha512": "3GiAd0b30L+31/86mtpLDf0Hf4Fnze4yx7hVXaW4wBd6KomIqacGaf+s9rMYNdJZEyKvUJPaBsghY+FgKOoAHg==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.analyzers/7.0.2",
+      "path": "microsoft.entityframeworkcore.analyzers/7.0.13",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
         "analyzers/dotnet/cs/Microsoft.EntityFrameworkCore.Analyzers.dll",
         "lib/netstandard2.0/_._",
-        "microsoft.entityframeworkcore.analyzers.7.0.2.nupkg.sha512",
+        "microsoft.entityframeworkcore.analyzers.7.0.13.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
@@ -7576,7 +7576,7 @@
     "net6.0": [
       "FSharp.Core >= 4.0.1.7-alpha",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.0",
-      "Microsoft.EntityFrameworkCore >= 7.0.2",
+      "Microsoft.EntityFrameworkCore >= 7.0.13",
       "Microsoft.EntityFrameworkCore.Design >= 7.0.2",
       "Microsoft.Owin.Host.SystemWeb >= 4.2.2",
       "Microsoft.Owin.Security.Jwt >= 4.2.2",
@@ -7633,7 +7633,7 @@
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
-            "version": "[7.0.2, )"
+            "version": "[7.0.13, )"
           },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -7752,15 +7752,6 @@
       "warningLevel": 1,
       "message": "Package 'Owin 1.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
       "libraryId": "Owin",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    },
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Detected package downgrade: Microsoft.EntityFrameworkCore from 7.0.11 to 7.0.2. Reference the package directly from the project to select a different version. \n CMS_appBackend -> Npgsql.EntityFrameworkCore.PostgreSQL 7.0.11 -> Microsoft.EntityFrameworkCore (>= 7.0.11 && < 8.0.0) \n CMS_appBackend -> Microsoft.EntityFrameworkCore (>= 7.0.2)",
-      "libraryId": "Microsoft.EntityFrameworkCore",
       "targetGraphs": [
         "net6.0"
       ]
