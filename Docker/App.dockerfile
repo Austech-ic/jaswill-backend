@@ -1,6 +1,23 @@
 # Use the official .NET SDK image as a base image
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+# Set the build configuration to Debug
+ENV BUILD_CONFIG Debug
+
+# Set maintainer information and labels
+LABEL maintainer=some_email@email_server.com \
+    Name=jaswillbackend-${BUILD_CONFIG} \
+    Version=0.0.1
+
+# Set the URL port from the build argument
+ARG URL_PORT
+ENV ASPNETCORE_URLS http://*:${URL_PORT}
+
+# Set working directory
 WORKDIR /app
+
+# Skip NuGet XML documentation
+ENV NUGET_XMLDOC_MODE skip
 
 # Copy the project files and restore dependencies
 COPY *.csproj ./
@@ -15,15 +32,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app/out .
 
-# Expose the port your application is running on
-EXPOSE 3000
-
-# Set environment variables for MySQL connection
-ENV MYSQL_HOST=localhost
-ENV MYSQL_PORT=3306
-ENV MYSQL_DATABASE=JaswillRealEstate
-ENV MYSQL_USER=root
-ENV MYSQL_PASSWORD=html12345
-
-# Define the entry point for your application
+# Set the entry point for the container
 ENTRYPOINT ["dotnet", "CMS_appBackend.dll"]
