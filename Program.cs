@@ -59,7 +59,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString, options => options.CommandTimeout(60)));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
