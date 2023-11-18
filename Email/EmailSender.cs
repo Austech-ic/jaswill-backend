@@ -20,11 +20,15 @@ namespace CMS_appBackend.Email
         {
             var mailgunApiKey = _configuration["Mailgun:api-key"];
             var mailgunDomain = _configuration["Mailgun:domain"];
-            var mailgunApiUrl = $"https://api.mailgun.net/v3/{mailgunDomain}/messages";
+            var mailgunApiUrl = _configuration["Mailgun:api-url"] + mailgunDomain + "/messages";
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{mailgunApiKey}")));
+                client.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue(
+                        "Basic",
+                        Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{mailgunApiKey}"))
+                    );
 
                 var form = new Dictionary<string, string>
                 {
@@ -35,7 +39,10 @@ namespace CMS_appBackend.Email
                     // Add other Mailgun parameters as needed
                 };
 
-                var response = await client.PostAsync(mailgunApiUrl, new FormUrlEncodedContent(form));
+                var response = await client.PostAsync(
+                    mailgunApiUrl,
+                    new FormUrlEncodedContent(form)
+                );
 
                 return response.IsSuccessStatusCode;
             }
