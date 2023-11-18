@@ -32,7 +32,7 @@ namespace CMS_appBackend.Email
 
                 var form = new Dictionary<string, string>
                 {
-                    { "from", "Jaswill Real Estate <aderibigbeolamide56@gmail.com>" },
+                    { "from", "Jaswill Real Estate <admin@jaswill.com>" },
                     { "to", $"{email.ReceiverName} <{email.ReceiverEmail}>" },
                     { "subject", email.Subject },
                     { "html", $"<html><body><h6>{email.Message}</h6></body></html>" }
