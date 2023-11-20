@@ -45,12 +45,12 @@ namespace CMS_appBackend.Controllers
         [HttpGet("GetPostById")]
         public async Task<IActionResult> GetPostById(int id)
         {
-            var bidding = await _postService.GetPostByIdAsync(id);
-            if (bidding.Success == true)
+            var post = await _postService.GetPostByIdAsync(id);
+            if (post.Success == true)
             {
-                return Ok();
+                return Ok(post);
             }
-            return Content(bidding.Message);
+            return BadRequest(post);
         }
 
         [HttpDelete("DeletePost")]
@@ -70,9 +70,9 @@ namespace CMS_appBackend.Controllers
             var posts = await _postService.GetAllPost();
             if (posts.Success == true)
             {
-                return Ok();
+                return Ok(posts);
             }
-            return Content(posts.Message);
+            return BadRequest(posts);
         }
     }
 }

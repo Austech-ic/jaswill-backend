@@ -44,7 +44,11 @@ namespace CMS_appBackend.Controllers
         public async Task<IActionResult> ViewAllRoles()
         {
             var roles = await _roleService.GetAllRoleAsync();
-            return Ok();
+            if (roles.Success == true)
+            {
+                return Ok(roles);
+            }
+            return BadRequest(roles);
         }
     }
 }

@@ -77,9 +77,9 @@ namespace CMS_appBackend.Controllers
             var admin = await _adminService.ApproveAdmin(id);
             if (admin.Success == true)
             {
-                return Content(admin.Message);
+                return Ok(admin);
             }
-            return Content(admin.Message);
+            return BadRequest(admin);
         }
 
         [HttpPost("LoginAdmin")]

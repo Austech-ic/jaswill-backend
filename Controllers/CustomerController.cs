@@ -38,9 +38,9 @@ namespace jaswill_backend.Controllers
             var customers = await _customerService.GetAll();
             if(customers.Success == true)
             {
-                return Content(customers.Message);
+                return Ok(customers);
             }
-            return Content(customers.Message);
+            return BadRequest(customers);
         }
 
         [HttpGet("GetCustomer/{id}")]
@@ -49,9 +49,9 @@ namespace jaswill_backend.Controllers
             var customer = await _customerService.GetCustomer(id);
             if(customer.Success == true)
             {
-                return Content(customer.Message);
+                return Ok(customer);
             }
-            return Content(customer.Message);
+            return BadRequest(customer);
         }
 
         [HttpGet("GetCustomerByTypeOfPartner/{typeOfPartner}")]
@@ -60,9 +60,9 @@ namespace jaswill_backend.Controllers
             var customer = await _customerService.GetCustomerByTypeOfPartner(typeOfPartner);
             if(customer.Success == true)
             {
-                return Content(customer.Message);
+                return Ok(customer);
             }
-            return Content(customer.Message);
+            return BadRequest(customer);
         }
 
         [HttpPost("ForgetPassword")]

@@ -38,9 +38,9 @@ namespace CMS_appBackend.Controllers
             var blog = await _blogService.GetBlogById(Id);
             if (blog.Success == true)
             {
-                return Content(blog.Message);
+                return Ok(blog);
             }
-            return Content(blog.Message);
+            return BadRequest(blog);
         }
 
         [HttpPut("UpdateBlog")]
@@ -60,9 +60,9 @@ namespace CMS_appBackend.Controllers
             var blog = await _blogService.GetBlogsToDisplayAsync();
             if (blog.Success == true)
             {
-                return Content(blog.Message);
+                return Ok(blog);
             }
-            return Content(blog.Message);
+            return BadRequest(blog);
         }
 
         [HttpDelete("DeleteBlog")]
@@ -82,9 +82,9 @@ namespace CMS_appBackend.Controllers
             var blog = await _blogService.GetBlogsByDateAsync(Date);
             if (blog.Success == true)
             {
-                return Content(blog.Message);
+                return Ok(blog);
             }
-            return Content(blog.Message);
+            return BadRequest(blog);
         }
 
         [HttpGet("GetAllBlogsAsync")]
@@ -93,9 +93,9 @@ namespace CMS_appBackend.Controllers
             var blog = await _blogService.GetAllBlogsAsync();
             if (blog.Success == true)
             {
-                return Content(blog.Message);
+                return Ok(blog);
             }
-            return Content(blog.Message);
+            return BadRequest(blog);
         }
 
         [HttpGet("GetBlogByContentName")]
@@ -104,9 +104,9 @@ namespace CMS_appBackend.Controllers
             var blog = await _blogService.GetBlogByContentName(ContentName);
             if (blog.Success == true)
             {
-                return Content(blog.Message);
+                return Ok(blog);
             }
-            return Content(blog.Message);
+            return BadRequest(blog);
         }
     }
 }
