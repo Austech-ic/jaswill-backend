@@ -59,7 +59,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
-builder.Services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(connectionString, options => options.CommandTimeout(60)));
+builder.Services.AddDbContext<ApplicationContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -106,3 +106,25 @@ using (var scope = app.Services.CreateScope())
     await initializer.Initialize().ConfigureAwait(false);
 }
 app.Run();
+
+// builder.Services.AddScoped<IAdminService, AdminService>();
+// builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+
+// builder.Services.AddScoped<IBlogService, BlogService>();
+// builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+
+// builder.Services.AddScoped<ICommentService, CommentService>();
+// builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+// builder.Services.AddScoped<ICategoryService, CategoryService>();
+// builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+// builder.Services.AddScoped<IPostService, PostService>();
+// builder.Services.AddScoped<IPostRepository, PostRepository>();
+
+// builder.Services.AddScoped<IUserService, UserService>();
+// builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
+builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();

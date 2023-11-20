@@ -24,25 +24,18 @@ namespace CMS_appBackend.Email
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization =
-                    new System.Net.Http.Headers.AuthenticationHeaderValue(
-                        "Basic",
-                        Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{mailgunApiKey}"))
-                    );
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{mailgunApiKey}")));
 
                 var form = new Dictionary<string, string>
                 {
-                    { "from", "Jaswill Real Estate <admin@jaswill.com>" },
+                    { "from", "Jaswill Real Estate <aderibigbeolamide56@gmail.com>" },
                     { "to", $"{email.ReceiverName} <{email.ReceiverEmail}>" },
                     { "subject", email.Subject },
                     { "html", $"<html><body><h6>{email.Message}</h6></body></html>" }
                     // Add other Mailgun parameters as needed
                 };
 
-                var response = await client.PostAsync(
-                    mailgunApiUrl,
-                    new FormUrlEncodedContent(form)
-                );
+                var response = await client.PostAsync(mailgunApiUrl, new FormUrlEncodedContent(form));
 
                 return response.IsSuccessStatusCode;
             }

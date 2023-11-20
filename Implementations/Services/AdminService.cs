@@ -52,6 +52,7 @@ namespace CMS_appBackend.Implementations.Services
                 Username = model.Username,
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
+                IsDeleted = false,
             };
             var adduser = await _userRepository.CreateAsync(newUser);
 
@@ -141,7 +142,6 @@ namespace CMS_appBackend.Implementations.Services
                     Success = false
                 };
             }
-
             var adminDtos = admins
                 .Where(administrator => administrator.User != null)
                 .Select(

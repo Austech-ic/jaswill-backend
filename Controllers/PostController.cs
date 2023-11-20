@@ -48,7 +48,7 @@ namespace CMS_appBackend.Controllers
             var bidding = await _postService.GetPostByIdAsync(id);
             if (bidding.Success == true)
             {
-                return View(bidding);
+                return Ok();
             }
             return Content(bidding.Message);
         }
@@ -70,7 +70,7 @@ namespace CMS_appBackend.Controllers
             var posts = await _postService.GetAllPost();
             if (posts.Success == true)
             {
-                return View(posts);
+                return Ok();
             }
             return Content(posts.Message);
         }

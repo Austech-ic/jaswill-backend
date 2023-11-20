@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "OxSPZVirzZ54kmleSEhFcCQe9X2gnr4O4LDeQWgYZig=",
+  "Source": "CMS_appBackend",
+  "BasePath": "_content/CMS_appBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

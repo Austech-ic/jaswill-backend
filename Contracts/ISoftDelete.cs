@@ -6,6 +6,6 @@ namespace CMS_appBackend.Contracts
     {
         DateTime? DeletedOn { get; set; }
         int? DeletedBy { get; set; }
-        bool ? IsDeleted { get; set; }  
+        bool  IsDeleted { get; set; }  
     }
 }

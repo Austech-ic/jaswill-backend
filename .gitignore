@@ -6,4 +6,5 @@ Migrations
 Email
 .env
 Dockerfile
+ftp.PublishSettings
 ```

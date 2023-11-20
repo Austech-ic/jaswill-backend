@@ -60,9 +60,10 @@ namespace CMS_appBackend.Implementations.Repositories
         public async Task<List<Admin>> GetAdminsAsync()
         {
             var admins = await _Context.Admins
-                .Include(admin => admin.User)
+                .Include(a => a.User)
                 .Where(adm => adm.IsDeleted == false)
                 .ToListAsync();
+                Console.WriteLine($"Admins Count: {admins?.Count}");
             return admins;
         }
 

@@ -9,7 +9,7 @@ namespace CMS_appBackend.Contracts
         public DateTime? LastModifiedOn { get ; set ; }
         public DateTime? DeletedOn { get ; set; }
         public int? DeletedBy { get ; set ; }
-        public bool? IsDeleted { get ; set ; }
+        public bool IsDeleted { get ; set ; } 
         DateTime? IAuditableEntity.CreatedOn { get;   set;    }
         DateTime? IAuditableEntity.LastModifiedOn { get; set; }
     }

@@ -56,14 +56,9 @@ namespace CMS_appBackend.Controllers
                 principal,
                 authenticationProperties
             );
-            return RedirectToAction("Index", "Admin");
+            return Ok();
         }
 
-        [HttpGet("Logout")]
-        public IActionResult Logout()
-        {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("StaffLogin");
-        }
+        
     }
 }

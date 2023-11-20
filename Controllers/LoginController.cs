@@ -39,14 +39,7 @@ namespace CMS_appBackend.Controllers
             }
             else if (login.Success == true && role == null)
             {
-                return RedirectToRoute(
-                    new
-                    {
-                        controller = "Customer",
-                        action = "Index",
-                        id = $"{login.Data.Id}"
-                    }
-                );
+                return Ok();
             }
             else if (login.Success == true && role.Success == true)
             {
@@ -70,14 +63,7 @@ namespace CMS_appBackend.Controllers
                 //var role = await _roleService.GetRoleByUserId(login.Data.Id);
                 if (role.Data.Name == "Admin")
                 {
-                    return RedirectToRoute(
-                        new
-                        {
-                            controller = "Admin",
-                            action = "Index",
-                            id = $"{login.Data.Id}"
-                        }
-                    );
+                    return Ok();
                 }
             }
             return Content(login.Message);

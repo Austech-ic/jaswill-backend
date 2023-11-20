@@ -66,9 +66,9 @@ namespace CMS_appBackend.Controllers
             var admins = await _adminService.GetAllAdmin();
             if(admins.Success == true)
             {
-                return Content(admins.Message);
+                return Ok(admins);
             }
-            return Content(admins.Message);
+            return BadRequest(admins);
         }
 
         [HttpGet("ApproveAdmin/{id}")]
@@ -154,11 +154,6 @@ namespace CMS_appBackend.Controllers
             return Content(admin.Message);
         }
 
-        [HttpGet("Logout")]
-        public IActionResult Logout()
-        {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login");
-        }
+        
     }
 }
