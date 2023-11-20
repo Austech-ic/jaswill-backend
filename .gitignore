@@ -11,4 +11,7 @@ ftp.PublishSettings
 .vscode
 bin
 obj
+.idea
+.vscode
+bin/Debug/net6.0
 ```

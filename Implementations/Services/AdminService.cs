@@ -134,7 +134,7 @@ namespace CMS_appBackend.Implementations.Services
         {
             var admins = await _adminRepository.GetAdminsAsync();
 
-            if (admins == null || !admins.Any())
+            if (admins == null)
             {
                 return new AdminsResponseModel
                 {

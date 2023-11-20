@@ -63,7 +63,6 @@ namespace CMS_appBackend.Implementations.Repositories
                 .Include(a => a.User)
                 .Where(adm => adm.IsDeleted == false)
                 .ToListAsync();
-                Console.WriteLine($"Admins Count: {admins?.Count}");
             return admins;
         }
 

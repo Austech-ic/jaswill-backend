@@ -73,6 +73,14 @@ namespace CMS_appBackend.Implementations.Services
         public async Task<CommentsResponseModel> GetAll()
         {
             var list = await _commentRepository.GetAll();
+            if(list == null)
+            {
+                return new CommentsResponseModel
+                {
+                    Message = "No available comment",
+                    Success = false
+                };
+            }
             var comments = list.Where(x => x.IsDeleted == false).Select(x => new CommentDTO
             {
                 Id = x.Id,
@@ -81,14 +89,6 @@ namespace CMS_appBackend.Implementations.Services
                 UserName  = $"{x.User.Email}",
                 
             }).ToList();
-            if(comments == null)
-            {
-                return new CommentsResponseModel
-                {
-                    Message = "No available comment",
-                    Success = false
-                };
-            }
             return new CommentsResponseModel
             {
                 Data = comments.ToHashSet(),
