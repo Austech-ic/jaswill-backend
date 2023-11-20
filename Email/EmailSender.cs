@@ -18,13 +18,12 @@ namespace CMS_appBackend.Email
 
         public async Task<bool> SendEmail(EmailRequestModel email)
         {
-            var mailgunApiKey = _configuration["Mailgun:api-key"];
-            var mailgunDomain = _configuration["Mailgun:domain"];
-            var mailgunApiUrl = _configuration["Mailgun:api-url"] + mailgunDomain + "/messages";
+            var brevoApiKey = _configuration["Brevo:api-key"];
+            var brevoApiUrl = _configuration["Brevo:api-url"]; // Adjust based on Brevo's API
 
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{mailgunApiKey}")));
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", brevoApiKey);
 
                 var form = new Dictionary<string, string>
                 {
@@ -32,10 +31,10 @@ namespace CMS_appBackend.Email
                     { "to", $"{email.ReceiverName} <{email.ReceiverEmail}>" },
                     { "subject", email.Subject },
                     { "html", $"<html><body><h6>{email.Message}</h6></body></html>" }
-                    // Add other Mailgun parameters as needed
+                    // Add other Brevo-specific parameters as needed
                 };
 
-                var response = await client.PostAsync(mailgunApiUrl, new FormUrlEncodedContent(form));
+                var response = await client.PostAsync(brevoApiUrl, new FormUrlEncodedContent(form));
 
                 return response.IsSuccessStatusCode;
             }
