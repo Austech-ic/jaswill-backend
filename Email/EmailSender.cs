@@ -19,7 +19,7 @@ namespace CMS_appBackend.Email
         public async Task<bool> SendEmail(EmailRequestModel email)
         {
             var brevoApiKey = _configuration["Brevo:api-key"];
-            var brevoApiUrl = _configuration["Brevo:api-url"]; // Adjust based on Brevo's API
+            var brevoApiUrl = _configuration["Brevo:api-url"];
 
             using (var client = new HttpClient())
             {
