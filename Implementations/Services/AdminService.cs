@@ -56,7 +56,7 @@ namespace CMS_appBackend.Implementations.Services
             };
             var adduser = await _userRepository.CreateAsync(newUser);
 
-            var admins = new Admin { UserId = adduser.Id, User = adduser, };
+            var admins = new Admin { UserId = adduser.Id, User = adduser, IsApprove = true, };
             var addAdmin = await _adminRepository.CreateAsync(admins);
             return new BaseResponse { Message = "Admin Added Successfully", Success = true, };
         }
