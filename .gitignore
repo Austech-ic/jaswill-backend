@@ -14,4 +14,5 @@ obj
 .idea
 .vscode
 bin/Debug/net6.0
+.dockerignore
 ```
