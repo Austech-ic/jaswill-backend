@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Identity;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Rewrite;
 using System.Data;
 using System.Text;
@@ -93,7 +94,10 @@ var rewriteOptions = new RewriteOptions().AddRedirect("^$", "swagger"); // Redir
 
 app.UseRewriter(rewriteOptions);
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(new HttpsRedirectionOptions
+{
+    HttpsPort = 7241 // Specify your HTTPS port here (matching launchSettings.json)
+});
 
 app.UseCors("CorsPolicy");
 
