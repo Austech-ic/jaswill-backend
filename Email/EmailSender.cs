@@ -19,7 +19,7 @@ namespace CMS_appBackend.Email
 
         public async Task<bool> SendEmail(EmailRequestModel email)
         {
-            var sendinblueApiKey = _configuration["Brevo:api-key"]; // Correct the key if necessary
+            Configuration.Default.ApiKey.Add("api-key", _configuration["Brevo:api-key"]);
 
             var apiInstance = new TransactionalEmailsApi();
             string SenderName = "Jaswill Real Estate";
