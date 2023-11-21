@@ -49,11 +49,11 @@ namespace CMS_appBackend.Email
             string AttachmentUrl = null;
             string stringInBase64 = "aGVsbG8gdGhpcyBpcyB0ZXN0";
             byte[] Content = System.Convert.FromBase64String(stringInBase64);
-            string AttachmentName = "test.txt";
-            SendSmtpEmailAttachment AttachmentContent = new SendSmtpEmailAttachment(AttachmentUrl, Content, AttachmentName);
-            List<SendSmtpEmailAttachment> Attachment = new List<SendSmtpEmailAttachment>();
-            Attachment.Add(AttachmentContent);
-            JObject Headers = new JObject();
+            // string AttachmentName = "test.txt";
+            // SendSmtpEmailAttachment AttachmentContent = new SendSmtpEmailAttachment(AttachmentUrl, Content, AttachmentName);
+            // List<SendSmtpEmailAttachment> Attachment = new List<SendSmtpEmailAttachment>();
+            // Attachment.Add(AttachmentContent);
+            // JObject Headers = new JObject();
             Headers.Add("Some-Custom-Name", "unique-id-1234");
             long? TemplateId = null;
             JObject Params = new JObject();
