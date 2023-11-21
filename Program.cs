@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
 using System.Data;
 using System.Text;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(
@@ -63,10 +65,10 @@ builder.Services.AddDbContext<ApplicationContext>(
     option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
-services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo("/app/keys"));
+builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo("/app/keys"));
 
 // Configure Swagger
-services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
 
@@ -79,19 +81,24 @@ services.AddSwaggerGen(c =>
         }
     );
 
-    c.AddSecurityRequirement(
-        new OpenApiSecurityRequirement
-        {
-            // Your security requirements...
-        }
-    );
-
-    c.Schemes = new List<OpenApiSchema>
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
-        new OpenApiSchema { Type = "https" },
-        new OpenApiSchema { Type = "http" }
-    };
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new List<string>()
+        }
+    });
+    // c.Schemes = new List<string> { "https", "http" };
 });
+
+    
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
