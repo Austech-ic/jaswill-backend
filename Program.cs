@@ -65,9 +65,6 @@ builder.Services.AddDbContext<ApplicationContext>(
     option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
-builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo("/app/keys"));
-
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
