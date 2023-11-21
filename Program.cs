@@ -59,39 +59,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
-builder.Services.AddDbContext<ApplicationContext>(
-    option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-);
-
-services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo("/app/keys"));
-
-// Configure Swagger
-services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
-
-    // Set the schemes to include "https"
-    c.AddSecurityDefinition(
-        "Bearer",
-        new OpenApiSecurityScheme
-        {
-            // Your security scheme configuration...
-        }
-    );
-
-    c.AddSecurityRequirement(
-        new OpenApiSecurityRequirement
-        {
-            // Your security requirements...
-        }
-    );
-
-    c.Schemes = new List<OpenApiSchema>
-    {
-        new OpenApiSchema { Type = "https" },
-        new OpenApiSchema { Type = "http" }
-    };
-});
+builder.Services.AddDbContext<ApplicationContext>(option => option.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -114,7 +82,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var rewriteOptions = new RewriteOptions().AddRedirect("^$", "swagger"); // Redirect from root to Swagger UI
+var rewriteOptions = new RewriteOptions()
+    .AddRedirect("^$", "swagger");  // Redirect from root to Swagger UI
 
 app.UseRewriter(rewriteOptions);
 
