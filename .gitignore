@@ -4,7 +4,7 @@ appsettings.json
 
 Migrations
 Email
-.env
+Database.env
 ftp.PublishSettings
 bin
 obj

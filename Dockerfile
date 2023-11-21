@@ -11,12 +11,14 @@ RUN dotnet restore
 COPY . .
 RUN dotnet publish -c Release -o out
 
+
 # Build the runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app/out .
 
-
+# Set environment variables
+ENV Database="$DB_CONNECTION_STRING"
 
 # Define the entry point for your application
 ENTRYPOINT ["dotnet", "CMS_appBackend.dll", "--environment=Development"]
