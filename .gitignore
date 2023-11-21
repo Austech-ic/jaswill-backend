@@ -7,8 +7,6 @@ Email
 .env
 Dockerfile
 ftp.PublishSettings
-.idea
-.vscode
 bin
 obj
 .idea
