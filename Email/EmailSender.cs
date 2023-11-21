@@ -19,8 +19,7 @@ namespace CMS_appBackend.Email
 
         public async Task<bool> SendEmail(EmailRequestModel email)
         {
-            var brevoApiKey = _configuration["Brevo:api-key"];
-            var brevoApiUrl = _configuration["Brevo:api-url"];
+            var sendinblueApiKey = _configuration["Brevo:api-key"]; // Correct the key if necessary
 
             var apiInstance = new TransactionalEmailsApi();
             string SenderName = "Jaswill Real Estate";
