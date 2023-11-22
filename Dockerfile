@@ -18,6 +18,7 @@ WORKDIR /app
 COPY --from=build /app/out .
 
 # Specify environment variables required by your application
+ENV DATABASE_URL=${DATABASE_URL}
 ENV MYSQL_HOST=${MYSQL_HOST}
 ENV MYSQL_PORT=${MYSQL_PORT}
 ENV MYSQL_USER=${MYSQL_USER}
