@@ -52,7 +52,6 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<DatabaseInitializer>();
-builder.Services.AddScoped<HealthCheckMiddlewares>();
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
@@ -109,8 +108,7 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 
-
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/healthz");
 
 app.UseAuthorization();
 
