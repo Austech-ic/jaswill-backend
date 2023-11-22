@@ -94,10 +94,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var rewriteOptions = new RewriteOptions()
-    .AddRedirect("^$", "swagger");  // Redirect from root to Swagger UI
+// var rewriteOptions = new RewriteOptions()
+//     .AddRedirect("^$", "swagger");  // Redirect from root to Swagger UI
 
-app.UseRewriter(rewriteOptions);
+// app.UseRewriter(rewriteOptions);
 
 app.UseHttpsRedirection();
 
