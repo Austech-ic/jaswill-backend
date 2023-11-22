@@ -109,11 +109,16 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 
-app.MapHealthChecks("/health");
+app.UseMiddleware<HealthCheckMiddleware>();
+
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHealthChecks("/health");
+            endpoints.MapControllers();
+        });
 
 using (var scope = app.Services.CreateScope())
 {
