@@ -8,9 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Identity;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Rewrite;
 using System.Data;
 using System.Text;
@@ -112,16 +109,12 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 
-app.UseMiddleware<HealthCheckMiddleware>();
 
+app.MapHealthChecks("/health");
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapHealthChecks("/health");
-            endpoints.MapControllers();
-        });
+app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
