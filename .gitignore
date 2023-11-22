@@ -8,6 +8,7 @@ bin
 obj
 bin/Debug/net6.0
 .dockerignore
+docker-compose.yml
 ```
 # User-specific files
 *.rsuser
