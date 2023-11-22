@@ -56,6 +56,11 @@ builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
 
+// Add this to your code to enable detailed logging
+System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+    (sender, certificate, chain, sslPolicyErrors) => true;
+
+
 builder.Services.AddControllers();
 
 var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
