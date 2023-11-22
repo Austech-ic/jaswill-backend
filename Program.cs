@@ -52,6 +52,7 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<DatabaseInitializer>();
+builder.Services.AddScoped<HealthCheckMiddleware>();
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
