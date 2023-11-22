@@ -108,7 +108,7 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/healthz");
 
 app.UseAuthorization();
 
