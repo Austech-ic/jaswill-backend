@@ -1,6 +1,6 @@
 # Use the .NET 6 SDK image to build the application
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-ENV ASPNETCORE_ENVIRONMENT=Development
+# ENV ASPNETCORE_ENVIRONMENT=Development
 WORKDIR /app
 
 # Copy the project files and restore dependencies
@@ -28,4 +28,5 @@ COPY --from=build /app/out .
 # ENV MYSQL_DEFAULTCOMMANDTIMEOUT=${MYSQL_DEFAULTCOMMANDTIMEOUT}
 
 # Define the entry point for your application
-ENTRYPOINT ["dotnet", "CMS_appBackend.dll", "--environment=Development"]
+ENTRYPOINT ["dotnet", "CMS_appBackend.dll"]
+# ENTRYPOINT ["dotnet", "CMS_appBackend.dll", "--environment=Development"]
