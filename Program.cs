@@ -76,7 +76,6 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddHealthChecks();
 
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -108,7 +107,7 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 
-app.MapHealthChecks("/healthz");
+app.MapHealthChecks("/_health");
 
 app.UseAuthorization();
 
