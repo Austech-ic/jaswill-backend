@@ -62,7 +62,6 @@ var connectionString = builder.Configuration.GetConnectionString("ApplicationCon
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-    .UseRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
 );
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
