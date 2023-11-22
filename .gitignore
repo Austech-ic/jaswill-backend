@@ -2,9 +2,7 @@
 appsettings.Development.json
 appsettings.json
 
-Migrations
-Email
-Database.env
+.env
 ftp.PublishSettings
 bin
 obj
