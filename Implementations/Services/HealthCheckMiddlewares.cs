@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 namespace CMS_appBackend.Implementations.Services
 {
-    public class HealthCheckMiddleware
+    public class HealthCheckMiddlewares
     {
         private readonly RequestDelegate _next;
 
-    public HealthCheckMiddleware(RequestDelegate next)
+    public HealthCheckMiddlewares(RequestDelegate next)
     {
         _next = next;
     }

@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Identity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Rewrite;
 using System.Data;
 using System.Text;
@@ -52,7 +55,7 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<DatabaseInitializer>();
-builder.Services.AddScoped<HealthCheckMiddleware>();
+builder.Services.AddScoped<HealthCheckMiddlewares>();
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
