@@ -109,7 +109,7 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 
-app.MapHealthChecks("/healthz");
+app.MapHealthChecks("/health");
 
 app.UseAuthorization();
 
