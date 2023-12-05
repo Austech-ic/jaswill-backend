@@ -48,9 +48,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Email = model.Email,
                 Password = _passwordHasher.HashPassword(null, model.Password),
-                FirstName = model.FirstName,
                 Username = model.Username,
-                LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
                 IsDeleted = false,
             };
