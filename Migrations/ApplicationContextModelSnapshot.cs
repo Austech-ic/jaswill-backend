@@ -69,10 +69,6 @@ namespace CMSappBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Body")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 

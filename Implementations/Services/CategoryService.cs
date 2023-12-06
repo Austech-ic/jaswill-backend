@@ -49,7 +49,6 @@ namespace CMS_appBackend.Implementations.Services
                 Blogs = x.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
-                    Body = n.Body,
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
@@ -92,7 +91,6 @@ namespace CMS_appBackend.Implementations.Services
                 Blogs = x.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
-                    Body = n.Body,
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
@@ -129,7 +127,6 @@ namespace CMS_appBackend.Implementations.Services
                 Blogs = category.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
-                    Body = n.Body,
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
@@ -155,7 +152,6 @@ namespace CMS_appBackend.Implementations.Services
                 Blogs = x.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
-                    Body = n.Body,
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,

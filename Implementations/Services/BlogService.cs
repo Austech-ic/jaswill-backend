@@ -52,7 +52,6 @@ namespace CMS_appBackend.Implementations.Services
             {
                 ContentName = model.ContentName,
                 Title = model.Title,
-                Body = model.Body,
                 ImageUrl = imageName
                 
             };
@@ -83,7 +82,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     ContentName = blo.ContentName,
                     Title = blo.Title,
-                    Body = blo.Body,
                     CreatedOn = blo.CreatedOn,
                     ImageUrl = blo.ImageUrl, 
                 }).ToList(),
@@ -110,7 +108,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     ContentName = blog.ContentName,
                     Title = blog.Title,
-                    Body = blog.Body,
                     CreatedOn = blog.CreatedOn,
                     ImageUrl = blog.ImageUrl, 
                 },
@@ -155,7 +152,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     ContentName = a.ContentName,
                     Title = a.Title,
-                    Body = a.Body,
                     CreatedOn = a.CreatedOn,
                     ImageUrl = a.ImageUrl, 
                 }).ToList(),
@@ -184,7 +180,6 @@ namespace CMS_appBackend.Implementations.Services
             }
             blog.ContentName = model.ContentName;
             blog.Title = model.Title;
-            blog.Body = model.Body;
             blog.CreatedOn = DateTime.Now;
             blog.ImageUrl = model.ImageUrl.FileName;
             await _blogRepository.UpdateAsync(blog);
@@ -212,7 +207,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     ContentName = blog.ContentName,
                     Title = blog.Title,
-                    Body = blog.Body,
                     CreatedOn = blog.CreatedOn,
                     ImageUrl = blog.ImageUrl, 
                 },
@@ -239,7 +233,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     ContentName = blo.ContentName,
                     Title = blo.Title,
-                    Body = blo.Body,
                     CreatedOn = blo.CreatedOn,
                     ImageUrl = blo.ImageUrl, 
                 }).ToList(),
