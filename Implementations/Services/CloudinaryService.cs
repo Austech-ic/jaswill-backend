@@ -17,11 +17,13 @@ namespace CMS_appBackend.Implementations.Services
 
         public CloudinaryService(IOptions<CloudinarySettings> cloudinarySettings)
         {
-            var account = new Account(
-                cloudinarySettings.Value.CloudName,
-                cloudinarySettings.Value.ApiKey,
-                cloudinarySettings.Value.ApiSecret
-            );
+            var cloudinaryUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
+            var cloudinaryUri = new Uri(cloudinaryUrl);
+            var cloudName = cloudinaryUri.UserInfo.Split(':')[0];
+            var apiKey = cloudinaryUri.UserInfo.Split(':')[1];
+            var apiSecret = cloudinaryUri.AbsolutePath.Substring(1);
+
+            var account = new Account(cloudName, apiKey, apiSecret);
             _cloudinary = new Cloudinary(account);
         }
 

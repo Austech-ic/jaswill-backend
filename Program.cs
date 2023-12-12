@@ -81,7 +81,14 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
-builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+// builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+
+var cloudinaryUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
+var cloudinaryUri = new Uri(cloudinaryUrl);
+var cloudName = cloudinaryUri.UserInfo.Split(':')[0];
+var apiKey = cloudinaryUri.UserInfo.Split(':')[1];
+var apiSecret = cloudinaryUri.AbsolutePath.Substring(1);
+
 
 
 
