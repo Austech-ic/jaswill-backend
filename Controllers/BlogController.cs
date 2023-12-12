@@ -2,6 +2,7 @@ using CMS_appBackend.DTOs.RequestModels;
 using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.Interface.Services;
 using Microsoft.AspNetCore.Mvc;
+using CMS_appBackend.Implementations.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 
@@ -15,16 +16,18 @@ namespace CMS_appBackend.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
+        // private readonly CloudinaryService _cloudinaryService;
 
         public BlogController(IBlogService blogService)
         {
             _blogService = blogService;
+            // _cloudinaryService = cloudinaryService;
         }
 
         [HttpPost("CreateBlog")]
-        public async Task<IActionResult> CreateBlog(CreateBlogRequestModel model)
+        public async Task<IActionResult> CreateBlog(CreateBlogRequestModel model, IFormFile imageUrl)
         {
-            var blog = await _blogService.CreateBlogAsync(model);
+            var blog = await _blogService.CreateBlogAsync(model, imageUrl);
             if (blog.Success == true)
             {
                 return Content(blog.Message);
@@ -44,9 +47,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPut("UpdateBlog")]
-        public async Task<IActionResult> UpdateBlog(UpdateBlogRequestModels model)
+        public async Task<IActionResult> UpdateBlog(UpdateBlogRequestModels model, IFormFile imageUrl)
         {
-            var blog = await _blogService.UpdateBlogAsync(model);
+            var blog = await _blogService.UpdateBlogAsync(model, imageUrl);
             if (blog.Success == true)
             {
                 return Content(blog.Message);
@@ -98,15 +101,26 @@ namespace CMS_appBackend.Controllers
             return BadRequest(blog);
         }
 
-        [HttpGet("GetBlogByContentName")]
-        public async Task<IActionResult> GetBlogByContentName(string ContentName)
+        [HttpGet("GetBlogByTittle")]
+        public async Task<IActionResult> GetBlogByTittle(string tittle)
         {
-            var blog = await _blogService.GetBlogByContentName(ContentName);
+            var blog = await _blogService.GetBlogByTittle(tittle);
             if (blog.Success == true)
             {
                 return Ok(blog);
             }
             return BadRequest(blog);
         }
+
+        // [HttpPost("upload")]
+        // public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+        // {
+        //     var imageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(file);
+        //     if (imageUrl != null)
+        //     {
+        //         return Ok(imageUrl);
+        //     }
+        //     return BadRequest("Image Upload Failed");
+        // }
     }
 }

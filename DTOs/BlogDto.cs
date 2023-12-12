@@ -6,10 +6,8 @@ namespace CMS_appBackend.DTOs
     public class BlogDto
     {
         public int BlogId { get; set; }
-        public string ContentName { get; set; }
         public string ImageUrl { get; set; }
         public string Title {get;set;}
         public DateTime CreatedOn {get; set;}
-        public string CreatedBy {get; set;}
     }
 } 

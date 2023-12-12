@@ -7,11 +7,9 @@ namespace CMS_appBackend.Entities
 {
     public class Blog: AuditableEntity
     {
-        public string ContentName { get; set; }
         public string ImageUrl { get; set; }
         public string Title {get;set;}
         public DateTime CreatedOn {get; set;}
-        public string CreatedBy {get; set;}
        public List<Post> Posts {get; set;} 
     }
 }

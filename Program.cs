@@ -8,6 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Identity;
 using Microsoft.AspNetCore.Identity;
+using CloudinaryDotNet;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using CMS_appBackend.Entities;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using CMS_appBackend.OperationFilters;
+using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Rewrite;
 using System.Data;
 using System.Text;
@@ -52,6 +60,7 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<DatabaseInitializer>();
+builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
@@ -72,6 +81,9 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
 );
 
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -86,7 +98,22 @@ builder.Services
         config.Cookie.Name = "CMS_appBackend";
         config.LogoutPath = "/CMS_appBackend/Logout";
     });
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
+
+    // Configure Swagger to accept file uploads
+    c.OperationFilter<AddFileParamTypesOperationFilter>();
+    c.OperationFilter<AddFileUploadParamsOperationFilter>();
+
+    // // Set the comments path for the Swagger JSON and UI
+    // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    // c.IncludeXmlComments(xmlPath);
+});
 var app = builder.Build();
+// ... (other app configurations)
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -95,23 +122,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// var rewriteOptions = new RewriteOptions()
-//     .AddRedirect("^$", "swagger");  // Redirect from root to Swagger UI
-
-// app.UseRewriter(rewriteOptions);
-
 app.UseHttpsRedirection();
-
 app.UseCors("CorsPolicy");
-
 app.UseStaticFiles();
-
 app.UseAuthentication();
-
 app.MapHealthChecks("/_health");
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
@@ -120,26 +136,5 @@ using (var scope = app.Services.CreateScope())
     var initializer = serviceProvider.GetRequiredService<DatabaseInitializer>();
     await initializer.Initialize().ConfigureAwait(false);
 }
+
 app.Run();
-
-// builder.Services.AddScoped<IAdminService, AdminService>();
-// builder.Services.AddScoped<IAdminRepository, AdminRepository>();
-
-// builder.Services.AddScoped<IBlogService, BlogService>();
-// builder.Services.AddScoped<IBlogRepository, BlogRepository>();
-
-// builder.Services.AddScoped<ICommentService, CommentService>();
-// builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-
-// builder.Services.AddScoped<ICategoryService, CategoryService>();
-// builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-
-// builder.Services.AddScoped<IPostService, PostService>();
-// builder.Services.AddScoped<IPostRepository, PostRepository>();
-
-// builder.Services.AddScoped<IUserService, UserService>();
-// builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-
-builder.Services.AddScoped<IRoleService, RoleService>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();

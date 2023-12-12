@@ -52,8 +52,6 @@ namespace CMS_appBackend.Implementations.Services
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
-                    ContentName = n.ContentName,
-                    CreatedBy = n.CreatedBy,
                 }).ToList(),
             }).ToList();
             if (categories == null)
@@ -94,8 +92,6 @@ namespace CMS_appBackend.Implementations.Services
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
-                    ContentName = n.ContentName,
-                    CreatedBy = n.CreatedBy,
                 }).ToList(),
             }).ToHashSet();
 
@@ -130,8 +126,6 @@ namespace CMS_appBackend.Implementations.Services
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
-                    ContentName = n.ContentName,
-                    CreatedBy = n.CreatedBy,
                 }).ToList(),
             };
             return new CategoryResponseModel
@@ -155,8 +149,6 @@ namespace CMS_appBackend.Implementations.Services
                     ImageUrl = n.ImageUrl,
                     CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
-                    ContentName = n.ContentName,
-                    CreatedBy = n.CreatedBy,
                 }).ToList(),
             }).ToList();
             if(result.Count == 0)

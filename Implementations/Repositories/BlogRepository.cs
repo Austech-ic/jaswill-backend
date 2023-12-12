@@ -26,5 +26,15 @@ namespace CMS_appBackend.Implementations.Repositories
             var Blog = await _Context.Blogs.Include(x => x.Posts).Where(x => x.IsDeleted == false).ToListAsync();
             return Blog;
         }
+
+        public async Task<Blog> GetBlogByIdAsync(int id)
+        {
+            return await _Context.Blogs.Include(x => x.Posts).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Blog> GetBlogByTitleAsync(string title)
+        {
+            return await _Context.Blogs.Include(x => x.Posts).FirstOrDefaultAsync(x => x.Title == title);
+        }
     }
 }

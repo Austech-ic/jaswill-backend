@@ -3,6 +3,7 @@ using CMS_appBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using CMS_appBackend.Interface.Services;
 using CMS_appBackend.DTOs.RequestModels;
+using CMS_appBackend.Implementations.Services;
 using System.Security.Claims;
 using System.Web;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
@@ -14,6 +15,7 @@ namespace CMS_appBackend.Controllers
     public class PostController : Controller
     {
         private readonly IPostService _postService;
+        // private readonly CloudinaryService _cloudinaryService;
 
         public PostController(IPostService postService)
         {
@@ -21,9 +23,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("CreatePost")]
-        public async Task<IActionResult> CreatePost(CreatePostRequestModel model)
+        public async Task<IActionResult> CreatePost(CreatePostRequestModel model, IFormFile PostImage)
         {
-            var post = await _postService.CreatePostAsync(model);
+            var post = await _postService.CreatePostAsync(model, PostImage);
             if (post.Success == true)
             {
                 return Content(post.Message);
@@ -32,9 +34,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("UpdatePost")]
-        public async Task<IActionResult> UpdatePost(UpdatePostRequestModel model)
+        public async Task<IActionResult> UpdatePost(UpdatePostRequestModel model, IFormFile PostImage)
         {
-            var post = await _postService.UpdatePost(model);
+            var post = await _postService.UpdatePost(model, PostImage);
             if (post.Success == true)
             {
                 return Content(post.Message);
@@ -74,5 +76,16 @@ namespace CMS_appBackend.Controllers
             }
             return BadRequest(posts);
         }
+
+        // [HttpPost("upload")]
+        // public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+        // {
+        //     var imageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(file);
+        //     if (imageUrl != null)
+        //     {
+        //         return Ok(imageUrl);
+        //     }
+        //     return BadRequest("Image Upload Failed");
+        // }
     }
 }

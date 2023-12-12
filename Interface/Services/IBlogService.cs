@@ -6,15 +6,15 @@ namespace CMS_appBackend.Interface.Services
 {
     public interface IBlogService
     {
-        Task<BaseResponse> CreateBlogAsync(CreateBlogRequestModel model);
+        Task<BaseResponse> CreateBlogAsync(CreateBlogRequestModel model, IFormFile ImageUrl);
         Task<BlogsResponseModel> GetBlogsByDateAsync(DateTime Date);
         Task<BaseResponse> DeleteBlogAsync(int id);
         Task<BlogsResponseModel> GetBlogsToDisplayAsync();
         // Task<BaseResponse> AddBlogForAuctionAsync(int id);
         Task<BlogResponseModel> GetBlogById(int id);
-        Task<BaseResponse> UpdateBlogAsync(UpdateBlogRequestModels model);
+        Task<BaseResponse> UpdateBlogAsync(UpdateBlogRequestModels model, IFormFile ImageUrl);
         Task<BlogsResponseModel> GetAllBlogsAsync();
-        Task<BlogResponseModel> GetBlogByContentName(string contentName);
+        Task<BlogResponseModel> GetBlogByTittle(string title);
 
     }
 }
