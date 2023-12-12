@@ -17,15 +17,13 @@ namespace CMS_appBackend.Implementations.Services
 
         public CloudinaryService(IOptions<CloudinarySettings> cloudinarySettings)
         {
-            _cloudinary = new Cloudinary(
-                new Account(
-                    cloudinarySettings.Value.CloudName,
-                    cloudinarySettings.Value.ApiKey,
-                    cloudinarySettings.Value.ApiSecret
-                )
+            var account = new Account(
+                cloudinarySettings.Value.CloudName,
+                cloudinarySettings.Value.ApiKey,
+                cloudinarySettings.Value.ApiSecret
             );
+            _cloudinary = new Cloudinary(account);
         }
-
 
         // public string GetImageUrl(string publicId)
         // {
@@ -53,7 +51,10 @@ namespace CMS_appBackend.Implementations.Services
             // Upload the base64-encoded image to Cloudinary
             var uploadParams = new ImageUploadParams
             {
-                File = new FileDescription(file.FileName, new MemoryStream(Convert.FromBase64String(base64String)))
+                File = new FileDescription(
+                    file.FileName,
+                    new MemoryStream(Convert.FromBase64String(base64String))
+                )
                 // Additional parameters like folder, tags, etc.
             };
 
