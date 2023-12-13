@@ -20,7 +20,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<UserResponseModel> Login(LoginRequestModel model)
         {
-            var user = await _repository.GetAdminEmailandPassword(model.Email);
+            var user = await _repository.GetAdminEmailandPassword(model);
 
             if (
                 user == null
