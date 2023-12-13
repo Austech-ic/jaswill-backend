@@ -13,4 +13,10 @@ namespace CMS_appBackend.DTOs.RequestModels
         public string PhoneNumber { get; set; }
        
     }
+
+    public class LoginRequestModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
 }

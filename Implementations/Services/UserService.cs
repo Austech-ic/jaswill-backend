@@ -18,13 +18,13 @@ namespace CMS_appBackend.Implementations.Services
             _passwordHasher = passwordHasher;
         }
 
-        public async Task<UserResponseModel> Login(string email, string password)
+        public async Task<UserResponseModel> Login(LoginRequestModel model)
         {
-            var user = await _repository.GetAdminEmailandPassword(email);
+            var user = await _repository.GetAdminEmailandPassword(model.Email);
 
             if (
                 user == null
-                || _passwordHasher.VerifyHashedPassword(null, user.Password, password)
+                || _passwordHasher.VerifyHashedPassword(null, user.Password, model.Password)
                     != PasswordVerificationResult.Success
             )
             {
@@ -54,6 +54,7 @@ namespace CMS_appBackend.Implementations.Services
                 Data = userDto
             };
         }
+        
 
         public bool VerifyPassword(string enteredPassword, string hashedPassword)
         {
