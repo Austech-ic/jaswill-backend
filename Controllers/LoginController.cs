@@ -4,6 +4,7 @@ using CMS_appBackend.Implementations.Repositories;
 using CMS_appBackend.Context;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using CMS_appBackend.DTOs.RequestModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Web;
@@ -29,9 +30,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(LoginRequestModel model)
         {
-            var login = await _userService.Login(email, password);
+            var login = await _userService.Login(model);
             var role = await _roleService.GetRoleByUserId(login.Data.Id);
             if (login.Success == false)
             {

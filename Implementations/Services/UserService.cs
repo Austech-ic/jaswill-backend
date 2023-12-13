@@ -1,6 +1,7 @@
 using CMS_appBackend.DTOs;
 using CMS_appBackend.DTOs.ResponseModels;
 using CMS_appBackend.Interface.Repositories;
+using CMS_appBackend.DTOs.RequestModels;
 using CMS_appBackend.Interface.Services;
 using Microsoft.AspNetCore.Identity;
 using CMS_appBackend.Identity;
@@ -20,8 +21,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<UserResponseModel> Login(LoginRequestModel model)
         {
-            var user = await _repository.GetAdminEmailandPassword(model);
-
+            var user = await _repository.GetAdminEmailandPassword(model.Email);
             if (
                 user == null
                 || _passwordHasher.VerifyHashedPassword(null, user.Password, model.Password)
@@ -54,7 +54,6 @@ namespace CMS_appBackend.Implementations.Services
                 Data = userDto
             };
         }
-        
 
         public bool VerifyPassword(string enteredPassword, string hashedPassword)
         {
