@@ -83,9 +83,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("LoginAdmin")]
-        public async Task<IActionResult> LoginAdmin(string email, string password)
+        public async Task<IActionResult> LoginAdmin(LoginRequestModel model)
         {
-            var login = await _userService.Login(email, password);
+            var login = await _userService.Login(model);
             if (login.Success == false)
             {
                 return Content("Email or Password does not exist ");
