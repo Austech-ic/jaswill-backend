@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+using Swashbuckle.AspNetCore.Annotations;
 namespace CMS_appBackend.DTOs.RequestModels
 {
     public class CreateBlogRequestModel

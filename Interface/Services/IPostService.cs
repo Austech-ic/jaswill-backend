@@ -6,9 +6,8 @@ namespace CMS_appBackend.Interface.Services
 {
     public interface IPostService
     {
-        // Task<BaseResponse> ChangeAuctionOpeningDateAsync(int id, DateTime ExpiryDate);
-        Task<BaseResponse> CreatePostAsync(CreatePostRequestModel model, IFormFile PostImage);
-        Task<BaseResponse> UpdatePost(UpdatePostRequestModel model, IFormFile PostImage);
+        Task<BaseResponse> CreatePostAsync(CreatePostRequestModel model);
+        Task<BaseResponse> UpdatePost(UpdatePostRequestModel model);
         Task<PostResponseModel> GetPostByIdAsync(int id);
         Task<BaseResponse> DeletePost(int id);
         Task<PostsResponseModel> GetAllPost();

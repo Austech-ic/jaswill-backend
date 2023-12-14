@@ -13,19 +13,19 @@ namespace CMS_appBackend.Implementations.Repositories
         }
         public async Task<IList<Post>> GetPostByDate(DateTime date)
         {
-            return await _Context.Posts
+            return await _Context.Posts.Include(x => x.Images)
             .Where(x => x.CreatedOn == date).ToListAsync();
         }
         public async Task<IList<Post>> GetAllPost()
         {
-            return await _Context.Posts
+            return await _Context.Posts.Include(x => x.Images)
             .Where(x => x.IsDeleted == false)
             .ToListAsync();
         }
 
        public async Task<Post> GetPostById(int id)
         {
-            return await _Context.Posts
+            return await _Context.Posts.Include(x => x.Images)
             .Where(x => x.Id == id)
             .FirstOrDefaultAsync();
         }

@@ -72,13 +72,8 @@ namespace CMSappBackend.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ContentName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime(6)");
@@ -277,6 +272,56 @@ namespace CMSappBackend.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("CMS_appBackend.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("blogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("postId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("realEstateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("blogId");
+
+                    b.HasIndex("postId");
+
+                    b.HasIndex("realEstateId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("CMS_appBackend.Entities.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -329,6 +374,62 @@ namespace CMSappBackend.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("CMS_appBackend.Entities.RealEstate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Features")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RealEstates");
                 });
 
             modelBuilder.Entity("CMS_appBackend.Identity.Role", b =>
@@ -510,6 +611,33 @@ namespace CMSappBackend.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("CMS_appBackend.Entities.Image", b =>
+                {
+                    b.HasOne("CMS_appBackend.Entities.Blog", "blog")
+                        .WithMany("Images")
+                        .HasForeignKey("blogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CMS_appBackend.Entities.Post", "post")
+                        .WithMany("Images")
+                        .HasForeignKey("postId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CMS_appBackend.Entities.RealEstate", "realEstate")
+                        .WithMany("Images")
+                        .HasForeignKey("realEstateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("blog");
+
+                    b.Navigation("post");
+
+                    b.Navigation("realEstate");
+                });
+
             modelBuilder.Entity("CMS_appBackend.Entities.Post", b =>
                 {
                     b.HasOne("CMS_appBackend.Entities.Blog", null)
@@ -538,12 +666,24 @@ namespace CMSappBackend.Migrations
 
             modelBuilder.Entity("CMS_appBackend.Entities.Blog", b =>
                 {
+                    b.Navigation("Images");
+
                     b.Navigation("Posts");
                 });
 
             modelBuilder.Entity("CMS_appBackend.Entities.Category", b =>
                 {
                     b.Navigation("Blogs");
+                });
+
+            modelBuilder.Entity("CMS_appBackend.Entities.Post", b =>
+                {
+                    b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("CMS_appBackend.Entities.RealEstate", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("CMS_appBackend.Identity.Role", b =>

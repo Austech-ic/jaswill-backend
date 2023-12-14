@@ -15,22 +15,25 @@ namespace CMS_appBackend.Implementations.Services
         private readonly IPostRepository _postRepository;
         private readonly IBlogRepository _blogRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IImageRepository _imageRepository;
         private readonly CloudinaryService _cloudinaryService;
 
         public PostService(
             IPostRepository postRepository,
             IBlogRepository blogRepository,
             IWebHostEnvironment webHostEnvironment,
-            CloudinaryService cloudinaryService
+            CloudinaryService cloudinaryService,
+            IImageRepository imageRepository
         )
         {
             _postRepository = postRepository;
             _blogRepository = blogRepository;
             _webHostEnvironment = webHostEnvironment;
             _cloudinaryService = cloudinaryService;
+            _imageRepository = imageRepository;
         }
 
-        public async Task<BaseResponse> CreatePostAsync(CreatePostRequestModel model, IFormFile PostImage)
+        public async Task<BaseResponse> CreatePostAsync(CreatePostRequestModel model)
         {
             var post = await _postRepository.GetAsync(
                 x => x.Content == model.Content && x.IsDeleted == false
@@ -79,7 +82,7 @@ namespace CMS_appBackend.Implementations.Services
             };
         }
 
-        public async Task<BaseResponse> UpdatePost(UpdatePostRequestModel model, IFormFile PostImage)
+        public async Task<BaseResponse> UpdatePost(UpdatePostRequestModel model)
         {
             var post = await _postRepository.GetAsync(
                 x => x.PostTag == model.PostTag && x.IsDeleted == false

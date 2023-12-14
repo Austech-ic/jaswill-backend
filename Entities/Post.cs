@@ -11,5 +11,6 @@ namespace CMS_appBackend.Entities
         public string PostTag {get; set;}
         public DateTime CreatedOn {get; set;}
         public bool IsDeleted {get; set;}
+        public IList<Image> Images{get; set;} = new List<Image>();
     }
 }

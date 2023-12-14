@@ -17,29 +17,17 @@ namespace CMS_appBackend.Implementations.Services
 
         public CloudinaryService(IOptions<CloudinarySettings> cloudinarySettings)
         {
-            var cloudinaryUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
-            var cloudinaryUri = new Uri(cloudinaryUrl);
-            var cloudName = cloudinaryUri.UserInfo.Split(':')[0];
-            var apiKey = cloudinaryUri.UserInfo.Split(':')[1];
-            var apiSecret = cloudinaryUri.AbsolutePath.Substring(1);
+            Console.WriteLine($"CloudName: {cloudinarySettings.Value.CloudName}");
+            Console.WriteLine($"ApiKey: {cloudinarySettings.Value.ApiKey}");
+            Console.WriteLine($"ApiSecret: {cloudinarySettings.Value.ApiSecret}");
 
-            var account = new Account(cloudName, apiKey, apiSecret);
+            var account = new Account(
+                cloudinarySettings.Value.CloudName,
+                cloudinarySettings.Value.ApiKey,
+                cloudinarySettings.Value.ApiSecret
+            );
             _cloudinary = new Cloudinary(account);
         }
-
-        // public string GetImageUrl(string publicId)
-        // {
-        //     var getParams = new GetResourceParams(publicId)
-        //     {
-        //         ResourceType = ResourceType.Image,
-        //     };
-        //     var cloudinaryResult = _cloudinary.GetResource(getParams);
-
-        //     // Assuming you want the URL of the first (original) transformation
-        //     var imageUrl = cloudinaryResult.Url;
-
-        //     return imageUrl;
-        // }
 
         public async Task<string> UploadImageToCloudinaryAsync(IFormFile file)
         {

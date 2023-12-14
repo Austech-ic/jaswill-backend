@@ -15,17 +15,24 @@ namespace CMS_appBackend.Controllers
     public class PostController : Controller
     {
         private readonly IPostService _postService;
-        // private readonly CloudinaryService _cloudinaryService;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public PostController(IPostService postService)
+        public PostController(IPostService postService, CloudinaryService cloudinaryService)
         {
             _postService = postService;
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpPost("CreatePost")]
-        public async Task<IActionResult> CreatePost(CreatePostRequestModel model, IFormFile PostImage)
+        public async Task<IActionResult> CreatePost([FromForm]CreatePostRequestModel model)
         {
-            var post = await _postService.CreatePostAsync(model, PostImage);
+             if (model.PostImage != null && model.PostImage.Length > 0)
+            {
+                var cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
+                    model.PostImage
+                );
+            }
+            var post = await _postService.CreatePostAsync(model);
             if (post.Success == true)
             {
                 return Content(post.Message);
@@ -34,9 +41,15 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("UpdatePost")]
-        public async Task<IActionResult> UpdatePost(UpdatePostRequestModel model, IFormFile PostImage)
+        public async Task<IActionResult> UpdatePost([FromForm]UpdatePostRequestModel model)
         {
-            var post = await _postService.UpdatePost(model, PostImage);
+            if (model.PostImage != null && model.PostImage.Length > 0)
+            {
+                var cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
+                    model.PostImage
+                );
+            }
+            var post = await _postService.UpdatePost(model);
             if (post.Success == true)
             {
                 return Content(post.Message);

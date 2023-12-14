@@ -23,6 +23,8 @@ namespace CMS_appBackend.Context
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments{get;set;}
         public DbSet<Customer> Customers{get;set;}
+        public DbSet<Image> Images{get;set;}
+        public DbSet<RealEstate> RealEstates{get;set;}
         
     }
 }

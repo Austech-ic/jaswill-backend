@@ -27,8 +27,8 @@ namespace CMS_appBackend.Controllers
             _userService = userService;
         }
 
-        [HttpPost("CreateAdmin")]
-        public async Task<IActionResult> CreateAdmin(CreateAdminRequestModel model)
+        [HttpPost("SignUpAdmin")]
+        public async Task<IActionResult> SignUpAdmin(CreateAdminRequestModel model)
         {
             var admin = await _adminService.AddAdmin(model);
             if (admin.Success == true)

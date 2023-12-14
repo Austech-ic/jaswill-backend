@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-namespace jaswill_backend.Controllers
+namespace CMS_appBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

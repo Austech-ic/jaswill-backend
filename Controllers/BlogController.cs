@@ -16,22 +16,30 @@ namespace CMS_appBackend.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
-        // private readonly CloudinaryService _cloudinaryService;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public BlogController(IBlogService blogService)
+        public BlogController(IBlogService blogService, CloudinaryService cloudinaryService)
         {
             _blogService = blogService;
-            // _cloudinaryService = cloudinaryService;
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpPost("CreateBlog")]
-        public async Task<IActionResult> CreateBlog(CreateBlogRequestModel model, IFormFile imageUrl)
+        public async Task<IActionResult> CreateBlog([FromForm] CreateBlogRequestModel model)
         {
-            var blog = await _blogService.CreateBlogAsync(model, imageUrl);
-            if (blog.Success == true)
+            if (model.ImageUrl != null && model.ImageUrl.Length > 0)
+            {
+                var cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
+                    model.ImageUrl
+                );
+            }
+            var blog = await _blogService.CreateBlogAsync(model);
+
+            if (blog.Success)
             {
                 return Content(blog.Message);
             }
+
             return Content(blog.Message);
         }
 
@@ -47,9 +55,17 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPut("UpdateBlog")]
-        public async Task<IActionResult> UpdateBlog(UpdateBlogRequestModels model, IFormFile imageUrl)
+        public async Task<IActionResult> UpdateBlog([FromForm]
+            UpdateBlogRequestModels model
+        )
         {
-            var blog = await _blogService.UpdateBlogAsync(model, imageUrl);
+             if (model.ImageUrl != null && model.ImageUrl.Length > 0)
+            {
+                var cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
+                    model.ImageUrl
+                );
+            }
+            var blog = await _blogService.UpdateBlogAsync(model);
             if (blog.Success == true)
             {
                 return Content(blog.Message);

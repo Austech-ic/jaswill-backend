@@ -56,6 +56,12 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IImageRepository, ImageRepository>();
+
+builder.Services.AddScoped<IRealEstateService, RealEstateService>();
+builder.Services.AddScoped<IRealEstateRepository, RealEstateRepository>();
+
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -83,11 +89,14 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 // builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
-var cloudinaryUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
-var cloudinaryUri = new Uri(cloudinaryUrl);
-var cloudName = cloudinaryUri.UserInfo.Split(':')[0];
-var apiKey = cloudinaryUri.UserInfo.Split(':')[1];
-var apiSecret = cloudinaryUri.AbsolutePath.Substring(1);
+var cloudinarySettings = new CloudinarySettings
+{
+    CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME"),
+    ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
+    ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")
+};
+
+builder.Services.AddSingleton(cloudinarySettings);
 
 
 
