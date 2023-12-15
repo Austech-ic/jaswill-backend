@@ -68,7 +68,7 @@ namespace CMS_appBackend.Implementations.Services
             return new BaseResponse() { Message = "RealEstate Deleted Successfully", Success = true, };
         }
 
-        public async Task<RealEstatesResponseModel> GetAllRealEstateAsync()
+        public async Task<RealEstatesResponseModel> GetAllRealEstatesAsync()
         {
             var realEstate = await _realEstateRepository.GetAllAsync();
             if (realEstate == null)
@@ -106,7 +106,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<RealEstateResponseModel> GetRealEstateByIdAsync(int Id)
         {
-            var realEstate = await _realEstateRepository.GetAsync(x => x.Id == Id && x.IsDeleted == false);
+            var realEstate = await _realEstateRepository.GetRealEstateById(Id);
             if (realEstate == null)
             {
                 return new RealEstateResponseModel

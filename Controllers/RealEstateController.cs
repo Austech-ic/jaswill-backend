@@ -69,9 +69,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpGet("GetAllRealEstates")]
-        public async Task<IActionResult> GetAllRealEstates()
+        public async Task<IActionResult> GetAllRealEstatesAsync()
         {
-            var realEstates = await _realEstateService.GetAllRealEstateAsync();
+            var realEstates = await _realEstateService.GetAllRealEstatesAsync();
             if (realEstates.Success == true)
             {
                 return Ok(realEstates);
