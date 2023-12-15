@@ -89,14 +89,10 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 // builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
-var cloudinarySettings = new CloudinarySettings
-{
-    CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME"),
-    ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
-    ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")
-};
+var cloudinaryUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
+var uri = new Uri(cloudinaryUrl);
+var cloudinaryAccount = new Account(uri.Host, uri.UserInfo.Split(':')[0], uri.UserInfo.Split(':')[1]);
 
-builder.Services.AddSingleton(cloudinarySettings);
 
 
 
