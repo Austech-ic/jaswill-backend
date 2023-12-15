@@ -12,6 +12,5 @@ namespace CMS_appBackend.DTOs.RequestModels
         public string NumberOfBathrooms { get; set; }
         public string NumberOfFloors { get; set; }
         public IFormFile ImageUrl {get;set;}
-        public string Features {get;set;}
     }
 }

@@ -95,16 +95,6 @@ namespace CMS_appBackend.Controllers
             return Content(blog.Message);
         }
 
-        [HttpGet("GetBlogsByDateAsync")]
-        public async Task<IActionResult> GetBlogsByDateAsync(DateTime Date)
-        {
-            var blog = await _blogService.GetBlogsByDateAsync(Date);
-            if (blog.Success == true)
-            {
-                return Ok(blog);
-            }
-            return BadRequest(blog);
-        }
 
         [HttpGet("GetAllBlogsAsync")]
         public async Task<IActionResult> GetAllBlogsAsync()
@@ -117,16 +107,6 @@ namespace CMS_appBackend.Controllers
             return BadRequest(blog);
         }
 
-        [HttpGet("GetBlogByTittle")]
-        public async Task<IActionResult> GetBlogByTittle(GetBlogByTitleRequestModel model)
-        {
-            var blog = await _blogService.GetBlogByTittle(model);
-            if (blog.Success == true)
-            {
-                return Ok(blog);
-            }
-            return BadRequest(blog);
-        }
 
         // [HttpPost("upload")]
         // public async Task<IActionResult> UploadImage([FromForm] IFormFile file)

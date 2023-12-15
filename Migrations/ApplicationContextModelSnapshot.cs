@@ -382,11 +382,9 @@ namespace CMSappBackend.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("CreatedBy")
@@ -402,11 +400,9 @@ namespace CMSappBackend.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
@@ -419,27 +415,21 @@ namespace CMSappBackend.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("NumberOfBathrooms")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("NumberOfBedrooms")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("NumberOfFloors")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Propertylocation")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
