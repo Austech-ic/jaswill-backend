@@ -68,7 +68,7 @@ namespace CMS_appBackend.Controllers
             return Content(realEstate.Message);
         }
 
-        [HttpGet("GetAllRealEstates")]
+        [HttpGet("GetAllRealEstatesAsync")]
         public async Task<IActionResult> GetAllRealEstatesAsync()
         {
             var realEstates = await _realEstateService.GetAllRealEstatesAsync();
