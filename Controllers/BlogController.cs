@@ -118,9 +118,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpGet("GetBlogByTittle")]
-        public async Task<IActionResult> GetBlogByTittle(string tittle)
+        public async Task<IActionResult> GetBlogByTittle(GetBlogByTitleRequestModel model)
         {
-            var blog = await _blogService.GetBlogByTittle(tittle);
+            var blog = await _blogService.GetBlogByTittle(model);
             if (blog.Success == true)
             {
                 return Ok(blog);

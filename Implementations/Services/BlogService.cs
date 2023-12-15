@@ -76,7 +76,6 @@ namespace CMS_appBackend.Implementations.Services
                             new BlogDto
                             {
                                 Title = blo.Title,
-                                CreatedOn = blo.CreatedOn,
                                 ImageUrl = blo.ImageUrl,
                             }
                     )
@@ -98,7 +97,6 @@ namespace CMS_appBackend.Implementations.Services
                 Data = new BlogDto
                 {
                     Title = blog.Title,
-                    CreatedOn = blog.CreatedOn,
                     ImageUrl = blog.ImageUrl,
                 },
                 Message = "Blog found successfully",
@@ -133,7 +131,6 @@ namespace CMS_appBackend.Implementations.Services
                             new BlogDto
                             {
                                 Title = a.Title,
-                                CreatedOn = a.CreatedOn,
                                 ImageUrl = a.ImageUrl,
                             }
                     )
@@ -158,14 +155,13 @@ namespace CMS_appBackend.Implementations.Services
                 blog.ImageUrl = cloudinaryImageUrl;
             }
             blog.Title = model.Title;
-            blog.CreatedOn = DateTime.Now;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Update Successful", Success = true };
         }
 
-        public async Task<BlogResponseModel> GetBlogByTittle(string tittle)
+        public async Task<BlogResponseModel> GetBlogByTittle(GetBlogByTitleRequestModel model)
         {
-            var blog = await _blogRepository.GetBlogByTitleAsync(tittle);
+            var blog = await _blogRepository.GetBlogByTitleAsync(model.Title);
             if (blog == null)
             {
                 return new BlogResponseModel { Message = $"Blog not found", Success = false, };
@@ -175,7 +171,6 @@ namespace CMS_appBackend.Implementations.Services
                 Data = new BlogDto
                 {
                     Title = blog.Title,
-                    CreatedOn = blog.CreatedOn,
                     ImageUrl = blog.ImageUrl,
                 },
                 Message = "Blog found successfully",
@@ -197,7 +192,6 @@ namespace CMS_appBackend.Implementations.Services
                             new BlogDto
                             {
                                 Title = blo.Title,
-                                CreatedOn = blo.CreatedOn,
                                 ImageUrl = blo.ImageUrl,
                             }
                     )

@@ -38,7 +38,7 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpGet("GetCategoriesByName/{name}")]
-        public async Task<IActionResult> GetCategoriesByName([FromRoute]string name)
+        public async Task<IActionResult> GetCategoriesByName([FromRoute]GetCategoriesByNameRequestModel name)
         {
             var catg = await _categoryService.GetCategoriesByName(name);
             if (catg.Success == false)

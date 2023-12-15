@@ -43,10 +43,14 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Title = model.Title,
                 ImageUrl = cloudinaryUrl,
-                Address = model.Address,
                 Description = model.Description,
-                Price = model.Price,
-                Features = model.Features,
+                Type = model.Type,
+                City = model.City,
+                Propertylocation = model.Propertylocation,
+                NumberOfBedrooms = model.NumberOfBedrooms,
+                NumberOfBathrooms = model.NumberOfBathrooms,
+                NumberOfFloors = model.NumberOfFloors,
+                Content = model.Content,
             };
             var result = await _realEstateRepository.CreateAsync(re);
             return new BaseResponse { Message = "RealEstate Created Successfully", Success = true, };
@@ -84,10 +88,14 @@ namespace CMS_appBackend.Implementations.Services
                                 Id = re.Id,
                                 Title = re.Title,
                                 ImageUrl = re.ImageUrl,
-                                Address = re.Address,
                                 Description = re.Description,
-                                Price = re.Price,
-                                Features = re.Features,
+                                Type = re.Type,
+                                City = re.City,
+                                Propertylocation = re.Propertylocation,
+                                NumberOfBedrooms = re.NumberOfBedrooms,
+                                NumberOfBathrooms = re.NumberOfBathrooms,
+                                NumberOfFloors = re.NumberOfFloors,
+                                Content = re.Content,
                             }
                     )
                     .ToList(),
@@ -114,10 +122,14 @@ namespace CMS_appBackend.Implementations.Services
                     Id = realEstate.Id,
                     Title = realEstate.Title,
                     ImageUrl = realEstate.ImageUrl,
-                    Address = realEstate.Address,
                     Description = realEstate.Description,
-                    Price = realEstate.Price,
-                    Features = realEstate.Features,
+                    Type = realEstate.Type,
+                    City = realEstate.City,
+                    Propertylocation = realEstate.Propertylocation,
+                    NumberOfBedrooms = realEstate.NumberOfBedrooms,
+                    NumberOfBathrooms = realEstate.NumberOfBathrooms,
+                    NumberOfFloors = realEstate.NumberOfFloors,
+                    Content = realEstate.Content,
                 },
                 Message = "RealEstate Found",
                 Success = true,
@@ -139,10 +151,14 @@ namespace CMS_appBackend.Implementations.Services
                 realEstate.ImageUrl = cloudinaryImageUrl;
             }
             realEstate.Title = model.Title;
-            realEstate.Address = model.Address;
             realEstate.Description = model.Description;
-            realEstate.Price = model.Price;
-            realEstate.Features = model.Features;
+            realEstate.Type = model.Type;
+            realEstate.City = model.City;
+            realEstate.Propertylocation = model.Propertylocation;
+            realEstate.NumberOfBedrooms = model.NumberOfBedrooms;
+            realEstate.NumberOfBathrooms = model.NumberOfBathrooms;
+            realEstate.NumberOfFloors = model.NumberOfFloors;
+            realEstate.Content = model.Content;
             await _realEstateRepository.UpdateAsync(realEstate);
             return new BaseResponse() { Message = "RealEstate Updated Successfully", Success = true, };
         }

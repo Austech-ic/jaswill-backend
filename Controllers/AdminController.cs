@@ -144,9 +144,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordRequestModel model, string code)
+        public async Task<IActionResult> ResetPassword(ResetPasswordRequestModel model)
         {
-            var admin = await _adminService.ResetPassword(model, code);
+            var admin = await _adminService.ResetPassword(model);
             if (admin.Success == true)
             {
                 return Content(admin.Message);

@@ -50,7 +50,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
                 }).ToList(),
             }).ToList();
@@ -90,7 +89,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
                 }).ToList(),
             }).ToHashSet();
@@ -124,7 +122,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
                 }).ToList(),
             };
@@ -136,10 +133,10 @@ namespace CMS_appBackend.Implementations.Services
             };
         }
 
-        public async Task<CategoriesResponseModel> GetCategoriesByName(string name)
+        public async Task<CategoriesResponseModel> GetCategoriesByName(GetCategoriesByNameRequestModel model)
         {
             var catg = await _categoryRepository.GetAll();
-            var result = catg.Where(x => x.CategoryName.ToLower().Contains(name.ToLower())).Select(x => new CategoryDto
+            var result = catg.Where(x => x.CategoryName.ToLower().Contains(model.Name.ToLower())).Select(x => new CategoryDto
             {
                 Id = x.Id,
                 CategoryName = x.CategoryName,
@@ -147,7 +144,6 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    CreatedOn = n.CreatedOn,
                     BlogId = n.Id,
                 }).ToList(),
             }).ToList();

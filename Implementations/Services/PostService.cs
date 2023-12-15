@@ -75,7 +75,6 @@ namespace CMS_appBackend.Implementations.Services
                     PostName = post.PostName,
                     PostTag = post.PostTag,
                     PostImage = post.PostImage,
-                    CreatedOn = post.CreatedOn,
                 },
                 Message = "Post found successfully",
                 Success = true,
@@ -129,7 +128,6 @@ namespace CMS_appBackend.Implementations.Services
                                 PostName = x.PostName,
                                 PostTag = x.PostTag,
                                 PostImage = x.PostImage,
-                                CreatedOn = x.CreatedOn,
                             }
                     )
                     .ToList(),

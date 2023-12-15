@@ -6,7 +6,11 @@ namespace CMS_appBackend.DTOs.RequestModels
     {
         public IFormFile ImageUrl { get; set; }
         public string Title {get;set;}
-        public DateTime CreatedOn {get; set;}
+    }
+
+    public class GetBlogByTitleRequestModel
+    {
+        public string Title {get;set;}
     }
 
 }

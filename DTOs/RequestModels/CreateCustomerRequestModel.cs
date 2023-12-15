@@ -24,4 +24,9 @@ namespace CMS_appBackend.DTOs.RequestModels
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
     }
+
+    public class GetCustomerByTypeOfPartnerRequestModel
+    {
+        public string TypeOfPartner { get; set; }
+    }
 }

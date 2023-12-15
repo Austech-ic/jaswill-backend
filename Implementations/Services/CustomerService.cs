@@ -135,9 +135,9 @@ namespace CMS_appBackend.Implementations.Services
             };
         }
 
-        public async Task<CustomerResponseModel> GetCustomerByTypeOfPartner(string typeOfPartner)
+        public async Task<CustomerResponseModel> GetCustomerByTypeOfPartner(GetCustomerByTypeOfPartnerRequestModel model)
         {
-            var customer = await _customerRepository.GetCutomerByTypeOfPartner(typeOfPartner);
+            var customer = await _customerRepository.GetCutomerByTypeOfPartner(model.TypeOfPartner);
             if (customer == null)
             {
                 return new CustomerResponseModel
@@ -170,11 +170,10 @@ namespace CMS_appBackend.Implementations.Services
         }
 
         public async Task<BaseResponse> ForgetPassword(
-            ForgetPasswordRequestModel model,
-            string email
+            ForgetPasswordRequestModel model
         )
         {
-            var user = await _userRepository.GetAsync(x => x.Email.Equals(email));
+            var user = await _userRepository.GetAsync(x => x.Email.Equals(model.Email));
             if (user == null)
             {
                 return new BaseResponse { Message = "User not found", Success = false, };
@@ -194,9 +193,9 @@ namespace CMS_appBackend.Implementations.Services
             return new BaseResponse { Message = "Forget password successfully", Success = true, };
         }
 
-        public async Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model, string code)
+        public async Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model)
         {
-            var user = await _userRepository.GetAsync(x => x.VerificationCode.Equals(code));
+            var user = await _userRepository.GetAsync(x => x.VerificationCode.Equals(model.Code));
             if (user == null)
             {
                 return new BaseResponse { Message = "User not found", Success = false, };

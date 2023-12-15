@@ -207,9 +207,9 @@ namespace CMS_appBackend.Implementations.Services
             };
         }
 
-        public async Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model, String code)
+        public async Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model)
         {
-            var user = await _userRepository.GetAsync(x => x.VerificationCode == code);
+            var user = await _userRepository.GetAsync(x => x.VerificationCode == model.Code);
             if (user == null)
             {
                 return new BaseResponse { Message = "User not found", Success = false };

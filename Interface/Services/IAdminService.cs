@@ -16,7 +16,7 @@ namespace CMS_appBackend.Interface.Services
         Task<AdminsResponseModel> GetAllAdmin();
         Task<BaseResponse> AddUserRole(int UserId, int RoleId);
         Task<BaseResponse> ForgetPassword(ForgetPasswordRequestModel model, int Id);
-        Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model, String code);
+        Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model);
         Task<BaseResponse> ChangePassword(ChangePasswordRequestModel model, int id);
     }
 }

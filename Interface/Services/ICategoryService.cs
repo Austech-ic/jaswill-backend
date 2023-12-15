@@ -9,7 +9,7 @@ namespace CMS_appBackend.Interface.Services
         Task<BaseResponse> UpdateCategory(UpdateCategoryRequestModel model);
         Task<CategoriesResponseModel> GetAll();
         Task<CategoryResponseModel> GetById(int id);
-        Task<CategoriesResponseModel> GetCategoriesByName(string name);
+        Task<CategoriesResponseModel> GetCategoriesByName(GetCategoriesByNameRequestModel model);
         Task<CategoriesResponseModel> GetAllWithInfo();
     }
 }

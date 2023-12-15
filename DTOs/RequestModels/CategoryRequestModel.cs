@@ -12,4 +12,9 @@ namespace CMS_appBackend.DTOs.RequestModel
         public int Id { get; set; }
         public string Name { get; set; }
     }
+
+    public class GetCategoriesByNameRequestModel
+    {
+        public string Name { get; set; }
+    }
 }

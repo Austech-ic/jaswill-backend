@@ -14,7 +14,7 @@ namespace CMS_appBackend.Interface.Services
         Task<BlogResponseModel> GetBlogById(int id);
         Task<BaseResponse> UpdateBlogAsync(UpdateBlogRequestModels model);
         Task<BlogsResponseModel> GetAllBlogsAsync();
-        Task<BlogResponseModel> GetBlogByTittle(string title);
+        Task<BlogResponseModel> GetBlogByTittle(GetBlogByTitleRequestModel model);
 
     }
 }

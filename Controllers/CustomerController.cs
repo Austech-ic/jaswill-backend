@@ -55,7 +55,7 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpGet("GetCustomerByTypeOfPartner/{typeOfPartner}")]
-        public async Task<IActionResult> GetCustomerByTypeOfPartner(string typeOfPartner)
+        public async Task<IActionResult> GetCustomerByTypeOfPartner(GetCustomerByTypeOfPartnerRequestModel typeOfPartner)
         {
             var customer = await _customerService.GetCustomerByTypeOfPartner(typeOfPartner);
             if(customer.Success == true)
@@ -68,7 +68,7 @@ namespace CMS_appBackend.Controllers
         [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword(ForgetPasswordRequestModel model)
         {
-            var customer = await _customerService.ForgetPassword(model, model.Email);
+            var customer = await _customerService.ForgetPassword(model);
             if(customer.Success == true)
             {
                 return Content(customer.Message);
@@ -79,7 +79,7 @@ namespace CMS_appBackend.Controllers
         [HttpPost("ResetPassword")]
         public async Task<IActionResult> ResetPassword(ResetPasswordRequestModel model)
         {
-            var customer = await _customerService.ResetPassword(model, model.Code);
+            var customer = await _customerService.ResetPassword(model);
             if(customer.Success == true)
             {
                 return Content(customer.Message);
