@@ -75,7 +75,7 @@ namespace CMSappBackend.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int?>("DeletedBy")
@@ -335,11 +335,10 @@ namespace CMSappBackend.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime(6)");
 
                     b.Property<int?>("DeletedBy")
@@ -382,7 +381,11 @@ namespace CMSappBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -402,10 +405,6 @@ namespace CMSappBackend.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Features")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -419,11 +418,27 @@ namespace CMSappBackend.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("Price")
+                    b.Property<string>("NumberOfBathrooms")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NumberOfBedrooms")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NumberOfFloors")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Propertylocation")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("longtext");
 

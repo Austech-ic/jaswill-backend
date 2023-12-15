@@ -54,10 +54,10 @@ namespace CMS_appBackend.Controllers
             return BadRequest(customer);
         }
 
-        [HttpGet("GetCustomerByTypeOfPartner/{typeOfPartner}")]
-        public async Task<IActionResult> GetCustomerByTypeOfPartner(GetCustomerByTypeOfPartnerRequestModel typeOfPartner)
+        [HttpGet("GetCustomerByTypeOfPartner/{model}")]
+        public async Task<IActionResult> GetCustomerByTypeOfPartner(GetCustomerByTypeOfPartnerRequestModel model)
         {
-            var customer = await _customerService.GetCustomerByTypeOfPartner(typeOfPartner);
+            var customer = await _customerService.GetCustomerByTypeOfPartner(model);
             if(customer.Success == true)
             {
                 return Ok(customer);

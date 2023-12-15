@@ -37,10 +37,10 @@ namespace CMS_appBackend.Controllers
             return Ok(update);
         }
 
-        [HttpGet("GetCategoriesByName/{name}")]
-        public async Task<IActionResult> GetCategoriesByName([FromRoute]GetCategoriesByNameRequestModel name)
+        [HttpGet("GetCategoriesByName/{model}")]
+        public async Task<IActionResult> GetCategoriesByName([FromRoute]GetCategoriesByNameRequestModel model)
         {
-            var catg = await _categoryService.GetCategoriesByName(name);
+            var catg = await _categoryService.GetCategoriesByName(model);
             if (catg.Success == false)
             {
                 return BadRequest(catg);
