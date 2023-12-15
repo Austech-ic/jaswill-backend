@@ -15,15 +15,25 @@ namespace CMS_appBackend.Implementations.Services
     {
         private readonly Cloudinary _cloudinary;
 
-        public CloudinaryService(IOptions<CloudinarySettings> cloudinarySettings)
+        // public CloudinaryService(IOptions<CloudinarySettings> cloudinarySettings)
+        // {
+        //     // ...
+        //     var account = new Account(
+        //         cloudinarySettings.Value.CloudName,
+        //         cloudinarySettings.Value.ApiKey,
+        //         cloudinarySettings.Value.ApiSecret
+        //     );
+        //     _cloudinary = new Cloudinary(account);
+        // }
+         public CloudinaryService()
         {
-            // ...
-            var account = new Account(
-                cloudinarySettings.Value.CloudName,
-                cloudinarySettings.Value.ApiKey,
-                cloudinarySettings.Value.ApiSecret
+            var cloudinaryAccount = new Account(
+                Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME"),
+                Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY"),
+                Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")
             );
-            _cloudinary = new Cloudinary(account);
+
+            _cloudinary = new Cloudinary(cloudinaryAccount);
         }
 
         public async Task<string> UploadImageToCloudinaryAsync(IFormFile file)
