@@ -79,10 +79,10 @@ namespace CMS_appBackend.Controllers
             return BadRequest(realEstates);
         }
 
-        [HttpGet("GetRealEstateById")]
-        public async Task<IActionResult> GetRealEstateByUserId(int id)
+        [HttpGet("GetRealEstateById/{Id}")]
+        public async Task<IActionResult> GetRealEstateByUserId(int Id)
         {
-            var realEstates = await _realEstateService.GetRealEstateByIdAsync(id);
+            var realEstates = await _realEstateService.GetRealEstateByIdAsync(Id);
             if (realEstates.Success == true)
             {
                 return Ok(realEstates);
