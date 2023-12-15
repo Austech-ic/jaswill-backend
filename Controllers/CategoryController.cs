@@ -37,17 +37,6 @@ namespace CMS_appBackend.Controllers
             return Ok(update);
         }
 
-        [HttpGet("GetCategoriesByName")]
-        public async Task<IActionResult> GetCategoriesByName([FromRoute]GetCategoriesByNameRequestModel model)
-        {
-            var catg = await _categoryService.GetCategoriesByName(model);
-            if (catg.Success == false)
-            {
-                return BadRequest(catg);
-            }
-            return Ok(catg);
-        }
-
         [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetAllCategory()
         {

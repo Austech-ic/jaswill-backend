@@ -54,16 +54,6 @@ namespace CMS_appBackend.Controllers
             return BadRequest(customer);
         }
 
-        [HttpGet("GetCustomerByTypeOfPartner/{model}")]
-        public async Task<IActionResult> GetCustomerByTypeOfPartner(GetCustomerByTypeOfPartnerRequestModel model)
-        {
-            var customer = await _customerService.GetCustomerByTypeOfPartner(model);
-            if(customer.Success == true)
-            {
-                return Ok(customer);
-            }
-            return BadRequest(customer);
-        }
 
         [HttpPost("ForgetPassword")]
         public async Task<IActionResult> ForgetPassword(ForgetPasswordRequestModel model)
