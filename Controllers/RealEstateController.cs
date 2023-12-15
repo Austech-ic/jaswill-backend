@@ -39,15 +39,14 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPut("UpdateRealEstate")]
-        public async Task<IActionResult> UpdateRealEstate(
-            UpdateRealEstateRequstModel model,
-            IFormFile imageUrl
+        public async Task<IActionResult> UpdateRealEstate( [FromForm]
+            UpdateRealEstateRequstModel model 
         )
         {
-            if (imageUrl != null && imageUrl.Length > 0)
+           if (model.ImageUrl != null && model.ImageUrl.Length > 0)
             {
                 var cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
-                    imageUrl
+                    model.ImageUrl
                 );
             }
             var realEstate = await _realEstateService.UpdateRealEstateAsync(model);
