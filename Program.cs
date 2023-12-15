@@ -90,8 +90,6 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 // builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 var cloudinaryUrl = Environment.GetEnvironmentVariable("CLOUDINARY_URL");
-var uri = new Uri(cloudinaryUrl);
-var cloudinaryAccount = new Account(uri.Host, uri.UserInfo.Split(':')[0], uri.UserInfo.Split(':')[1]);
 
 
 

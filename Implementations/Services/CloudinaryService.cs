@@ -17,10 +17,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public CloudinaryService(IOptions<CloudinarySettings> cloudinarySettings)
         {
-            Console.WriteLine($"CloudName: {cloudinarySettings.Value.CloudName}");
-            Console.WriteLine($"ApiKey: {cloudinarySettings.Value.ApiKey}");
-            Console.WriteLine($"ApiSecret: {cloudinarySettings.Value.ApiSecret}");
-
+            // ...
             var account = new Account(
                 cloudinarySettings.Value.CloudName,
                 cloudinarySettings.Value.ApiKey,
