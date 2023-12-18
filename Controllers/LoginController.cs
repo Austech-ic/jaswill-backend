@@ -67,7 +67,7 @@ namespace CMS_appBackend.Controllers
                     return Ok();
                 }
             }
-            return Content(login.Message);
+            return BadRequest(login.Message);
         }
 
         [HttpGet("Logout")]

@@ -33,9 +33,9 @@ namespace CMS_appBackend.Controllers
             var admin = await _adminService.AddAdmin(model);
             if (admin.Success == true)
             {
-                return Content(admin.Message);
+                return Ok(admin.Message);
             }
-            return Content(admin.Message);
+            return BadRequest(admin.Message);
         }
 
         [HttpPost("AddUserRole")]
@@ -44,9 +44,9 @@ namespace CMS_appBackend.Controllers
             var userRole = await _adminService.AddUserRole(UserId, RoleId);
             if (userRole.Success == true)
             {
-                return Content(userRole.Message);
+                return Ok(userRole.Message);
             }
-            return Content(userRole.Message);
+            return BadRequest(userRole.Message);
         }
 
         [HttpDelete("DeleteAdmin/{id}")]
@@ -55,9 +55,9 @@ namespace CMS_appBackend.Controllers
             var admin = await _adminService.DeleteAdmin(id);
             if (admin.Success == true)
             {
-                return Content(admin.Message);
+                return Ok(admin.Message);
             }
-            return Content(admin.Message);
+            return BadRequest(admin.Message);
         }
 
         [HttpGet("GetAllAdmins")]
@@ -88,7 +88,7 @@ namespace CMS_appBackend.Controllers
             var login = await _userService.Login(model);
             if (login.Success == false)
             {
-                return Content("Email or Password does not exist ");
+                return BadRequest("Email or Password does not exist ");
             }
 
             var claims = new List<Claim>
@@ -107,7 +107,7 @@ namespace CMS_appBackend.Controllers
                 principal,
                 authenticationProperties
             );
-            return Content(login.Message);
+            return Ok(login.Message);
         }
 
         [HttpPost("UpdateAdmin")]
@@ -116,9 +116,9 @@ namespace CMS_appBackend.Controllers
             var admin = await _adminService.UpdateAdmin(model);
             if (admin.Success == true)
             {
-                return Content(admin.Message);
+                return Ok(admin.Message);
             }
-            return Content(admin.Message);
+            return BadRequest(admin.Message);
         }
 
         [HttpPost("UpdateAdminPassword")]
@@ -127,9 +127,9 @@ namespace CMS_appBackend.Controllers
             var admin = await _adminService.ChangePassword(model, id);
             if (admin.Success == true)
             {
-                return Content(admin.Message);
+                return Ok(admin.Message);
             }
-            return Content(admin.Message);
+            return BadRequest(admin.Message);
         }
 
         [HttpPost("ForgetPassword")]
