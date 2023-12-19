@@ -23,7 +23,7 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<List<Blog>> GetBlogsToDisplayAsync()
         {
-            var Blog = await _Context.Blogs.Include(x => x.Images).Where(x => x.IsDeleted == false).ToListAsync();
+            var Blog = await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).Where(x => x.IsDeleted == false).ToListAsync();
             return Blog;
         }
 

@@ -75,14 +75,11 @@ namespace CMS_appBackend.Controllers
         public async Task<IActionResult> GetBlogsToDisplayAsync()
         {
             var blog = await _blogService.GetBlogsToDisplayAsync();
-            if (blog.Success)
+            if (blog.Success == true)
             {
-                return Ok(blog.Message);
+                return Ok(blog);
             }
-            else
-            {
-                return BadRequest(blog.Message);
-            }
+            return BadRequest(blog.Message);
         }
 
         [HttpDelete("DeleteBlog")]
