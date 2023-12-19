@@ -119,7 +119,7 @@ namespace CMS_appBackend.Implementations.Services
         public async Task<BlogsResponseModel> GetBlogsToDisplayAsync()
         {
             var blogToDisplay = await _blogRepository.GetBlogsToDisplayAsync();
-            if (blogToDisplay.Count == 0)
+            if (blogToDisplay == null)
             {
                 return new BlogsResponseModel { Message = "No Blog available", Success = false };
             }
