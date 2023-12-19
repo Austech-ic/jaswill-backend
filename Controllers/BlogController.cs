@@ -73,7 +73,7 @@ namespace CMS_appBackend.Controllers
             return Content(blog.Message);
         }
 
-        [HttpGet("GetBlogsToDisplay")]
+        [HttpGet("GetBlogsToDisplayAsync")]
         public async Task<IActionResult> GetBlogsToDisplayAsync()
         {
             var blog = await _blogService.GetBlogsToDisplayAsync();
