@@ -130,6 +130,7 @@ namespace CMS_appBackend.Implementations.Services
                         a =>
                             new BlogDto
                             {
+                                Id = a.Id,
                                 Title = a.Title,
                                 ImageUrl = a.ImageUrl,
                             }
@@ -193,6 +194,7 @@ namespace CMS_appBackend.Implementations.Services
                         blo =>
                             new BlogDto
                             {
+                                Id = blo.Id,
                                 Title = blo.Title,
                                 ImageUrl = blo.ImageUrl,
                             }
