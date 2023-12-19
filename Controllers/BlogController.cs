@@ -55,11 +55,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPut("UpdateBlog")]
-        public async Task<IActionResult> UpdateBlog([FromForm]
-            UpdateBlogRequestModels model
-        )
+        public async Task<IActionResult> UpdateBlog([FromForm] UpdateBlogRequestModels model)
         {
-             if (model.ImageUrl != null && model.ImageUrl.Length > 0)
+            if (model.ImageUrl != null && model.ImageUrl.Length > 0)
             {
                 var cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
                     model.ImageUrl
@@ -81,7 +79,10 @@ namespace CMS_appBackend.Controllers
             {
                 return Ok(blog);
             }
-            return BadRequest(blog);
+            else
+            {
+                return BadRequest(blog);
+            }
         }
 
         [HttpDelete("DeleteBlog")]
@@ -95,7 +96,6 @@ namespace CMS_appBackend.Controllers
             return Content(blog.Message);
         }
 
-
         [HttpGet("GetAllBlogsAsync")]
         public async Task<IActionResult> GetAllBlogsAsync()
         {
@@ -106,7 +106,6 @@ namespace CMS_appBackend.Controllers
             }
             return BadRequest(blog);
         }
-
 
         // [HttpPost("upload")]
         // public async Task<IActionResult> UploadImage([FromForm] IFormFile file)

@@ -50,7 +50,7 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    BlogId = n.Id,
+                    Id = n.Id,
                 }).ToList(),
             }).ToList();
             if (categories == null)
@@ -89,7 +89,7 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    BlogId = n.Id,
+                    Id = n.Id,
                 }).ToList(),
             }).ToHashSet();
 
@@ -122,7 +122,7 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    BlogId = n.Id,
+                    Id = n.Id,
                 }).ToList(),
             };
             return new CategoryResponseModel
@@ -144,7 +144,7 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = n.Title,
                     ImageUrl = n.ImageUrl,
-                    BlogId = n.Id,
+                    Id = n.Id,
                 }).ToList(),
             }).ToList();
             if(result.Count == 0)

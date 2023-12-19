@@ -5,7 +5,7 @@ namespace CMS_appBackend.DTOs
 {
     public class BlogDto
     {
-        public int BlogId { get; set; }
+        public int Id { get; set; }
         public string ImageUrl { get; set; }
         public string Title {get;set;}
     }
