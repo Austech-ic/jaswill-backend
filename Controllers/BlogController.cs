@@ -77,7 +77,7 @@ namespace CMS_appBackend.Controllers
         public async Task<IActionResult> GetBlogsToDisplayAsync()
         {
             var blog = await _blogService.GetBlogsToDisplayAsync();
-            if (blog.Success == true)
+            if (blog.Success)
             {
                 return Ok(blog);
             }
