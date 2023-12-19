@@ -77,11 +77,11 @@ namespace CMS_appBackend.Controllers
             var blog = await _blogService.GetBlogsToDisplayAsync();
             if (blog.Success)
             {
-                return Ok(blog);
+                return Ok(blog.Message);
             }
             else
             {
-                return BadRequest(blog);
+                return BadRequest(blog.Message);
             }
         }
 
