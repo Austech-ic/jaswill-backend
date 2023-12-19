@@ -135,6 +135,8 @@ namespace CMS_appBackend.Implementations.Services
                             }
                     )
                     .ToList(),
+                Message = "Blog found successfully",
+                Success = true,
             };
         }
 
