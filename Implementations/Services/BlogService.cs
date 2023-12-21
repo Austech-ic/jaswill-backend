@@ -52,6 +52,8 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Title = model.Title,
                 ImageUrl = cloudinaryUrl,
+                CreatedOn = DateTime.Now,
+                Desccription = model.Desccription,
             };
 
             var result = await _blogRepository.CreateAsync(blo);
@@ -77,6 +79,8 @@ namespace CMS_appBackend.Implementations.Services
                             {
                                 Title = blo.Title,
                                 ImageUrl = blo.ImageUrl,
+                                CreatedOn = blo.CreatedOn,
+                                Desccription = blo.Desccription,
                             }
                     )
                     .ToList(),
@@ -98,6 +102,8 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = blog.Title,
                     ImageUrl = blog.ImageUrl,
+                    CreatedOn = blog.CreatedOn,
+                    Desccription = blog.Desccription,
                 },
                 Message = "Blog found successfully",
                 Success = true,
@@ -133,6 +139,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Id = a.Id,
                                 Title = a.Title,
                                 ImageUrl = a.ImageUrl,
+                                CreatedOn = a.CreatedOn,
+                                Desccription = a.Desccription,
                             }
                     )
                     .ToList(),
@@ -158,6 +166,8 @@ namespace CMS_appBackend.Implementations.Services
                 blog.ImageUrl = cloudinaryImageUrl;
             }
             blog.Title = model.Title;
+            blog.CreatedOn  = DateTime.Now;
+            blog.Desccription = model.Desccription;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Update Successful", Success = true };
         }
@@ -175,6 +185,8 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = blog.Title,
                     ImageUrl = blog.ImageUrl,
+                    CreatedOn = blog.CreatedOn,
+                    Desccription = blog.Desccription,
                 },
                 Message = "Blog found successfully",
                 Success = true,
@@ -197,6 +209,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Id = blo.Id,
                                 Title = blo.Title,
                                 ImageUrl = blo.ImageUrl,
+                                CreatedOn = blo.CreatedOn,
+                                Desccription = blo.Desccription,
                             }
                     )
                     .ToList(),
