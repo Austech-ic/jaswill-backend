@@ -20,7 +20,7 @@ namespace CMS_appBackend.Implementations.Repositories
         
         public async Task<IList<RealEstate>> GetAllRealEstate()
         {
-            var realEstate = await _Context.RealEstates.Include(x => x.Images).ToListAsync();
+            var realEstate = await _Context.RealEstates.Include(x => x.Images).Where(x => x.IsDeleted == false).ToListAsync();
             return realEstate;
         }
 
