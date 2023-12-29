@@ -71,7 +71,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<RealEstatesResponseModel> GetAllRealEstatesAsync()
         {
-            var realEstate = await _realEstateRepository.GetAllAsync();
+            var realEstate = await _realEstateRepository.GetAllRealEstatesAsync();
             if (realEstate == null)
             {
                 return new RealEstatesResponseModel

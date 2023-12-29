@@ -18,10 +18,13 @@ namespace CMS_appBackend.Implementations.Repositories
             _Context = Context;
         }
         
-        public async Task<IList<RealEstate>> GetAllRealEstate()
+        public async Task<IList<RealEstate>> GetAllRealEstatesAsync()
         {
-            var realEstate = await _Context.RealEstates.Include(x => x.Images).Where(x => x.IsDeleted == false).ToListAsync();
-            return realEstate;
+            var realEstates = await _Context.RealEstates
+                .Include(x => x.Images)
+                .Where(x => x.IsDeleted == false)
+                .ToListAsync();
+            return realEstates;
         }
 
         public async Task<RealEstate> GetRealEstateById(int id)

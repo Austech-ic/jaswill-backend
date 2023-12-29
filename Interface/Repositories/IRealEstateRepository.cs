@@ -4,7 +4,7 @@ namespace CMS_appBackend.Interface.Repositories
 {
     public interface IRealEstateRepository : IGenericRepository<RealEstate>
     {
-        Task<IList<RealEstate>> GetAllRealEstate();
+        Task<IList<RealEstate>> GetAllRealEstatesAsync();
         Task<RealEstate> GetRealEstateById(int id);
     }
 }
