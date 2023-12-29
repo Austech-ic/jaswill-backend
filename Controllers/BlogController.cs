@@ -82,15 +82,15 @@ namespace CMS_appBackend.Controllers
             return BadRequest(blog.Message);
         }
 
-        [HttpDelete("DeleteBlog")]
+        [HttpPut("DeleteBlog/{Id}")]
         public async Task<IActionResult> DeleteBlog(int Id)
         {
             var blog = await _blogService.DeleteBlogAsync(Id);
             if (blog.Success == true)
             {
-                return Content(blog.Message);
+                return Ok(blog.Message);
             }
-            return Content(blog.Message);
+            return BadRequest(blog.Message);
         }
 
         [HttpGet("GetAllBlogsAsync")]

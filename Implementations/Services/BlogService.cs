@@ -91,7 +91,9 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BlogResponseModel> GetBlogById(int id)
         {
-            var blog = await _blogRepository.GetBlogByIdAsync(id);
+            var blog = await _blogRepository.GetAsync(
+                x => x.Id == id && x.IsDeleted == false
+            );
             if (blog == null)
             {
                 return new BlogResponseModel { Message = $"Blog not found", Success = false, };
@@ -100,6 +102,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Data = new BlogDto
                 {
+                    Id = blog.Id,
                     Title = blog.Title,
                     ImageUrl = blog.ImageUrl,
                     CreatedOn = blog.CreatedOn,
@@ -118,6 +121,7 @@ namespace CMS_appBackend.Implementations.Services
                 return new BaseResponse() { Message = "No Blog found", Success = false, };
             }
             blog.IsDeleted = true;
+            blog.DeletedOn = DateTime.Now;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Deletion Successful", Success = true };
         }
@@ -195,7 +199,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BlogsResponseModel> GetAllBlogsAsync()
         {
-            var blog = await _blogRepository.GetAllAsync();
+            var blog = await _blogRepository.GetAllBlogsAsync();
             if (blog == null)
             {
                 return new BlogsResponseModel { Message = $"No Blogs found", Success = false, };

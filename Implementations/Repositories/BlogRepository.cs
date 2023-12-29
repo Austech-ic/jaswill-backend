@@ -29,12 +29,23 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<Blog> GetBlogByIdAsync(int id)
         {
-            return await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).FirstOrDefaultAsync(x => x.Id == id);
+            var blog = await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).FirstOrDefaultAsync(x => x.Id == id);
+            return blog;
         }
 
         public async Task<Blog> GetBlogByTitleAsync(string title)
         {
             return await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).FirstOrDefaultAsync(x => x.Title == title);
+        }
+
+        public async Task<IList<Blog>> GetAllBlogsAsync()
+        {
+            var blogs = await _Context.Blogs
+                .Include(x => x.Images)
+                .Include(x => x.Posts)
+                .Where(x => x.IsDeleted == false)
+                .ToListAsync();
+            return blogs;
         }
     }
 }

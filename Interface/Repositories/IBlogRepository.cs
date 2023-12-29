@@ -7,6 +7,7 @@ namespace CMS_appBackend.Interface.Repositories
     {
        Task<List<Blog>> GetBlogsByDateAsync(DateTime Date);
        Task<Blog> GetBlogByIdAsync(int id);
+       Task<IList<Blog>> GetAllBlogsAsync();
        Task<Blog> GetBlogByTitleAsync(string title);
        Task<List<Blog>> GetBlogsToDisplayAsync();
     }
