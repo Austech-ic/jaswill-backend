@@ -46,6 +46,7 @@ namespace CMS_appBackend.Implementations.Services
                 Description = model.Description,
                 Type = model.Type,
                 City = model.City,
+                Price = model.Price,
                 Propertylocation = model.Propertylocation,
                 NumberOfBedrooms = model.NumberOfBedrooms,
                 NumberOfBathrooms = model.NumberOfBathrooms,
@@ -91,6 +92,7 @@ namespace CMS_appBackend.Implementations.Services
                                 Description = re.Description,
                                 Type = re.Type,
                                 City = re.City,
+                                Price = re.Price,
                                 Propertylocation = re.Propertylocation,
                                 NumberOfBedrooms = re.NumberOfBedrooms,
                                 NumberOfBathrooms = re.NumberOfBathrooms,
@@ -125,6 +127,7 @@ namespace CMS_appBackend.Implementations.Services
                     Description = realEstate.Description,
                     Type = realEstate.Type,
                     City = realEstate.City,
+                    Price = realEstate.Price,
                     Propertylocation = realEstate.Propertylocation,
                     NumberOfBedrooms = realEstate.NumberOfBedrooms,
                     NumberOfBathrooms = realEstate.NumberOfBathrooms,
@@ -154,6 +157,7 @@ namespace CMS_appBackend.Implementations.Services
             realEstate.Description = model.Description;
             realEstate.Type = model.Type;
             realEstate.City = model.City;
+            realEstate.Price = model.Price;
             realEstate.Propertylocation = model.Propertylocation;
             realEstate.NumberOfBedrooms = model.NumberOfBedrooms;
             realEstate.NumberOfBathrooms = model.NumberOfBathrooms;

@@ -427,6 +427,9 @@ namespace CMSappBackend.Migrations
                     b.Property<string>("NumberOfFloors")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("Price")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Propertylocation")
                         .HasColumnType("longtext");
 
