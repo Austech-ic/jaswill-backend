@@ -39,25 +39,43 @@ namespace CMS_appBackend.Implementations.Services
             var blog = await _blogRepository.GetAsync(
                 x => x.Title == model.Title && x.IsDeleted == false
             );
+
             if (blog != null)
             {
-                return new BaseResponse() { Message = "Blog Already Exist", Success = false, };
+                return new BaseResponse() { Message = "Blog Already Exists", Success = false };
             }
+
             string cloudinaryUrl = null;
+
             if (model.ImageUrl != null)
             {
-                cloudinaryUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(model.ImageUrl);
+                cloudinaryUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
+                    model.ImageUrl
+                );
             }
+
+            DateTime createdOn;
+
+            if (!DateTime.TryParse(model.CreatedOn, out createdOn))
+            {
+                return new BaseResponse()
+                {
+                    Message = "Invalid date format for CreatedOn",
+                    Success = false
+                };
+            }
+
             var blo = new Blog
             {
                 Title = model.Title,
                 ImageUrl = cloudinaryUrl,
-                CreatedOn = DateTime.UtcNow,
+                CreatedOn = createdOn,
                 Desccription = model.Desccription,
             };
 
             var result = await _blogRepository.CreateAsync(blo);
-            return new BaseResponse { Message = "Blog Created Successfully", Success = true, };
+
+            return new BaseResponse { Message = "Blog Created Successfully", Success = true };
         }
 
         public async Task<BlogsResponseModel> GetBlogsByDateAsync(DateTime Date)
@@ -91,9 +109,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BlogResponseModel> GetBlogById(int id)
         {
-            var blog = await _blogRepository.GetAsync(
-                x => x.Id == id && x.IsDeleted == false
-            );
+            var blog = await _blogRepository.GetAsync(x => x.Id == id && x.IsDeleted == false);
             if (blog == null)
             {
                 return new BlogResponseModel { Message = $"Blog not found", Success = false, };
@@ -169,8 +185,18 @@ namespace CMS_appBackend.Implementations.Services
                 );
                 blog.ImageUrl = cloudinaryImageUrl;
             }
+            DateTime createdOn;
+
+            if (!DateTime.TryParse(model.CreatedOn, out createdOn))
+            {
+                return new BaseResponse()
+                {
+                    Message = "Invalid date format for CreatedOn",
+                    Success = false
+                };
+            }
             blog.Title = model.Title;
-            blog.CreatedOn  = DateTime.UtcNow;
+            blog.CreatedOn = createdOn;
             blog.Desccription = model.Desccription;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Update Successful", Success = true };
