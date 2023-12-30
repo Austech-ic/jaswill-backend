@@ -54,7 +54,7 @@ namespace CMS_appBackend.Implementations.Services
                 );
             }
 
-             DateTime createdOn;
+            DateTime createdOn;
             string[] formats = { "yyyy-MM-dd", "MM/dd/yyyy", "dd/MM/yyyy", "yyyyMMdd" };
 
             if (
@@ -105,7 +105,7 @@ namespace CMS_appBackend.Implementations.Services
                             {
                                 Title = blo.Title,
                                 ImageUrl = blo.ImageUrl,
-                                CreatedOn = blo.CreatedOn,
+                                CreatedOn = blo.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"), 
                                 Desccription = blo.Desccription,
                             }
                     )
@@ -129,7 +129,7 @@ namespace CMS_appBackend.Implementations.Services
                     Id = blog.Id,
                     Title = blog.Title,
                     ImageUrl = blog.ImageUrl,
-                    CreatedOn = blog.CreatedOn,
+                    CreatedOn = blog.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"),
                     Desccription = blog.Desccription,
                 },
                 Message = "Blog found successfully",
@@ -167,7 +167,7 @@ namespace CMS_appBackend.Implementations.Services
                                 Id = a.Id,
                                 Title = a.Title,
                                 ImageUrl = a.ImageUrl,
-                                CreatedOn = a.CreatedOn,
+                                CreatedOn = a.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"),
                                 Desccription = a.Desccription,
                             }
                     )
@@ -232,7 +232,7 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Title = blog.Title,
                     ImageUrl = blog.ImageUrl,
-                    CreatedOn = blog.CreatedOn,
+                    CreatedOn = blog.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"),
                     Desccription = blog.Desccription,
                 },
                 Message = "Blog found successfully",
@@ -242,26 +242,30 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BlogsResponseModel> GetAllBlogsAsync()
         {
-            var blog = await _blogRepository.GetAllBlogsAsync();
-            if (blog == null)
+            var blogs = await _blogRepository.GetAllBlogsAsync();
+            if (blogs == null)
             {
-                return new BlogsResponseModel { Message = $"No Blogs found", Success = false, };
+                return new BlogsResponseModel { Message = "No Blogs found", Success = false };
             }
+
+            var blogDtos = blogs
+                .Select(
+                    blo =>
+                        new BlogDto
+                        {
+                            Id = blo.Id,
+                            Title = blo.Title,
+                            ImageUrl = blo.ImageUrl,
+                            CreatedOn = blo.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"), // Adjust the format as needed
+                            Desccription = blo.Desccription,
+                        }
+                )
+                .ToList();
+
             return new BlogsResponseModel
             {
-                Data = blog.Select(
-                        blo =>
-                            new BlogDto
-                            {
-                                Id = blo.Id,
-                                Title = blo.Title,
-                                ImageUrl = blo.ImageUrl,
-                                CreatedOn = blo.CreatedOn,
-                                Desccription = blo.Desccription,
-                            }
-                    )
-                    .ToList(),
-                Message = "Blog found successfully",
+                Data = blogDtos,
+                Message = "Blogs found successfully",
                 Success = true,
             };
         }
