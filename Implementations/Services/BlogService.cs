@@ -54,9 +54,18 @@ namespace CMS_appBackend.Implementations.Services
                 );
             }
 
-            DateTime createdOn;
+             DateTime createdOn;
+            string[] formats = { "yyyy-MM-dd", "MM/dd/yyyy", "dd/MM/yyyy", "yyyyMMdd" };
 
-            if (!DateTime.TryParse(model.CreatedOn, out createdOn))
+            if (
+                DateTime.TryParseExact(
+                    model.CreatedOn,
+                    formats,
+                    null,
+                    System.Globalization.DateTimeStyles.None,
+                    out createdOn
+                )
+            )
             {
                 return new BaseResponse()
                 {
@@ -64,7 +73,6 @@ namespace CMS_appBackend.Implementations.Services
                     Success = false
                 };
             }
-
             var blo = new Blog
             {
                 Title = model.Title,
@@ -186,8 +194,17 @@ namespace CMS_appBackend.Implementations.Services
                 blog.ImageUrl = cloudinaryImageUrl;
             }
             DateTime createdOn;
+            string[] formats = { "yyyy-MM-dd", "MM/dd/yyyy", "dd/MM/yyyy", "yyyyMMdd" };
 
-            if (!DateTime.TryParse(model.CreatedOn, out createdOn))
+            if (
+                DateTime.TryParseExact(
+                    model.CreatedOn,
+                    formats,
+                    null,
+                    System.Globalization.DateTimeStyles.None,
+                    out createdOn
+                )
+            )
             {
                 return new BaseResponse()
                 {
