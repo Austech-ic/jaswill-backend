@@ -47,6 +47,11 @@ namespace CMS_appBackend.Implementations.Services
                 Type = model.Type,
                 City = model.City,
                 Price = model.Price,
+                Agency = model.Agency,
+                Agreement = model.Agreement,
+                Caution = model.Caution,
+                ServiceCharge = model.ServiceCharge,
+                Total = model.Total,
                 Propertylocation = model.Propertylocation,
                 NumberOfBedrooms = model.NumberOfBedrooms,
                 NumberOfBathrooms = model.NumberOfBathrooms,
@@ -93,6 +98,11 @@ namespace CMS_appBackend.Implementations.Services
                                 Type = re.Type,
                                 City = re.City,
                                 Price = re.Price,
+                                Agency = re.Agency,
+                                Agreement = re.Agreement,
+                                Caution = re.Caution,
+                                ServiceCharge = re.ServiceCharge,
+                                Total = re.Total,
                                 Propertylocation = re.Propertylocation,
                                 NumberOfBedrooms = re.NumberOfBedrooms,
                                 NumberOfBathrooms = re.NumberOfBathrooms,
@@ -128,6 +138,11 @@ namespace CMS_appBackend.Implementations.Services
                     Type = realEstate.Type,
                     City = realEstate.City,
                     Price = realEstate.Price,
+                    Agency = realEstate.Agency,
+                    Agreement = realEstate.Agreement,
+                    Caution = realEstate.Caution,
+                    ServiceCharge = realEstate.ServiceCharge,
+                    Total = realEstate.Total,
                     Propertylocation = realEstate.Propertylocation,
                     NumberOfBedrooms = realEstate.NumberOfBedrooms,
                     NumberOfBathrooms = realEstate.NumberOfBathrooms,
@@ -153,16 +168,21 @@ namespace CMS_appBackend.Implementations.Services
                 );
                 realEstate.ImageUrl = cloudinaryImageUrl;
             }
-            realEstate.Title = model.Title;
-            realEstate.Description = model.Description;
-            realEstate.Type = model.Type;
-            realEstate.City = model.City;
-            realEstate.Price = model.Price;
-            realEstate.Propertylocation = model.Propertylocation;
-            realEstate.NumberOfBedrooms = model.NumberOfBedrooms;
-            realEstate.NumberOfBathrooms = model.NumberOfBathrooms;
-            realEstate.NumberOfFloors = model.NumberOfFloors;
-            realEstate.Content = model.Content;
+            realEstate.Title = model.Title ?? realEstate.Title;
+            realEstate.Description = model.Description ?? realEstate.Description;
+            realEstate.Type = model.Type ?? realEstate.Type;
+            realEstate.City = model.City ?? realEstate.City;
+            realEstate.Price = model.Price ?? realEstate.Price;
+            realEstate.Agency = model.Agency ?? realEstate.Agency;
+            realEstate.Agreement = model.Agreement ?? realEstate.Agreement;
+            realEstate.Caution = model.Caution ?? realEstate.Caution;
+            realEstate.ServiceCharge = model.ServiceCharge ?? realEstate.ServiceCharge;
+            realEstate.Total = model.Total ?? realEstate.Total;
+            realEstate.Propertylocation = model.Propertylocation ?? realEstate.Propertylocation;
+            realEstate.NumberOfBedrooms = model.NumberOfBedrooms ?? realEstate.NumberOfBedrooms;
+            realEstate.NumberOfBathrooms = model.NumberOfBathrooms ?? realEstate.NumberOfBathrooms;
+            realEstate.NumberOfFloors = model.NumberOfFloors ?? realEstate.NumberOfFloors;
+            realEstate.Content = model.Content ?? realEstate.Content;
             await _realEstateRepository.UpdateAsync(realEstate);
             return new BaseResponse() { Message = "RealEstate Updated Successfully", Success = true, };
         }

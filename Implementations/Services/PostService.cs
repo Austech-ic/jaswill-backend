@@ -95,10 +95,10 @@ namespace CMS_appBackend.Implementations.Services
                 string cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(model.PostImage);
                 post.PostImage = cloudinaryImageUrl;
             }
-            post.Content = model.Content;
-            post.PostName = model.PostName;
-            post.PostTag = model.PostTag;
-            post.CreatedOn = DateTime.Now;
+            post.Content = model.Content ?? post.Content;
+            post.PostName = model.PostName ?? post.PostName;
+            post.PostTag = model.PostTag ?? post.PostTag;
+            post.CreatedOn = DateTime.UtcNow;
             await _postRepository.UpdateAsync(post);
             return new BaseResponse { Message = "Post Updated Successfully", Success = true, };
         }

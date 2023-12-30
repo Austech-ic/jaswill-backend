@@ -385,6 +385,15 @@ namespace CMSappBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Agency")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Agreement")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Caution")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("City")
                         .HasColumnType("longtext");
 
@@ -433,7 +442,13 @@ namespace CMSappBackend.Migrations
                     b.Property<string>("Propertylocation")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("ServiceCharge")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Title")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Total")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Type")

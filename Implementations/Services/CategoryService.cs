@@ -174,7 +174,7 @@ namespace CMS_appBackend.Implementations.Services
                     Success = false
                 };
             }
-            category.CategoryName = model.Name;
+            category.CategoryName = model.Name ?? category.CategoryName;
             await _categoryRepository.UpdateAsync(category);
             return new BaseResponse
             {

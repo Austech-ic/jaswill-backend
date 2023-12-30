@@ -173,10 +173,10 @@ namespace CMS_appBackend.Implementations.Services
             {
                 return new BaseResponse { Message = "Admin not found", Success = false };
             }
-            admin.User.FirstName = model.FirstName;
-            admin.User.LastName = model.LastName;
-            admin.User.Email = model.Email;
-            admin.User.PhoneNumber = model.PhoneNumber;
+            admin.User.FirstName = model.FirstName ?? admin.User.FirstName;
+            admin.User.LastName = model.LastName ?? admin.User.LastName;
+            admin.User.Email = model.Email ?? admin.User.Email;
+            admin.User.PhoneNumber = model.PhoneNumber ?? admin.User.PhoneNumber;
             await _adminRepository.UpdateAsync(admin);
             return new BaseResponse { Message = "Admin Updated Successfully", Success = true };
         }

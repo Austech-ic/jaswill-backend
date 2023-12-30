@@ -173,9 +173,9 @@ namespace CMS_appBackend.Implementations.Services
                 );
                 blog.ImageUrl = cloudinaryImageUrl;
             }
-            blog.Title = model.Title;
+            blog.Title = model.Title ?? blog.Title;
             blog.CreatedOn = DateTime.UtcNow;
-            blog.Desccription = model.Desccription;
+            blog.Desccription = model.Desccription ?? blog.Desccription;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Update Successful", Success = true };
         }
