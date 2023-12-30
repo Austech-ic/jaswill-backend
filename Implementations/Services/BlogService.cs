@@ -53,31 +53,11 @@ namespace CMS_appBackend.Implementations.Services
                     model.ImageUrl
                 );
             }
-
-            DateTime createdOn;
-            string[] formats = { "yyyy-MM-dd", "MM/dd/yyyy", "dd/MM/yyyy", "yyyyMMdd" };
-
-            if (
-                DateTime.TryParseExact(
-                    model.CreatedOn,
-                    formats,
-                    null,
-                    System.Globalization.DateTimeStyles.None,
-                    out createdOn
-                )
-            )
-            {
-                return new BaseResponse()
-                {
-                    Message = "Invalid date format for CreatedOn",
-                    Success = false
-                };
-            }
             var blo = new Blog
             {
                 Title = model.Title,
                 ImageUrl = cloudinaryUrl,
-                CreatedOn = createdOn,
+                CreatedOn = DateTime.UtcNow,
                 Desccription = model.Desccription,
             };
 
@@ -193,27 +173,8 @@ namespace CMS_appBackend.Implementations.Services
                 );
                 blog.ImageUrl = cloudinaryImageUrl;
             }
-            DateTime createdOn;
-            string[] formats = { "yyyy-MM-dd", "MM/dd/yyyy", "dd/MM/yyyy", "yyyyMMdd" };
-
-            if (
-                DateTime.TryParseExact(
-                    model.CreatedOn,
-                    formats,
-                    null,
-                    System.Globalization.DateTimeStyles.None,
-                    out createdOn
-                )
-            )
-            {
-                return new BaseResponse()
-                {
-                    Message = "Invalid date format for CreatedOn",
-                    Success = false
-                };
-            }
             blog.Title = model.Title;
-            blog.CreatedOn = createdOn;
+            blog.CreatedOn = DateTime.UtcNow;
             blog.Desccription = model.Desccription;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Update Successful", Success = true };
