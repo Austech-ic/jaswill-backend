@@ -154,6 +154,13 @@ namespace CMS_appBackend.Controllers
             return Content(admin.Message);
         }
 
+        [HttpGet("Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("LoginAdmin");
+        }
+
         
     }
 }
