@@ -52,7 +52,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Title = model.Title,
                 ImageUrl = cloudinaryUrl,
-                CreatedOn = DateTime.Now,
+                CreatedOn = DateTime.UtcNow,
                 Desccription = model.Desccription,
             };
 
@@ -170,7 +170,7 @@ namespace CMS_appBackend.Implementations.Services
                 blog.ImageUrl = cloudinaryImageUrl;
             }
             blog.Title = model.Title;
-            blog.CreatedOn  = DateTime.Now;
+            blog.CreatedOn  = DateTime.UtcNow;
             blog.Desccription = model.Desccription;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Update Successful", Success = true };
