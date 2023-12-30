@@ -158,7 +158,7 @@ namespace CMS_appBackend.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("LoginAdmin");
+            return Ok();
         }
 
         
