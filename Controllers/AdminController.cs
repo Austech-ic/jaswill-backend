@@ -154,6 +154,17 @@ namespace CMS_appBackend.Controllers
             return Content(admin.Message);
         }
 
+        [HttpGet("GetAdminUserNameAndEmail/{id}")]
+        public async Task<IActionResult> GetAdminUserNameAndEmail(int id)
+        {
+            var admin = await _adminService.GetAdminUserNameAndEmail(id);
+            if (admin.Success == true)
+            {
+                return Ok(admin);
+            }
+            return BadRequest(admin);
+        }
+
         [HttpGet("Logout")]
         public IActionResult Logout()
         {
