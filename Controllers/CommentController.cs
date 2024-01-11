@@ -19,9 +19,9 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("CreateComment/{userId}/{blogId}")]
-        public async Task<IActionResult> CreateComment([FromForm] CreateCommentRequestModel model, [FromRoute]int userId, [FromRoute]int blogId)
+        public async Task<IActionResult> CreateComment([FromForm] CreateCommentRequestModel model,  [FromRoute]int blogId)
         {
-            var create = await _commentService.CreateComment(model, userId, blogId);
+            var create = await _commentService.CreateComment(model, blogId);
             if (create.Success == false)
             {
                 return BadRequest(create);

@@ -5,7 +5,7 @@ namespace CMS_appBackend.Interface.Services
 {
     public interface ICommentService
     {
-        Task<BaseResponse> CreateComment(CreateCommentRequestModel model, int postId, int blogId);
+        Task<BaseResponse> CreateComment(CreateCommentRequestModel model, int blogId);
         Task<BaseResponse> UpdateComment(UpdateCommentRequestModel model, int id);
         Task<CommentsResponseModel> GetCommentByBlogId(int id);
         Task<CommentsResponseModel> GetCommentsByContent(string content);

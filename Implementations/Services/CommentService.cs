@@ -20,9 +20,9 @@ namespace CMS_appBackend.Implementations.Services
             _blogRepository = blogRepository;
         }
 
-        public async Task<BaseResponse> CreateComment(CreateCommentRequestModel model, int userId, int blogId)
+        public async Task<BaseResponse> CreateComment(CreateCommentRequestModel model,  int blogId)
         {
-            var user = await _userRepository.GetAsync(x => x.Id == userId);
+            var user = await _userRepository.GetAsync(x => x.Id == blogId);
             if (user == null)
             {
                 return new BaseResponse
