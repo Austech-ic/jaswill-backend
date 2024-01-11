@@ -56,8 +56,6 @@ namespace CMS_appBackend.Implementations.Services
                 Detail = model.Detail,
                 Blog = blog,
                 BlogId = blogId,
-                User = user,
-                UserId = user.Id,
                 CreatedBy = user.Id,
                 LastModifiedBy = user.Id,
             };
@@ -85,7 +83,6 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = x.Id,
                 Detail = x.Detail,
-                UserName  = $"{x.User.Email}",
                 
             }).ToList();
             return new CommentsResponseModel
@@ -110,7 +107,6 @@ namespace CMS_appBackend.Implementations.Services
             var commentDto = new CommentDTO
             {
                 Detail = comment.Detail,
-                UserName = $"{comment.User.Email}",
                 Id = comment.Id,
             };
             return new CommentResponseModel
@@ -149,7 +145,6 @@ namespace CMS_appBackend.Implementations.Services
             var result = comments.Where(x => x.IsDeleted == false).Select(x => new CommentDTO
             {
                 Detail = x.Detail,
-                UserName = $"{x.User.Email}",
                 Id = x.Id,
             }).ToHashSet();
             if(result.Count == 0)
@@ -174,7 +169,6 @@ namespace CMS_appBackend.Implementations.Services
             var comments = list.Where(x => x.IsDeleted == false).Select(x => new CommentDTO
             {
                 Detail = x.Detail,
-                UserName = $"{x.User.Email}",
                 Id = x.Id,
             }).ToHashSet();
             if (comments.Count == 0)
