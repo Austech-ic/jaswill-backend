@@ -56,8 +56,6 @@ namespace CMS_appBackend.Implementations.Services
                 Detail = model.Detail,
                 Blog = blog,
                 BlogId = blogId,
-                CreatedBy = user.Id,
-                LastModifiedBy = user.Id,
             };
             await _commentRepository.CreateAsync(comment);
             return new BaseResponse
