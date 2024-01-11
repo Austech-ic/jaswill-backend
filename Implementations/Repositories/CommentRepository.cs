@@ -16,14 +16,14 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<IList<Comment>> GetAll()
         {
-            var comments = await _Context.Comments.Where(x => x.IsDeleted == false).Include(x => x.Blog).Include(x => x.User).OrderByDescending(x => x.CreatedOn).ToListAsync();
+            var comments = await _Context.Comments.Where(x => x.IsDeleted == false).Include(x => x.Blog).OrderByDescending(x => x.CreatedOn).ToListAsync();
             
             return comments;
         }
 
         public async Task<Comment> GetComment(int id)
         {
-            var comment = await _Context.Comments.Include(x => x.Blog).Include(x => x.User).SingleOrDefaultAsync(x => x.Id == id);
+            var comment = await _Context.Comments.Include(x => x.Blog).SingleOrDefaultAsync(x => x.Id == id);
             return comment;
         }
 
@@ -31,13 +31,13 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<IList<Comment>> GetCommentByBlogId(int id)
         {
-            var comment = await _Context.Comments.Where(x => x.BlogId == id && x.IsDeleted == false).Include(x => x.Blog).Include(x => x.User).OrderByDescending(x => x.CreatedOn).ToListAsync();
+            var comment = await _Context.Comments.Where(x => x.BlogId == id && x.IsDeleted == false).Include(x => x.Blog).OrderByDescending(x => x.CreatedOn).ToListAsync();
             return comment;
         }
 
         public async Task<IList<Comment>> GetCommentsByContent(string content)
         {
-            var comment = await _Context.Comments.Where(x => x.IsDeleted == false && x.Detail.ToLower().Contains(content.ToLower())).Include(x => x.Blog).Include(x => x.User).ToListAsync();
+            var comment = await _Context.Comments.Where(x => x.IsDeleted == false && x.Detail.ToLower().Contains(content.ToLower())).Include(x => x.Blog).ToListAsync();
             return comment;
         }
     }
