@@ -69,17 +69,18 @@ namespace CMS_appBackend.Email
             List<SendSmtpEmailTo1> To1 = new List<SendSmtpEmailTo1>();
             To1.Add(smtpEmailTo1);
             Dictionary<string, object> _parmas = new Dictionary<string, object>();
+
             if (!Params.ContainsKey("parameter"))
             {
                 Params.Add("parameter", "My param value");
             }
 
+            // Check if "subject" property does not exist before adding it
             if (!Params.ContainsKey("subject"))
             {
                 Params.Add("subject", "New Subject");
             }
 
-            Params.Add("subject", "New Subject");
             SendSmtpEmailReplyTo1 ReplyTo1 = new SendSmtpEmailReplyTo1(ReplyToEmail, ReplyToName);
             SendSmtpEmailMessageVersions messageVersion = new SendSmtpEmailMessageVersions(
                 To1,
@@ -89,9 +90,9 @@ namespace CMS_appBackend.Email
                 ReplyTo1,
                 Subject
             );
-            List<SendSmtpEmailMessageVersions> messageVersiopns =
+            List<SendSmtpEmailMessageVersions> messageVersions =
                 new List<SendSmtpEmailMessageVersions>();
-            messageVersiopns.Add(messageVersion);
+            messageVersions.Add(messageVersion);
 
             var sendSmtpEmail = new SendSmtpEmail(
                 Email,
@@ -106,7 +107,7 @@ namespace CMS_appBackend.Email
                 Headers,
                 TemplateId,
                 Params,
-                messageVersiopns,
+                messageVersions,
                 Tags
             );
             CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
