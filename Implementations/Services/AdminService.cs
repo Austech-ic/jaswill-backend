@@ -181,9 +181,9 @@ namespace CMS_appBackend.Implementations.Services
             return new BaseResponse { Message = "Admin Updated Successfully", Success = true };
         }
 
-        public async Task<BaseResponse> ForgetPassword(ForgetPasswordRequestModel model, int Id)
+        public async Task<BaseResponse> ForgetPassword(ForgetPasswordRequestModel model)
         {
-            var user = await _userRepository.GetAminById(Id);
+            var user = await _userRepository.GetAsync(x => x.Email == model.Email);
             if (user == null)
             {
                 return new BaseResponse { Message = "User not found", Success = false };
