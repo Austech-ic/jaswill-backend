@@ -19,10 +19,7 @@ namespace CMS_appBackend.Email
 
         public async Task<bool> SendEmail(EmailRequestModel email)
         {
-            if (!Configuration.Default.ApiKey.ContainsKey("api-key"))
-            {
-                Configuration.Default.ApiKey.Add("api-key", _configuration["Brevo:api-key"]);
-            }
+           Configuration.Default.ApiKey.TryAdd("api-key", _configuration["Brevo:api-key"]);
 
             var apiInstance = new TransactionalEmailsApi();
             string SenderName = "Jaswill Real Estate";
