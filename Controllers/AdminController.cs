@@ -133,7 +133,7 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("ForgetPassword")]
-        public async Task<IActionResult> ForgetPassword(ForgetPasswordRequestModel model, int Id)
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordRequestModel model)
         {
             var admin = await _adminService.ForgetPassword(model);
             if (admin.Success == true)
