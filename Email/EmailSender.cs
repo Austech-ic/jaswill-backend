@@ -19,7 +19,7 @@ namespace CMS_appBackend.Email
 
         public async Task<bool> SendEmail(EmailRequestModel email)
         {
-            Configuration.Default.ApiKey.Add("api-key", _configuration["Brevo:api-key"]);
+             Configuration.Default.ApiKey.Add("api-key", _configuration["Brevo:api-key"]);
 
             var apiInstance = new TransactionalEmailsApi();
             string SenderName = "Jaswill Real Estate";
@@ -53,26 +53,24 @@ namespace CMS_appBackend.Email
             SendSmtpEmailAttachment AttachmentContent = new SendSmtpEmailAttachment(AttachmentUrl, Content, AttachmentName);
             List<SendSmtpEmailAttachment> Attachment = new List<SendSmtpEmailAttachment>();
             Attachment.Add(AttachmentContent);
-            JObject Headers = new JObject();
-            Headers.Add("Some-Custom-Name", "unique-id-1234");
-            long? TemplateId = null;
-            JObject Params = new JObject();
+
+            // Removed the dynamic key generation
+            Dictionary<string, object> Params = new Dictionary<string, object>();
             Params.Add("parameter", "My param value");
             Params.Add("subject", "New Subject");
+
             List<string> Tags = new List<string>();
             Tags.Add("mytag");
             SendSmtpEmailTo1 smtpEmailTo1 = new SendSmtpEmailTo1(ToEmail, ToName);
             List<SendSmtpEmailTo1> To1 = new List<SendSmtpEmailTo1>();
             To1.Add(smtpEmailTo1);
-            var g = Guid.NewGuid().ToString();
-            Dictionary<string, object> _parmas = new Dictionary<string, object>();
-            _parmas.Add(g, Params);
-            SendSmtpEmailReplyTo1 ReplyTo1 = new SendSmtpEmailReplyTo1(ReplyToEmail, ReplyToName);
-            SendSmtpEmailMessageVersions messageVersion = new SendSmtpEmailMessageVersions(To1, _parmas, Bcc, Cc, ReplyTo1, Subject);
-            List<SendSmtpEmailMessageVersions> messageVersiopns = new List<SendSmtpEmailMessageVersions>();
-            messageVersiopns.Add(messageVersion);
 
-            var sendSmtpEmail = new SendSmtpEmail(Email, To, Bcc, Cc, HtmlContent, TextContent, Subject, ReplyTo, Attachment, Headers, TemplateId, Params, messageVersiopns, Tags);
+            SendSmtpEmailReplyTo1 ReplyTo1 = new SendSmtpEmailReplyTo1(ReplyToEmail, ReplyToName);
+            SendSmtpEmailMessageVersions messageVersion = new SendSmtpEmailMessageVersions(To1, Params, Bcc, Cc, ReplyTo1, Subject);
+            List<SendSmtpEmailMessageVersions> messageVersions = new List<SendSmtpEmailMessageVersions>();
+            messageVersions.Add(messageVersion);
+
+            var sendSmtpEmail = new SendSmtpEmail(Email, To, Bcc, Cc, HtmlContent, TextContent, Subject, ReplyTo, Attachment, Headers, TemplateId, Params, messageVersions, Tags);
             CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
             Configuration.Default.ApiKey.Clear();
             return true;
