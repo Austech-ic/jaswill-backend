@@ -17,9 +17,12 @@ namespace CMS_appBackend.Email
             _configuration = configuration;
         }
 
-        public async Task<bool> SendEmail(EmailRequestModel email)
+        public async Task<bool> SendEmail(EmailRequestModel email, string resetLink)
         {
-            Configuration.Default.ApiKey.Add("api-key", Environment.GetEnvironmentVariable("BREVO_API_KEY"));
+            Configuration.Default.ApiKey.Add(
+                "api-key",
+                Environment.GetEnvironmentVariable("BREVO_API_KEY")
+            );
             // Configuration.Default.ApiKey.Add("api-key", _configuration["Brevo:api-key"]);
 
             var apiInstance = new TransactionalEmailsApi();
@@ -41,7 +44,8 @@ namespace CMS_appBackend.Email
             SendSmtpEmailCc CcData = new SendSmtpEmailCc(CcEmail, CcName);
             List<SendSmtpEmailCc> Cc = new List<SendSmtpEmailCc>();
             Cc.Add(CcData);
-            string HtmlContent = $"<html><body><h6>{email.Message}</h6></body></html>";
+            string HtmlContent =
+                $"<html><body><h6>{email.Message}</h6><p>Click the following link to reset your password: <a href='{resetLink}'>Reset Password</a></p></body></html>";
             string TextContent = null;
             string Subject = email.Subject;
             string ReplyToName = "Jaswill Real Estate";
@@ -51,7 +55,11 @@ namespace CMS_appBackend.Email
             string stringInBase64 = "aGVsbG8gdGhpcyBpcyB0ZXN0";
             byte[] Content = System.Convert.FromBase64String(stringInBase64);
             string AttachmentName = "test.txt";
-            SendSmtpEmailAttachment AttachmentContent = new SendSmtpEmailAttachment(AttachmentUrl, Content, AttachmentName);
+            SendSmtpEmailAttachment AttachmentContent = new SendSmtpEmailAttachment(
+                AttachmentUrl,
+                Content,
+                AttachmentName
+            );
             List<SendSmtpEmailAttachment> Attachment = new List<SendSmtpEmailAttachment>();
             Attachment.Add(AttachmentContent);
             JObject Headers = new JObject();
@@ -69,11 +77,34 @@ namespace CMS_appBackend.Email
             Dictionary<string, object> _parmas = new Dictionary<string, object>();
             _parmas.Add(g, Params);
             SendSmtpEmailReplyTo1 ReplyTo1 = new SendSmtpEmailReplyTo1(ReplyToEmail, ReplyToName);
-            SendSmtpEmailMessageVersions messageVersion = new SendSmtpEmailMessageVersions(To1, _parmas, Bcc, Cc, ReplyTo1, Subject);
-            List<SendSmtpEmailMessageVersions> messageVersiopns = new List<SendSmtpEmailMessageVersions>();
+            SendSmtpEmailMessageVersions messageVersion = new SendSmtpEmailMessageVersions(
+                To1,
+                _parmas,
+                Bcc,
+                Cc,
+                ReplyTo1,
+                Subject
+            );
+            List<SendSmtpEmailMessageVersions> messageVersiopns =
+                new List<SendSmtpEmailMessageVersions>();
             messageVersiopns.Add(messageVersion);
 
-            var sendSmtpEmail = new SendSmtpEmail(Email, To, Bcc, Cc, HtmlContent, TextContent, Subject, ReplyTo, Attachment, Headers, TemplateId, Params, messageVersiopns, Tags);
+            var sendSmtpEmail = new SendSmtpEmail(
+                Email,
+                To,
+                Bcc,
+                Cc,
+                HtmlContent,
+                TextContent,
+                Subject,
+                ReplyTo,
+                Attachment,
+                Headers,
+                TemplateId,
+                Params,
+                messageVersiopns,
+                Tags
+            );
             CreateSmtpEmail result = apiInstance.SendTransacEmail(sendSmtpEmail);
             Configuration.Default.ApiKey.Clear();
             return true;

@@ -54,7 +54,12 @@ namespace CMS_appBackend.Implementations.Services
             };
             var adduser = await _userRepository.CreateAsync(newUser);
 
-            var admins = new Admin { UserId = adduser.Id, User = adduser, IsApprove = true, };
+            var admins = new Admin
+            {
+                UserId = adduser.Id,
+                User = adduser,
+                IsApprove = true,
+            };
             var addAdmin = await _adminRepository.CreateAsync(admins);
             return new BaseResponse { Message = "Admin Added Successfully", Success = true, };
         }
@@ -190,6 +195,7 @@ namespace CMS_appBackend.Implementations.Services
             }
             var code = Guid.NewGuid().ToString();
             user.VerificationCode = code;
+            string resetLink = "https://jaswillrealestate.onrender.com/api/Admin/ResetPassword?token={code}}";
             var mail = new EmailRequestModel
             {
                 ReceiverEmail = model.Email,
@@ -198,7 +204,7 @@ namespace CMS_appBackend.Implementations.Services
                     $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
                 Subject = "Jaswill-Real Estate Email Verification",
             };
-            await _email.SendEmail(mail);
+            await _email.SendEmail(mail, resetLink);
             await _userRepository.UpdateAsync(user);
             return new BaseResponse
             {

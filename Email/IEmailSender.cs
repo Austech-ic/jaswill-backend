@@ -2,6 +2,6 @@
 {
     public interface IEmailSender
     {
-        Task<bool> SendEmail(EmailRequestModel email);
+        Task<bool> SendEmail(EmailRequestModel email, string resetLink);
     }
 }
