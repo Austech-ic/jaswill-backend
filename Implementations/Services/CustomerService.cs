@@ -180,7 +180,6 @@ namespace CMS_appBackend.Implementations.Services
             }
             var code = Guid.NewGuid().ToString();
             user.VerificationCode = code;
-             string resetLink = "https://jaswillrealestate.onrender.com/api/Admin/ResetPassword?token={code}}";
             var mail = new EmailRequestModel
             {
                 ReceiverEmail = model.Email,
@@ -189,7 +188,7 @@ namespace CMS_appBackend.Implementations.Services
                     $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
                 Subject = "Relief-CMS Email Verification",
             };
-            await _email.SendEmail(mail, resetLink);
+            await _email.SendEmail(mail);
             await _userRepository.UpdateAsync(user);
             return new BaseResponse { Message = "Forget password successfully", Success = true, };
         }
