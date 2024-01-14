@@ -54,7 +54,12 @@ namespace CMS_appBackend.Implementations.Services
             };
             var adduser = await _userRepository.CreateAsync(newUser);
 
-            var admins = new Admin { UserId = adduser.Id, User = adduser, IsApprove = true, };
+            var admins = new Admin
+            {
+                UserId = adduser.Id,
+                User = adduser,
+                IsApprove = true,
+            };
             var addAdmin = await _adminRepository.CreateAsync(admins);
             return new BaseResponse { Message = "Admin Added Successfully", Success = true, };
         }
@@ -188,8 +193,8 @@ namespace CMS_appBackend.Implementations.Services
             {
                 return new BaseResponse { Message = "User not found", Success = false };
             }
-            var code = Guid.NewGuid().ToString();
-            user.VerificationCode = code;
+            var code = new Random().Next(1000, 10000); 
+            user.VerificationCode = code.ToString();
             var mail = new EmailRequestModel
             {
                 ReceiverEmail = model.Email,
