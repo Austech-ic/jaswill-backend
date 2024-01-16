@@ -39,7 +39,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BaseResponse> AddAdmin(CreateAdminRequestModel model)
         {
-            var admin = await _adminRepository.GetAsync(a => a.User.Email == model.Email);
+            var admin = await _adminRepository.GetAsync(a => a.User.Email == model.Email && a.IsDeleted == false);
             if (admin != null)
             {
                 return new BaseResponse() { Message = "Admin Already Exist", Success = false, };
