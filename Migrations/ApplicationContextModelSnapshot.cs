@@ -134,6 +134,9 @@ namespace CMSappBackend.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -142,6 +145,12 @@ namespace CMSappBackend.Migrations
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Price")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -154,7 +163,7 @@ namespace CMSappBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("BlogId")
+                    b.Property<int?>("BlogId")
                         .HasColumnType("int");
 
                     b.Property<int>("CreatedBy")
@@ -182,14 +191,9 @@ namespace CMSappBackend.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BlogId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -267,6 +271,9 @@ namespace CMSappBackend.Migrations
 
                     b.Property<string>("VerificationCode")
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime>("VerificationCodeExpiryTime")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -547,6 +554,9 @@ namespace CMSappBackend.Migrations
                     b.Property<string>("VerificationCode")
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime>("VerificationCodeExpiryTime")
+                        .HasColumnType("datetime(6)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -614,17 +624,9 @@ namespace CMSappBackend.Migrations
                 {
                     b.HasOne("CMS_appBackend.Entities.Blog", "Blog")
                         .WithMany()
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CMS_appBackend.Identity.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("BlogId");
 
                     b.Navigation("Blog");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CMS_appBackend.Entities.Customer", b =>

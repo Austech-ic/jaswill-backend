@@ -22,7 +22,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BaseResponse> CreateComment(CreateCommentRequestModel model)
         {
-            var user = await _commentRepository.GetAsync(x => x.Detail == model.Detail);
+            var user = await _commentRepository.GetAsync(x => x.Detail == model.Detail && x.IsDeleted == false);
             if (user == null)
             {
                 return new BaseResponse

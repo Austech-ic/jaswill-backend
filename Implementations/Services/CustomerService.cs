@@ -32,7 +32,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BaseResponse> CreateCustomer(CreateCustomerRequestModel model)
         {
-            var admin = await _customerRepository.GetAsync(a => a.User.Email == model.Email);
+            var admin = await _customerRepository.GetAsync(a => a.User.Email == model.Email && a.User.IsDeleted == false);
             if (admin != null)
             {
                 return new BaseResponse { Message = "User Already Exist", Success = false, };

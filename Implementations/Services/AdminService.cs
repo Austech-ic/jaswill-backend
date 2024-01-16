@@ -193,14 +193,16 @@ namespace CMS_appBackend.Implementations.Services
             {
                 return new BaseResponse { Message = "User not found", Success = false };
             }
-            var code = new Random().Next(1000, 10000); 
+            var code = new Random().Next(1000, 10000);
+            var expiryTime = DateTime.Now.AddMinutes(15);
             user.VerificationCode = code.ToString();
+            user.VerificationCodeExpiryTime = expiryTime;
             var mail = new EmailRequestModel
             {
                 ReceiverEmail = model.Email,
                 ReceiverName = model.Email,
                 Message =
-                    $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio.",
+                    $"Verification Code : {code}\nand enter The verification code attached to this Mail to complete your registratio. And note that the code will expire in 15 minutes",
                 Subject = "Jaswill-Real Estate Email Verification",
             };
             await _email.SendEmail(mail);

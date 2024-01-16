@@ -6,7 +6,7 @@ namespace CMS_appBackend.Entities
     public class Comment : AuditableEntity
     {
         public string Detail { get; set; }
-        public int BlogId { get; set; }
+        public int? BlogId { get; set; }
         public Blog? Blog { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BaseResponse> AddRoleAsync(CreateRoleRequestmodel model)
         {
-            var role = await _roleRepository.GetAsync(r => r.Name == model.Name);
+            var role = await _roleRepository.GetAsync(r => r.Name == model.Name && r.IsDeleted == false);
             if (role != null)
             {
                 return new BaseResponse()

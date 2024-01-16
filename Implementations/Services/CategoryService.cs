@@ -18,7 +18,7 @@ namespace CMS_appBackend.Implementations.Services
         }
         public async Task<BaseResponse> CreateCategory(CreateCategoryRequestModel model)
         {
-            var check = await _categoryRepository.GetAsync(x => x.CategoryName == model.CategoryName);
+            var check = await _categoryRepository.GetAsync(x => x.CategoryName == model.CategoryName && x.IsDeleted == false);
             if (check != null)
             {
                 return new BaseResponse
@@ -30,6 +30,9 @@ namespace CMS_appBackend.Implementations.Services
             var category = new Category
             {
                 CategoryName = model.CategoryName,
+                Title = model.Title,
+                Description = model.Description,
+                Price = model.Price,
             };
             await _categoryRepository.CreateAsync(category);
             return new BaseResponse
