@@ -111,7 +111,7 @@ namespace CMS_appBackend.Controllers
                 new
                 {
                     Message = login.Message,
-                    Username = login.Data.UserName,
+                    Username = login.Data.Username,
                     Email = login.Data.Email
                 }
             );
