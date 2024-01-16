@@ -41,47 +41,43 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<CategoriesResponseModel> GetAll()
         {
-            var all = await _categoryRepository.GetAll();
-            var categories = all.Where(x => x.IsDeleted == false).Select(x => new CategoryDto
-            {
-                Id = x.Id,
-                CategoryName = x.CategoryName,
-                Title = x.Title,
-                Description = x.Description,
-                Price = x.Price,
-                RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
-                {
-                    Id = n.Id,
-                    ImageUrl = n.ImageUrl,
-                    Title = n.Title,
-                    Description = n.Description,
-                    Type = n.Type,
-                    City = n.City,
-                    Price = n.Price,
-                    Agency = n.Agency,
-                    Agreement = n.Agreement,
-                    Caution = n.Caution,
-                    ServiceCharge = n.ServiceCharge,
-                    Total = n.Total,
-                    Propertylocation = n.Propertylocation,
-                    NumberOfBedrooms = n.NumberOfBedrooms,
-                    NumberOfFloors = n.NumberOfFloors,
-                    NumberOfBathrooms = n.NumberOfBathrooms,
-                    Content = n.Content,
-                }).ToList(),
-            }).ToList();
+            var categories = await _categoryRepository.GetAll();
             if (categories == null)
             {
                 return new CategoriesResponseModel
                 {
-                    Message = "Categories not available",
+                    Message = "No category found",
                     Success = false
                 };
             }
             return new CategoriesResponseModel
             {
-                Message = "List of categories",
-                Data = categories.ToHashSet(),
+                Data = categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    CategoryName = x.CategoryName,
+                    RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
+                    {
+                        Id = n.Id,
+                        ImageUrl = n.ImageUrl,
+                        Title = n.Title,
+                        Description = n.Description,
+                        Type = n.Type,
+                        City = n.City,
+                        Price = n.Price,
+                        Agency = n.Agency,
+                        Agreement = n.Agreement,
+                        Caution = n.Caution,
+                        ServiceCharge = n.ServiceCharge,
+                        Total = n.Total,
+                        Propertylocation = n.Propertylocation,
+                        NumberOfBedrooms = n.NumberOfBedrooms,
+                        NumberOfFloors = n.NumberOfFloors,
+                        NumberOfBathrooms = n.NumberOfBathrooms,
+                        Content = n.Content,
+                    }).ToList(),
+                }).ToList(),
+                Message = "List of Categories",
                 Success = true
             };
         }
@@ -184,16 +180,27 @@ namespace CMS_appBackend.Implementations.Services
             };
         }
 
-        public async Task<CategoriesResponseModel> GetCategoriesByName(GetCategoriesByNameRequestModel model)
+        public async Task<CategoryResponseModel> GetCategoriesByName(GetCategoriesByNameRequestModel model)
         {
-            var catg = await _categoryRepository.GetAll();
-            var result = catg.Where(x => x.CategoryName.ToLower().Contains(model.Name.ToLower())).Select(x => new CategoryDto
+           var category = await _categoryRepository.GetAsync(x => x.CategoryName == model.Name && x.IsDeleted == false);
+            if (category == null)
             {
-                Id = x.Id,
-                CategoryName = x.CategoryName,
-                RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
+                return new CategoryResponseModel
                 {
-                   Id = n.Id,
+                    Message = "Category not found",
+                    Success = false
+                };
+            }
+            var categoryDTO = new CategoryDto
+            {
+                Id = category.Id,
+                CategoryName = category.CategoryName,
+                Title = category.Title,
+                Description = category.Description,
+                Price = category.Price,
+                RealEstateDtos = category.RealEstates.Select(n => new RealEstateDto
+                {
+                    Id = n.Id,
                     ImageUrl = n.ImageUrl,
                     Title = n.Title,
                     Description = n.Description,
@@ -211,19 +218,11 @@ namespace CMS_appBackend.Implementations.Services
                     NumberOfBathrooms = n.NumberOfBathrooms,
                     Content = n.Content,
                 }).ToList(),
-            }).ToList();
-            if(result.Count == 0)
+            };
+            return new CategoryResponseModel
             {
-                return new CategoriesResponseModel
-                {
-                    Message = "No category found",
-                    Success = false
-                };
-            }
-            return new CategoriesResponseModel
-            {
-                Data = result,
-                Message = "List of categories",
+                Message = "Category found",
+                Data = categoryDTO,
                 Success = true
             };
         }
