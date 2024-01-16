@@ -18,7 +18,7 @@ namespace CMS_appBackend.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [HttpPost("CreateComment/{blogId}")]
+        [HttpPost("CreateComment")]
         public async Task<IActionResult> CreateComment([FromForm] CreateCommentRequestModel model)
         {
             var create = await _commentService.CreateComment(model);
