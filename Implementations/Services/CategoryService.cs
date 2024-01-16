@@ -49,6 +49,9 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = x.Id,
                 CategoryName = x.CategoryName,
+                Title = x.Title,
+                Description = x.Description,
+                Price = x.Price,
                 Blogs = x.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
@@ -88,6 +91,9 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = x.Id,
                 CategoryName = x.CategoryName,
+                Title = x.Title,
+                Description = x.Description,
+                Price = x.Price,
                 Blogs = x.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
@@ -121,6 +127,9 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = category.Id,
                 CategoryName = category.CategoryName,
+                Title = category.Title,
+                Description = category.Description,
+                Price = category.Price,
                 Blogs = category.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
@@ -143,6 +152,9 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = x.Id,
                 CategoryName = x.CategoryName,
+                Title = x.Title,
+                Description = x.Description,
+                Price = x.Price,
                 Blogs = x.Blogs.Select(n => new BlogDto
                 {
                     Title = n.Title,
@@ -178,6 +190,9 @@ namespace CMS_appBackend.Implementations.Services
                 };
             }
             category.CategoryName = model.Name ?? category.CategoryName;
+            category.Title = model.Title ?? category.Title;
+            category.Description = model.Description ?? category.Description;
+            category.Price = model.Price ?? category.Price;
             await _categoryRepository.UpdateAsync(category);
             return new BaseResponse
             {
