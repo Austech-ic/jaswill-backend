@@ -64,7 +64,7 @@ namespace CMS_appBackend.Controllers
         public async Task<IActionResult> GetAllAdmins()
         {
             var admins = await _adminService.GetAllAdmin();
-            if(admins.Success == true)
+            if (admins.Success == true)
             {
                 return Ok(admins);
             }
@@ -107,7 +107,14 @@ namespace CMS_appBackend.Controllers
                 principal,
                 authenticationProperties
             );
-            return Ok(login.Message);
+            return Ok(
+                new
+                {
+                    Message = login.Message,
+                    Username = login.Data.UserName,
+                    Email = login.Data.Email
+                }
+            );
         }
 
         [HttpPost("UpdateAdmin")]
@@ -122,7 +129,10 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("UpdateAdminPassword")]
-        public async Task<IActionResult> UpdateAdminPassword(ChangePasswordRequestModel model, int id)
+        public async Task<IActionResult> UpdateAdminPassword(
+            ChangePasswordRequestModel model,
+            int id
+        )
         {
             var admin = await _adminService.ChangePassword(model, id);
             if (admin.Success == true)
@@ -171,7 +181,5 @@ namespace CMS_appBackend.Controllers
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return Ok();
         }
-
-        
     }
 }

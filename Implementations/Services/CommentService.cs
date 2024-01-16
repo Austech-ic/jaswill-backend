@@ -20,9 +20,9 @@ namespace CMS_appBackend.Implementations.Services
             _blogRepository = blogRepository;
         }
 
-        public async Task<BaseResponse> CreateComment(CreateCommentRequestModel model,  int blogId)
+        public async Task<BaseResponse> CreateComment(CreateCommentRequestModel model)
         {
-            var user = await _userRepository.GetAsync(x => x.Id == blogId);
+            var user = await _commentRepository.GetAsync(x => x.Detail == model.Detail);
             if (user == null)
             {
                 return new BaseResponse
@@ -40,22 +40,10 @@ namespace CMS_appBackend.Implementations.Services
                     Success = false
                 };
             }
-            
-            var blog = await _blogRepository.GetAsync(x => x.Id == blogId);
-            if (blog == null)
-            {
-                return new BaseResponse
-                {
-                    Message = "Blog not found",
-                    Success = false
-                };
-            }
 
             var comment = new Comment
             {
                 Detail = model.Detail,
-                Blog = blog,
-                BlogId = blogId,
             };
             await _commentRepository.CreateAsync(comment);
             return new BaseResponse
