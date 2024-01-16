@@ -10,5 +10,6 @@ namespace CMS_appBackend.Interface.Repositories
         Task<Category> GetById(int id);
         Task<IList<Category>> GetAll();
         Task<IList<Category>> GetAllWithInfo();
+        Task<IList<Category>> GetCategoriesToDisplay();
     }
 }

@@ -13,7 +13,7 @@ namespace CMS_appBackend.Entities
         public string? Title {get; set;}
         public string? Description {get; set;}
         public string? Price {get; set;}
-        public List<Blog> Blogs {get; set;}
+        public List<RealEstate> RealEstates {get; set;}
 
     }
 }

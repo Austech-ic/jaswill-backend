@@ -10,11 +10,11 @@ namespace CMS_appBackend.DTOs.RequestModel
     {
         [Required]
         [StringLength(maximumLength: 300, MinimumLength = 5)]
-        public string Detail { get; set; }
+        public string CommentInput { get; set; }
        
     }
     public class UpdateCommentRequestModel
     {
-        public string Detail { get; set; }
+        public string CommentInput { get; set; }
     }
 }

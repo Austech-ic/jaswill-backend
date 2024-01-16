@@ -16,28 +16,20 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<IList<Comment>> GetAll()
         {
-            var comments = await _Context.Comments.Where(x => x.IsDeleted == false).Include(x => x.Blog).OrderByDescending(x => x.CreatedOn).ToListAsync();
+            var comments = await _Context.Comments.Where(x => x.IsDeleted == false).ToListAsync();
             
             return comments;
         }
 
         public async Task<Comment> GetComment(int id)
         {
-            var comment = await _Context.Comments.Include(x => x.Blog).SingleOrDefaultAsync(x => x.Id == id);
-            return comment;
-        }
-
-        
-
-        public async Task<IList<Comment>> GetCommentByBlogId(int id)
-        {
-            var comment = await _Context.Comments.Where(x => x.BlogId == id && x.IsDeleted == false).Include(x => x.Blog).OrderByDescending(x => x.CreatedOn).ToListAsync();
+            var comment = await _Context.Comments.SingleOrDefaultAsync(x => x.Id == id);
             return comment;
         }
 
         public async Task<IList<Comment>> GetCommentsByContent(string content)
         {
-            var comment = await _Context.Comments.Where(x => x.IsDeleted == false && x.Detail.ToLower().Contains(content.ToLower())).Include(x => x.Blog).ToListAsync();
+            var comment = await _Context.Comments.Where(x => x.IsDeleted == false && x.CommentInput.ToLower().Contains(content.ToLower())).ToListAsync();
             return comment;
         }
     }

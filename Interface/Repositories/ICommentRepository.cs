@@ -7,6 +7,5 @@ namespace CMS_appBackend.Interface.Repositories
         Task<Comment> GetComment(int id);
         Task<IList<Comment>> GetAll();
         Task<IList<Comment>> GetCommentsByContent(string content);
-        Task<IList<Comment>> GetCommentByBlogId(int id);
     }
 }

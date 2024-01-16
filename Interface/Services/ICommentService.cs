@@ -7,7 +7,6 @@ namespace CMS_appBackend.Interface.Services
     {
         Task<BaseResponse> CreateComment(CreateCommentRequestModel model);
         Task<BaseResponse> UpdateComment(UpdateCommentRequestModel model, int id);
-        Task<CommentsResponseModel> GetCommentByBlogId(int id);
         Task<CommentsResponseModel> GetCommentsByContent(string content);
         Task<CommentsResponseModel> GetAll();
         Task<CommentResponseModel> GetComment(int id);

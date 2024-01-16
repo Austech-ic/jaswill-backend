@@ -34,4 +34,10 @@ namespace CMS_appBackend.DTOs.RequestModels
         [DataType(DataType.Password, ErrorMessage = "")]
         public string ConfirmPassword { get; set; }
     }
+
+    public class GetAdminByEmailAndUsernameRequestModel
+    {
+        public string Email { get; set; }
+        public string Username { get; set; }
+    }
 }

@@ -91,5 +91,13 @@ namespace CMS_appBackend.Implementations.Repositories
 
             return admin;
         }
+
+        public async Task<Admin> GetAdminByEmailAndUsername(string email, string username)
+        {
+            var admin = await _Context.Admins
+                .Include(x => x.User)
+                .SingleOrDefaultAsync(x => x.User.Email == email || x.User.Username == username);
+            return admin;
+        }
     }
 }

@@ -164,13 +164,19 @@ namespace CMS_appBackend.Controllers
             return Content(admin.Message);
         }
 
-        [HttpGet("GetAdminUserNameAndEmail/{id}")]
-        public async Task<IActionResult> GetAdminUserNameAndEmail(int id)
+        [HttpGet("GetAdminUserNameAndEmail")]
+        public async Task<IActionResult> GetAdminUserNameAndEmail(GetAdminByEmailAndUsernameRequestModel model)
         {
-            var admin = await _adminService.GetAdminUserNameAndEmail(id);
+            var admin = await _adminService.GetAdminUserNameAndEmail(model);
             if (admin.Success == true)
             {
-                return Ok(admin);
+                return Ok(
+                    new
+                    {
+                        Message = admin.Message,
+                        Data = admin.Data,
+                    }
+                );
             }
             return BadRequest(admin);
         }

@@ -4,7 +4,7 @@ using CMS_appBackend.Entities;
 
 namespace CMS_appBackend.DTOs
 {
-    public class PostDto
+    public class PostDto 
     {
         public string PostName {get; set;}
         public string PostImage {get; set;}

@@ -75,16 +75,6 @@ namespace CMS_appBackend.Controllers
             return Ok(delete);
         }
                 
-        [HttpGet("GetCommentByBlogId/{id}")]
-        public async Task<IActionResult> GetCommentByBlogId([FromRoute] int id)
-        {
-            var comment = await _commentService.GetCommentByBlogId(id);
-            if(comment.Success == false)
-            {
-                return BadRequest(comment);
-            }
-            return Ok(comment);
-        }
 
         [HttpGet("GetCommentsByContent/{content}")]
         public async Task<IActionResult> GetCommentsByContent([FromRoute]string content)

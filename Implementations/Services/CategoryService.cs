@@ -30,9 +30,6 @@ namespace CMS_appBackend.Implementations.Services
             var category = new Category
             {
                 CategoryName = model.CategoryName,
-                Title = model.Title,
-                Description = model.Description,
-                Price = model.Price,
             };
             await _categoryRepository.CreateAsync(category);
             return new BaseResponse
@@ -52,11 +49,25 @@ namespace CMS_appBackend.Implementations.Services
                 Title = x.Title,
                 Description = x.Description,
                 Price = x.Price,
-                Blogs = x.Blogs.Select(n => new BlogDto
+                RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
                 {
-                    Title = n.Title,
-                    ImageUrl = n.ImageUrl,
                     Id = n.Id,
+                    ImageUrl = n.ImageUrl,
+                    Title = n.Title,
+                    Description = n.Description,
+                    Type = n.Type,
+                    City = n.City,
+                    Price = n.Price,
+                    Agency = n.Agency,
+                    Agreement = n.Agreement,
+                    Caution = n.Caution,
+                    ServiceCharge = n.ServiceCharge,
+                    Total = n.Total,
+                    Propertylocation = n.Propertylocation,
+                    NumberOfBedrooms = n.NumberOfBedrooms,
+                    NumberOfFloors = n.NumberOfFloors,
+                    NumberOfBathrooms = n.NumberOfBathrooms,
+                    Content = n.Content,
                 }).ToList(),
             }).ToList();
             if (categories == null)
@@ -94,11 +105,25 @@ namespace CMS_appBackend.Implementations.Services
                 Title = x.Title,
                 Description = x.Description,
                 Price = x.Price,
-                Blogs = x.Blogs.Select(n => new BlogDto
+                RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
                 {
-                    Title = n.Title,
-                    ImageUrl = n.ImageUrl,
                     Id = n.Id,
+                    ImageUrl = n.ImageUrl,
+                    Title = n.Title,
+                    Description = n.Description,
+                    Type = n.Type,
+                    City = n.City,
+                    Price = n.Price,
+                    Agency = n.Agency,
+                    Agreement = n.Agreement,
+                    Caution = n.Caution,
+                    ServiceCharge = n.ServiceCharge,
+                    Total = n.Total,
+                    Propertylocation = n.Propertylocation,
+                    NumberOfBedrooms = n.NumberOfBedrooms,
+                    NumberOfFloors = n.NumberOfFloors,
+                    NumberOfBathrooms = n.NumberOfBathrooms,
+                    Content = n.Content,
                 }).ToList(),
             }).ToHashSet();
 
@@ -130,11 +155,25 @@ namespace CMS_appBackend.Implementations.Services
                 Title = category.Title,
                 Description = category.Description,
                 Price = category.Price,
-                Blogs = category.Blogs.Select(n => new BlogDto
+                RealEstateDtos = category.RealEstates.Select(n => new RealEstateDto
                 {
-                    Title = n.Title,
-                    ImageUrl = n.ImageUrl,
                     Id = n.Id,
+                    ImageUrl = n.ImageUrl,
+                    Title = n.Title,
+                    Description = n.Description,
+                    Type = n.Type,
+                    City = n.City,
+                    Price = n.Price,
+                    Agency = n.Agency,
+                    Agreement = n.Agreement,
+                    Caution = n.Caution,
+                    ServiceCharge = n.ServiceCharge,
+                    Total = n.Total,
+                    Propertylocation = n.Propertylocation,
+                    NumberOfBedrooms = n.NumberOfBedrooms,
+                    NumberOfFloors = n.NumberOfFloors,
+                    NumberOfBathrooms = n.NumberOfBathrooms,
+                    Content = n.Content,
                 }).ToList(),
             };
             return new CategoryResponseModel
@@ -152,14 +191,25 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = x.Id,
                 CategoryName = x.CategoryName,
-                Title = x.Title,
-                Description = x.Description,
-                Price = x.Price,
-                Blogs = x.Blogs.Select(n => new BlogDto
+                RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
                 {
-                    Title = n.Title,
+                   Id = n.Id,
                     ImageUrl = n.ImageUrl,
-                    Id = n.Id,
+                    Title = n.Title,
+                    Description = n.Description,
+                    Type = n.Type,
+                    City = n.City,
+                    Price = n.Price,
+                    Agency = n.Agency,
+                    Agreement = n.Agreement,
+                    Caution = n.Caution,
+                    ServiceCharge = n.ServiceCharge,
+                    Total = n.Total,
+                    Propertylocation = n.Propertylocation,
+                    NumberOfBedrooms = n.NumberOfBedrooms,
+                    NumberOfFloors = n.NumberOfFloors,
+                    NumberOfBathrooms = n.NumberOfBathrooms,
+                    Content = n.Content,
                 }).ToList(),
             }).ToList();
             if(result.Count == 0)
@@ -190,14 +240,82 @@ namespace CMS_appBackend.Implementations.Services
                 };
             }
             category.CategoryName = model.Name ?? category.CategoryName;
-            category.Title = model.Title ?? category.Title;
-            category.Description = model.Description ?? category.Description;
-            category.Price = model.Price ?? category.Price;
             await _categoryRepository.UpdateAsync(category);
             return new BaseResponse
             {
                 Message = "Category updated succdessfully",
                 Success = true
+            };
+        }
+
+        public async Task<BaseResponse> DeleteCategory(int id)
+        {
+            var category = await _categoryRepository.GetById(id);
+            if (category == null)
+            {
+                return new BaseResponse
+                {
+                    Message = "Category not found",
+                    Success = false
+                };
+            }
+            category.IsDeleted = true;
+            await _categoryRepository.UpdateAsync(category);
+            return new BaseResponse
+            {
+                Message = "Category deleted successfully",
+                Success = true
+            };
+        }
+
+        public async Task<CategoriesResponseModel> GetCategoriesToDisplay()
+        {
+            var categories = await _categoryRepository.GetCategoriesToDisplay();
+            if (categories.Count == 0 || categories == null)
+            {
+                return new CategoriesResponseModel
+                {
+                    Message = "No category available",
+                    Success = false
+                };
+            }
+            return new CategoriesResponseModel
+            {
+                Data = categories
+                    .Select(
+                        a =>
+                            new CategoryDto
+                            {
+                                Id = a.Id,
+                                CategoryName = a.CategoryName,
+                                Title = a.Title,
+                                Description = a.Description,
+                                Price = a.Price,
+                                RealEstateDtos = a.RealEstates.Select(n => new RealEstateDto
+                                {
+                                    Id = n.Id,
+                                    ImageUrl = n.ImageUrl,
+                                    Title = n.Title,
+                                    Description = n.Description,
+                                    Type = n.Type,
+                                    City = n.City,
+                                    Price = n.Price,
+                                    Agency = n.Agency,
+                                    Agreement = n.Agreement,
+                                    Caution = n.Caution,
+                                    ServiceCharge = n.ServiceCharge,
+                                    Total = n.Total,
+                                    Propertylocation = n.Propertylocation,
+                                    NumberOfBedrooms = n.NumberOfBedrooms,
+                                    NumberOfFloors = n.NumberOfFloors,
+                                    NumberOfBathrooms = n.NumberOfBathrooms,
+                                    Content = n.Content,
+                                }).ToList(),
+                            }
+                    )
+                    .ToList(),
+                Message = "Categories found successfully",
+                Success = true,
             };
         }
     }

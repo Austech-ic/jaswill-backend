@@ -14,5 +14,6 @@ namespace CMS_appBackend.Interface.Repositories
         Task<List<Admin>> GetAdminsAsync();
         Task<Admin> GetVerificationCode(string code);
         Task<Admin> VerifyAdminRole(int roleId);
+        Task<Admin> GetAdminByEmailAndUsername(string email, string username);
     }
 }

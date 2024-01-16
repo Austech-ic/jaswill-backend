@@ -240,16 +240,15 @@ namespace CMS_appBackend.Implementations.Services
             return new BaseResponse { Message = "Password Changed Successfully", Success = true };
         }
 
-        public async Task<AdminResponseModel> GetAdminUserNameAndEmail(int Id)
+        public async Task<AdminResponseModel> GetAdminUserNameAndEmail(GetAdminByEmailAndUsernameRequestModel model)
         {
-            var admin = await _adminRepository.GetAdminInfo(Id);
+            var admin = await _adminRepository.GetAdminByEmailAndUsername(model.Email, model.Username);
             if (admin == null)
             {
                 return new AdminResponseModel { Message = "Admin not found", Success = false };
             }
             var adminDto = new AdminDto
             {
-                Id = admin.Id,
                 UserName = admin.User!.Username,
                 Email = admin.User!.Email,
             };

@@ -7,6 +7,6 @@ namespace CMS_appBackend.DTOs
        public string Title {get; set;}
         public string Description {get; set;}
         public string Price {get; set;}
-       public List<BlogDto> Blogs {get; set;} = new List<BlogDto>();
+       public List<RealEstateDto> RealEstateDtos {get; set;} = new List<RealEstateDto>();
     }
 }

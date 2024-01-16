@@ -69,5 +69,50 @@ namespace CMS_appBackend.Controllers
             }
             return Ok(categories);
         }
+
+        [HttpGet("GetCategoriesToDisplay")]
+        public async Task<IActionResult> GetCategoriesToDisplay()
+        {
+            var categories = await _categoryService.GetCategoriesToDisplay();
+            if(categories.Success == false)
+            {
+                return BadRequest(categories);
+            }
+            return Ok(
+                new
+                {
+                    Message = categories.Message,
+                    Data = categories.Data,
+                }
+            );
+        }
+
+        [HttpDelete("DeleteCategory/{id}")]
+        public async Task<IActionResult> DeleteCategory([FromRoute]int id)
+        {
+            var delete = await _categoryService.DeleteCategory(id);
+            if(delete.Success == false)
+            {
+                return BadRequest(delete);
+            }
+            return Ok(delete);
+        }
+
+        [HttpGet("GetCategoryByCategoryName")]
+        public async Task<IActionResult> GetCategoryByCategoryName([FromQuery]GetCategoriesByNameRequestModel model)
+        {
+            var categories = await _categoryService.GetCategoriesByName(model);
+            if(categories.Success == false)
+            {
+                return BadRequest(categories);
+            }
+            return Ok(
+                new
+                {
+                    Message = categories.Message,
+                    Data = categories.Data,
+                }
+            );
+        }
     }
 }

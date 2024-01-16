@@ -22,7 +22,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BaseResponse> CreateComment(CreateCommentRequestModel model)
         {
-            var user = await _commentRepository.GetAsync(x => x.Detail == model.Detail && x.IsDeleted == false);
+            var user = await _commentRepository.GetAsync(x => x.CommentInput == model.CommentInput && x.IsDeleted == false);
             if (user == null)
             {
                 return new BaseResponse
@@ -32,7 +32,7 @@ namespace CMS_appBackend.Implementations.Services
                 };
             }
 
-            if (model.Detail == null)
+            if (model.CommentInput == null)
             {
                 return new BaseResponse
                 {
@@ -43,7 +43,7 @@ namespace CMS_appBackend.Implementations.Services
 
             var comment = new Comment
             {
-                Detail = model.Detail,
+                CommentInput = model.CommentInput,
             };
             await _commentRepository.CreateAsync(comment);
             return new BaseResponse
@@ -68,7 +68,7 @@ namespace CMS_appBackend.Implementations.Services
             var comments = list.Where(x => x.IsDeleted == false).Select(x => new CommentDTO
             {
                 Id = x.Id,
-                Detail = x.Detail,
+                CommentInput = x.CommentInput,
                 
             }).ToList();
             return new CommentsResponseModel
@@ -92,7 +92,7 @@ namespace CMS_appBackend.Implementations.Services
             }
             var commentDto = new CommentDTO
             {
-                Detail = comment.Detail,
+                CommentInput = comment.CommentInput,
                 Id = comment.Id,
             };
             return new CommentResponseModel
@@ -125,36 +125,12 @@ namespace CMS_appBackend.Implementations.Services
         }
 
 
-        public async Task<CommentsResponseModel> GetCommentByBlogId(int id)
-        {
-            var comments = await _commentRepository.GetCommentByBlogId(id);
-            var result = comments.Where(x => x.IsDeleted == false).Select(x => new CommentDTO
-            {
-                Detail = x.Detail,
-                Id = x.Id,
-            }).ToHashSet();
-            if(result.Count == 0)
-            {
-                return new CommentsResponseModel
-                {
-                    Message = "No comment found",
-                    Success = false
-                };
-            }
-            return new CommentsResponseModel
-            {
-                Data = result,
-                Message = "",
-                Success = true
-            };
-        }
-
         public async Task<CommentsResponseModel> GetCommentsByContent(string content)
         {
             var list = await _commentRepository.GetCommentsByContent(content);
             var comments = list.Where(x => x.IsDeleted == false).Select(x => new CommentDTO
             {
-                Detail = x.Detail,
+                CommentInput = x.CommentInput,
                 Id = x.Id,
             }).ToHashSet();
             if (comments.Count == 0)
@@ -184,7 +160,7 @@ namespace CMS_appBackend.Implementations.Services
                     Success = false
                 };
             }
-            comment.Detail = model.Detail;
+            comment.CommentInput = model.CommentInput;
             comment.LastModifiedOn = DateTime.Now;
             var comm = await _commentRepository.UpdateAsync(comment);
             return new BaseResponse

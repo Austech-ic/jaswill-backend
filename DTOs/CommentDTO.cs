@@ -5,7 +5,7 @@ namespace CMS_appBackend.DTOs
     public class CommentDTO
     {
         public int Id { get; set; }
-        public string Detail { get; set; }
+        public string CommentInput { get; set; }
         public DateTime CreatedOn { get; set; }
     }
 }
