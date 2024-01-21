@@ -89,5 +89,36 @@ namespace CMS_appBackend.Controllers
             }
             return BadRequest(realEstates);
         }
+
+        [HttpGet("GetRealEstatesByCategoryId/{Id}")]
+        public async Task<IActionResult> GetRealEstatesByCategoryId(int Id)
+        {
+            var realEstates = await _realEstateService.GetRealEstatesByCategoryIdAsync(Id);
+            if (realEstates.Success == true)
+            {
+                return Ok(realEstates);
+            }
+            return BadRequest(realEstates);
+        }
+
+        [HttpGet("GetRealEstatesByType")]
+        public async Task<IActionResult> GetRealEstatesByType([FromQuery] GetRealEstatesByTypeRequestModel model)
+        {
+            var realEstates = await _realEstateService.GetRealEstatesByTypeAsync(model);
+            if (realEstates.Success == true)
+            {
+                return Ok(
+                    new
+                    {
+                        Message = realEstates.Message,
+                        Image = realEstates.Data.Select(x => x.ImageUrl),
+                        Title = realEstates.Data.Select(x => x.Title),
+                        Description = realEstates.Data.Select(x => x.Description),
+                        Price = realEstates.Data.Select(x => x.Price),
+                    }
+                );
+            }
+            return BadRequest(realEstates);
+        }
     }
 }

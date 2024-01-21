@@ -20,13 +20,13 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<Category> GetCategory(int id)
         {
-            var category = await _Context.Categories.Include(x => x.RealEstates).SingleOrDefaultAsync(x => x.Categoryid == id);
+            var category = await _Context.Categories.Include(x => x.RealEstates).SingleOrDefaultAsync(x => x.Id == id);
             return category;
         }
 
         public async Task<Category> GetById(int id)
         {
-            var category = _Context.Categories.Include(x => x.RealEstates).SingleOrDefault(x => x.Categoryid == id);
+            var category = _Context.Categories.Include(x => x.RealEstates).SingleOrDefault(x => x.Id == id);
             return category;
         }
 

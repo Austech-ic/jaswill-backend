@@ -30,6 +30,7 @@ namespace CMS_appBackend.Implementations.Services
             var category = new Category
             {
                 CategoryName = model.CategoryName,
+                Description = model.Description,
             };
             await _categoryRepository.CreateAsync(category);
             return new BaseResponse
@@ -56,6 +57,7 @@ namespace CMS_appBackend.Implementations.Services
                 {
                     Id = x.Id,
                     CategoryName = x.CategoryName,
+                    Description = x.Description,
                     RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
                     {
                         Id = n.Id,
@@ -98,9 +100,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = x.Id,
                 CategoryName = x.CategoryName,
-                Title = x.Title,
                 Description = x.Description,
-                Price = x.Price,
                 RealEstateDtos = x.RealEstates.Select(n => new RealEstateDto
                 {
                     Id = n.Id,
@@ -148,9 +148,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = category.Id,
                 CategoryName = category.CategoryName,
-                Title = category.Title,
                 Description = category.Description,
-                Price = category.Price,
                 RealEstateDtos = category.RealEstates.Select(n => new RealEstateDto
                 {
                     Id = n.Id,
@@ -195,9 +193,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = category.Id,
                 CategoryName = category.CategoryName,
-                Title = category.Title,
                 Description = category.Description,
-                Price = category.Price,
                 RealEstateDtos = category.RealEstates.Select(n => new RealEstateDto
                 {
                     Id = n.Id,
@@ -239,6 +235,7 @@ namespace CMS_appBackend.Implementations.Services
                 };
             }
             category.CategoryName = model.Name ?? category.CategoryName;
+            category.Description = model.Description ?? category.Description;
             await _categoryRepository.UpdateAsync(category);
             return new BaseResponse
             {
@@ -287,9 +284,7 @@ namespace CMS_appBackend.Implementations.Services
                             {
                                 Id = a.Id,
                                 CategoryName = a.CategoryName,
-                                Title = a.Title,
                                 Description = a.Description,
-                                Price = a.Price,
                                 RealEstateDtos = a.RealEstates.Select(n => new RealEstateDto
                                 {
                                     Id = n.Id,

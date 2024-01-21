@@ -11,5 +11,7 @@ namespace CMS_appBackend.Interface.Services
         Task<BaseResponse> DeleteRealEstateAsync(int id);
         Task<BaseResponse> UpdateRealEstateAsync(UpdateRealEstateRequstModel model);
         Task<RealEstatesResponseModel> GetAllRealEstatesAsync();
+        Task<RealEstatesResponseModel> GetRealEstatesByCategoryIdAsync(int id);
+        Task<RealEstatesResponseModel> GetRealEstatesByTypeAsync(GetRealEstatesByTypeRequestModel model);
     }
 }

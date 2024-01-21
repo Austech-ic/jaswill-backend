@@ -19,4 +19,9 @@ namespace CMS_appBackend.DTOs.RequestModels
         public string NumberOfFloors { get; set; }
         public IFormFile ImageUrl {get;set;}
     }
+
+    public class GetRealEstatesByTypeRequestModel
+    {
+        public string Type { get; set; }
+    }
 }

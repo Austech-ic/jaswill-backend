@@ -186,5 +186,89 @@ namespace CMS_appBackend.Implementations.Services
             await _realEstateRepository.UpdateAsync(realEstate);
             return new BaseResponse() { Message = "RealEstate Updated Successfully", Success = true, };
         }
+
+        public async Task<RealEstatesResponseModel> GetRealEstatesByCategoryIdAsync(int Id)
+        {
+            var realEstate = await _realEstateRepository.GetRealEstatesByCategoryId(Id);
+            if (realEstate == null)
+            {
+                return new RealEstatesResponseModel
+                {
+                    Message = "No RealEstate Found",
+                    Success = false,
+                };
+            }
+            return new RealEstatesResponseModel
+            {
+                Data = realEstate.Select(
+                        re =>
+                            new RealEstateDto
+                            {
+                                Id = re.Id,
+                                Title = re.Title,
+                                ImageUrl = re.ImageUrl,
+                                Description = re.Description,
+                                Type = re.Type,
+                                City = re.City,
+                                Price = re.Price,
+                                Agency = re.Agency,
+                                Agreement = re.Agreement,
+                                Caution = re.Caution,
+                                ServiceCharge = re.ServiceCharge,
+                                Total = re.Total,
+                                Propertylocation = re.Propertylocation,
+                                NumberOfBedrooms = re.NumberOfBedrooms,
+                                NumberOfBathrooms = re.NumberOfBathrooms,
+                                NumberOfFloors = re.NumberOfFloors,
+                                Content = re.Content,
+                            }
+                    )
+                    .ToList(),
+                Message = "RealEstate Found",
+                Success = true,
+            };
+        }
+
+        public async Task<RealEstatesResponseModel> GetRealEstatesByTypeAsync(GetRealEstatesByTypeRequestModel model)
+        {
+            var realEstate = await _realEstateRepository.GetRealEstatesByType(model.Type);
+            if (realEstate == null)
+            {
+                return new RealEstatesResponseModel
+                {
+                    Message = "No RealEstate Found",
+                    Success = false,
+                };
+            }
+            return new RealEstatesResponseModel
+            {
+                Data = realEstate.Select(
+                        re =>
+                            new RealEstateDto
+                            {
+                                Id = re.Id,
+                                Title = re.Title,
+                                ImageUrl = re.ImageUrl,
+                                Description = re.Description,
+                                Type = re.Type,
+                                City = re.City,
+                                Price = re.Price,
+                                Agency = re.Agency,
+                                Agreement = re.Agreement,
+                                Caution = re.Caution,
+                                ServiceCharge = re.ServiceCharge,
+                                Total = re.Total,
+                                Propertylocation = re.Propertylocation,
+                                NumberOfBedrooms = re.NumberOfBedrooms,
+                                NumberOfBathrooms = re.NumberOfBathrooms,
+                                NumberOfFloors = re.NumberOfFloors,
+                                Content = re.Content,
+                            }
+                    )
+                    .ToList(),
+                Message = "RealEstate Found",
+                Success = true,
+            };
+        }
     }
 }
