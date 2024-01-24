@@ -11,8 +11,8 @@ deployment:
     - cd $DEPLOYPATH
     - rm -rf $PUBLISHFOLDER
 
-    - mkdir -p jaswill-backend
-    - touch jaswill-backend/restart
+    - mkdir -p CMS_appBackend
+    - touch CMS_appBackend/restart
 
 options:
   build_dir: ""
