@@ -1,0 +1,18 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/repositories/jaswill-backend
+    - mkdir -p $DEPLOYPATH
+
+    - export PUBLISHFOLDER=bin/Release/net6.0/publish
+    - dotnet publish -c Release -o $DEPLOYPATH/$PUBLISHFOLDER
+
+    - cp -r * $DEPLOYPATH
+    - cd $DEPLOYPATH
+    - rm -rf $PUBLISHFOLDER
+
+    - mkdir -p jaswill-backend
+    - touch jaswill-backend/restart
+
+options:
+  build_dir: ""
