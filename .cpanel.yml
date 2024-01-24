@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/jaswbwsw/repositories/jaswill-backend
+    - export DEPLOYPATH=/home/jaswbwsw/repositories/jaswill-backend/
     - mkdir -p $DEPLOYPATH
 
     - export PUBLISHFOLDER=bin/Release/net6.0/publish
