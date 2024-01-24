@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/repositories/jaswill-backend
+    - export DEPLOYPATH=/home/jaswbwsw/repositories/jaswill-backend
     - mkdir -p $DEPLOYPATH
 
     - export PUBLISHFOLDER=bin/Release/net6.0/publish
@@ -11,8 +11,8 @@ deployment:
     - cd $DEPLOYPATH
     - rm -rf $PUBLISHFOLDER
 
-    - mkdir -p CMS_appBackend
-    - touch CMS_appBackend/restart
+    - mkdir -p jaswill-backend
+    - touch jaswill-backend/restart
 
 options:
   build_dir: ""
