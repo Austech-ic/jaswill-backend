@@ -73,19 +73,21 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 
-var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
 
-builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-);
+// var connectionString = builder.Configuration.GetConnectionString("ApplicationContext");
 
-// builder.Configuration.AddEnvironmentVariables();
+// builder.Services.AddDbContext<ApplicationContext>(options =>
+//     options.UseNpgsql(connectionString)
+// );
+
+
+builder.Configuration.AddEnvironmentVariables();
     
 
-// var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
-// builder.Services.AddDbContext<ApplicationContext>(options =>
-//     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-// );
+var connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
+builder.Services.AddDbContext<ApplicationContext>(options =>
+    options.UseNpgsql(connectionString)
+);
 
 // builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
