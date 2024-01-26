@@ -9,6 +9,7 @@ namespace CMS_appBackend.Entities
 {
     public class Category : AuditableEntity
     {
+        public int Id {get; set;}
         public string CategoryName {get; set;}
         public string? Description {get; set;}
         public List<RealEstate> RealEstates {get; set;}

@@ -20,6 +20,7 @@ namespace CMS_appBackend.Entities
         public string? NumberOfBathrooms { get; set; }
         public string? NumberOfFloors { get; set; }
         public string? ImageUrl { get; set; }
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
         public IList<Image> Images{get; set;} = new List<Image>();
     }
