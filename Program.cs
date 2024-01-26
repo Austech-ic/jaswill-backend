@@ -5,6 +5,9 @@ using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.Interface.Services;
 using CMS_appBackend.Email;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using CMS_appBackend.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -100,7 +103,27 @@ var cloudinarySettings = new CloudinarySettings
 
 builder.Services.AddSingleton(cloudinarySettings);
 
+var key = "This is an authorization key";
+builder.Services.AddSingleton<IJWTAuthentication>(new JWTAuthentication(key));
 
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(x =>
+    {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+
+    });
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
