@@ -38,7 +38,7 @@ namespace CMS_appBackend.Implementations.Repositories
         public async Task<IList<RealEstate>> GetRealEstatesByCategoryId(int id)
         {
             var realEstates = await _Context.RealEstates.Include(x => x.Images).
-            Include(x => x.Category).Where(x => x.CategoryId == id).ToListAsync();
+            Include(x => x.Category).Where(x => x.Id == id).ToListAsync();
             return realEstates;
         }
 
