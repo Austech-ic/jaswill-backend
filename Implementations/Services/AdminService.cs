@@ -194,7 +194,7 @@ namespace CMS_appBackend.Implementations.Services
                 return new BaseResponse { Message = "User not found", Success = false };
             }
             var code = new Random().Next(1000, 10000);
-            var expiryTime = DateTime.Now.AddMinutes(15);
+            var expiryTime = DateTime.UtcNow.AddMinutes(15);
             user.VerificationCode = code.ToString();
             user.VerificationCodeExpiryTime = expiryTime;
             var mail = new EmailRequestModel
