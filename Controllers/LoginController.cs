@@ -8,6 +8,7 @@ using CMS_appBackend.DTOs.RequestModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Web;
+using CMS_appBackend.Authentication;
 
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 using CMS_appBackend.Interface.Services;
@@ -22,52 +23,32 @@ namespace CMS_appBackend.Controllers
         private readonly ApplicationContext dbContext;
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
+        private readonly IJWTAuthentication _auth;
 
-        public LoginController(IUserService userService, IRoleService roleService)
+        public LoginController(IUserService userService, IRoleService roleService, IJWTAuthentication auth)
         {
             _userService = userService;
             _roleService = roleService;
+            _auth = auth;
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginRequestModel model)
-        {
+         public async Task<IActionResult> LoginAdmin(LoginRequestModel model)
+        {            
             var login = await _userService.Login(model);
-            var role = await _roleService.GetRoleByUserId(login.Data.Id);
-            if (login.Success == false)
+            if (!login.Success)
             {
-                return Content("Email or Password does not exist ");
+                return BadRequest(login);
             }
-            else if (login.Success == true && role == null)
-            {
-                return Ok();
-            }
-            else if (login.Success == true && role.Success == true)
-            {
-                var claims = new List<Claim>
+            var token = _auth.GenerateToken(login);
+            return Ok(
+                new
                 {
-                    new Claim(ClaimTypes.NameIdentifier, (login.Data.Id).ToString()),
-                    new Claim(ClaimTypes.NameIdentifier, login.Data.Email),
-                    new Claim(ClaimTypes.NameIdentifier, login.Data.Password),
-                };
-                var claimsIdentity = new ClaimsIdentity(
-                    claims,
-                    CookieAuthenticationDefaults.AuthenticationScheme
-                );
-                var authenticationProperties = new AuthenticationProperties();
-                var principal = new ClaimsPrincipal(claimsIdentity);
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    principal,
-                    authenticationProperties
-                );
-                //var role = await _roleService.GetRoleByUserId(login.Data.Id);
-                if (role.Data.Name == "Admin")
-                {
-                    return Ok();
+                    Message = login.Message,
+                    Data = login.Data,
+                    Token = token
                 }
-            }
-            return BadRequest(login.Message);
+            );
         }
 
         [HttpGet("Logout")]

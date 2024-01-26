@@ -108,15 +108,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHealthChecks();
 
-builder.Services
-    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(config =>
-    {
-        config.LoginPath = "/CMS_appBackend/login";
-        config.Cookie.Name = "CMS_appBackend";
-        config.LogoutPath = "/CMS_appBackend/Logout";
-    });
-
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });

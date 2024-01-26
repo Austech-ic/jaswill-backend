@@ -3,9 +3,11 @@ using CMS_appBackend.Interface.Repositories;
 using CMS_appBackend.Interface.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using CMS_appBackend.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using CMS_appBackend.DTOs.ResponseModels;
 
 using System.Security.Claims;
 using System.Web;
@@ -20,11 +22,13 @@ namespace CMS_appBackend.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly IUserService _userService;
+         private readonly IJWTAuthentication _auth;
 
-        public AdminController(IAdminService adminService, IUserService userService)
+        public AdminController(IAdminService adminService, IUserService userService, IJWTAuthentication auth)
         {
             _adminService = adminService;
             _userService = userService;
+            _auth = auth;
         }
 
         [HttpPost("SignUpAdmin")]
@@ -84,35 +88,19 @@ namespace CMS_appBackend.Controllers
 
         [HttpPost("LoginAdmin")]
         public async Task<IActionResult> LoginAdmin(LoginRequestModel model)
-        {
+        {            
             var login = await _userService.Login(model);
-            if (login.Success == false)
+            if (!login.Success)
             {
-                return BadRequest("Email or Password does not exist ");
+                return BadRequest(login);
             }
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, (login.Data.Id).ToString()),
-                new Claim(ClaimTypes.NameIdentifier, login.Data.Email),
-            };
-            var claimsIdentity = new ClaimsIdentity(
-                claims,
-                CookieAuthenticationDefaults.AuthenticationScheme
-            );
-            var authenticationProperties = new AuthenticationProperties();
-            var principal = new ClaimsPrincipal(claimsIdentity);
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                principal,
-                authenticationProperties
-            );
+            var token = _auth.GenerateToken(login);
             return Ok(
                 new
                 {
                     Message = login.Message,
-                    Username = login.Data.Username,
-                    Email = login.Data.Email
+                    Data = login.Data,
+                    Token = token
                 }
             );
         }
