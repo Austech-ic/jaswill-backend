@@ -19,7 +19,7 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpPost("CreateComment")]
-        public async Task<IActionResult> CreateComment([FromForm] CreateCommentRequestModel model)
+        public async Task<IActionResult> CreateComment( CreateCommentRequestModel model)
         {
             var create = await _commentService.CreateComment(model);
             if (create.Success == false)
@@ -32,7 +32,7 @@ namespace CMS_appBackend.Controllers
         
 
         [HttpPut("UpdateComment/{id}")]
-        public async Task<IActionResult> UpdateComment([FromForm] UpdateCommentRequestModel model, [FromRoute]int id)
+        public async Task<IActionResult> UpdateComment( UpdateCommentRequestModel model, [FromRoute]int id)
         {
             var update = await _commentService.UpdateComment(model, id);
             if(update.Success == false)
