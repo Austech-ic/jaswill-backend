@@ -259,5 +259,31 @@ namespace CMS_appBackend.Implementations.Services
                 Data = adminDto,
             };
         }
+
+        public async Task<AdminResponseModel> GetAdmin(int Id)
+        {
+            var admin = await _adminRepository.GetAsync(x => x.Id == Id);
+            if (admin == null)
+            {
+                return new AdminResponseModel { Message = "Admin not found", Success = false };
+            }
+            var adminDto = new AdminDto
+            {
+                Id = admin.Id,
+                UserName = admin.User!.Username,
+                FirstName = admin.User!.FirstName,
+                LastName = admin.User!.LastName,
+                Email = admin.User!.Email,
+                PhoneNumber = admin.User!.PhoneNumber,
+                IsApprove = admin.IsApprove,
+                IsSuperAdmin = admin.IsSuperAdmin,
+            };
+            return new AdminResponseModel
+            {
+                Message = "Admin successfully retrieved",
+                Success = true,
+                Data = adminDto,
+            };
+        }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using CMS_appBackend.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using CMS_appBackend.DTOs.ResponseModels;
 
@@ -103,6 +104,19 @@ namespace CMS_appBackend.Controllers
                     Token = token
                 }
             );
+        }
+        
+        [Authorize]
+         [HttpGet("GetProfile")]
+        public async Task<IActionResult> GetProfile()
+        {            
+            var id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var profile = await _adminService.GetAdmin(int.Parse(id));
+            if (!profile.Success)
+            {
+                return BadRequest(profile);
+            }
+            return Ok(profile);
         }
 
         [HttpPost("UpdateAdmin")]

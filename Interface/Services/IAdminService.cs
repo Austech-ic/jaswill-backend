@@ -19,5 +19,6 @@ namespace CMS_appBackend.Interface.Services
         Task<BaseResponse> ResetPassword(ResetPasswordRequestModel model);
         Task<BaseResponse> ChangePassword(ChangePasswordRequestModel model, int id);
         Task<AdminResponseModel> GetAdminUserNameAndEmail(GetAdminByEmailAndUsernameRequestModel model);
+        Task<AdminResponseModel> GetAdmin(int Id);
     }
 }
