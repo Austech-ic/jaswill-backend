@@ -125,7 +125,7 @@ namespace CMS_appBackend.Implementations.Services
                 return new BaseResponse() { Message = "No Blog found", Success = false, };
             }
             blog.IsDeleted = true;
-            blog.DeletedOn = DateTime.Now;
+            blog.DeletedOn = DateTime.UtcNow;
             await _blogRepository.UpdateAsync(blog);
             return new BaseResponse() { Message = "Blog Deletion Successful", Success = true };
         }
