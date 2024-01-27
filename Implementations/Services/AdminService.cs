@@ -262,7 +262,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<AdminResponseModel> GetAdmin(int Id)
         {
-            var admin = await _adminRepository.GetAsync(x => x.Id == Id);
+            var admin = await _adminRepository.GetAdminInfo(Id);
             if (admin == null)
             {
                 return new AdminResponseModel { Message = "Admin not found", Success = false };
