@@ -35,6 +35,8 @@ namespace CMS_appBackend.Implementations.Services
             var comment = new Comment
             {
                 CommentInput = model.CommentInput,
+                UserName = model.UserName,
+                BlogId = model.BlogId,
             };
             await _commentRepository.CreateAsync(comment);
             return new BaseResponse
@@ -60,7 +62,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 Id = x.Id,
                 CommentInput = x.CommentInput,
-                
+                UserName = x.UserName,                
             }).ToList();
             return new CommentsResponseModel
             {
@@ -85,6 +87,7 @@ namespace CMS_appBackend.Implementations.Services
             {
                 CommentInput = comment.CommentInput,
                 Id = comment.Id,
+                UserName = comment.UserName,
             };
             return new CommentResponseModel
             {
@@ -152,7 +155,8 @@ namespace CMS_appBackend.Implementations.Services
                 };
             }
             comment.CommentInput = model.CommentInput;
-            comment.LastModifiedOn = DateTime.Now;
+            comment.UserName = model.UserName;
+            comment.LastModifiedOn = DateTime.UtcNow;
             var comm = await _commentRepository.UpdateAsync(comment);
             return new BaseResponse
             {

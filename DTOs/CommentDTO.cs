@@ -6,6 +6,7 @@ namespace CMS_appBackend.DTOs
     {
         public int Id { get; set; }
         public string CommentInput { get; set; }
+        public string UserName { get; set; }
         public DateTime CreatedOn { get; set; }
     }
 }
