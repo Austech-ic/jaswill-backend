@@ -106,7 +106,7 @@ namespace CMS_appBackend.Implementations.Services
 
         public async Task<BlogResponseModel> GetBlogById(int id)
         {
-            var blog = await _blogRepository.GetAsync(x => x.Id == id && x.IsDeleted == false);
+            var blog = await _blogRepository.GetBlogByIdAsync(id);
             if (blog == null)
             {
                 return new BlogResponseModel { Message = $"Blog not found", Success = false, };
