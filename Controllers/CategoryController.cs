@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CMS_appBackend.DTOs.RequestModel;
+using CMS_appBackend.Implementations.Services;
 using CMS_appBackend.Interface.Services;
 
 namespace CMS_appBackend.Controllers
@@ -10,20 +11,36 @@ namespace CMS_appBackend.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
-        public CategoryController(ICategoryService categoryService)
+        private readonly CloudinaryService _cloudinaryService;
+
+        public CategoryController(
+            ICategoryService categoryService,
+            CloudinaryService cloudinaryService
+        )
         {
             _categoryService = categoryService;
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpPost("CreateCategory")]
-        public async Task<IActionResult> CreateCategory(CreateCategoryRequestModel model)
+        public async Task<IActionResult> CreateRealEstate(
+            [FromForm] CreateCategoryRequestModel model
+        )
         {
-            var add = await _categoryService.CreateCategory(model);
-            if (add.Success == false)
+            if (model.Image != null && model.Image.Length > 0)
             {
-                return BadRequest(add);
+                var cloudinaryImageUrl = await _cloudinaryService.UploadImageToCloudinaryAsync(
+                    model.Image
+                );
             }
-            return Ok(add);
+            var category = await _categoryService.CreateCategory(model);
+
+            if (category.Success)
+            {
+                return Content(category.Message);
+            }
+
+            return Content(category.Message);
         }
 
         [HttpPut("UpdateCategory")]
@@ -41,7 +58,7 @@ namespace CMS_appBackend.Controllers
         public async Task<IActionResult> GetAllCategory()
         {
             var all = await _categoryService.GetAll();
-            if(all.Success == false)
+            if (all.Success == false)
             {
                 return BadRequest(all);
             }
@@ -49,10 +66,10 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpGet("GetCategoryById/{id}")]
-        public async Task<IActionResult> GetCategoryById([FromRoute]int id)
+        public async Task<IActionResult> GetCategoryById([FromRoute] int id)
         {
             var catg = await _categoryService.GetById(id);
-            if(catg.Success == false)
+            if (catg.Success == false)
             {
                 return BadRequest(catg);
             }
@@ -63,24 +80,18 @@ namespace CMS_appBackend.Controllers
         public async Task<IActionResult> GetCategoriesToDisplay()
         {
             var categories = await _categoryService.GetCategoriesToDisplay();
-            if(categories.Success == false)
+            if (categories.Success == false)
             {
                 return BadRequest(categories);
             }
-            return Ok(
-                new
-                {
-                    Message = categories.Message,
-                    Data = categories.Data,
-                }
-            );
+            return Ok(new { Message = categories.Message, Data = categories.Data, });
         }
 
         [HttpDelete("DeleteCategory/{id}")]
-        public async Task<IActionResult> DeleteCategory([FromRoute]int id)
+        public async Task<IActionResult> DeleteCategory([FromRoute] int id)
         {
             var delete = await _categoryService.DeleteCategory(id);
-            if(delete.Success == false)
+            if (delete.Success == false)
             {
                 return BadRequest(delete);
             }
@@ -88,20 +99,16 @@ namespace CMS_appBackend.Controllers
         }
 
         [HttpGet("GetCategoryByCategoryName")]
-        public async Task<IActionResult> GetCategoryByCategoryName([FromQuery]GetCategoriesByNameRequestModel model)
+        public async Task<IActionResult> GetCategoryByCategoryName(
+            [FromQuery] GetCategoriesByNameRequestModel model
+        )
         {
             var categories = await _categoryService.GetCategoriesByName(model);
-            if(categories.Success == false)
+            if (categories.Success == false)
             {
                 return BadRequest(categories);
             }
-            return Ok(
-                new
-                {
-                    Message = categories.Message,
-                    Data = categories.Data,
-                }
-            );
+            return Ok(new { Message = categories.Message, Data = categories.Data, });
         }
     }
 }
