@@ -87,15 +87,6 @@ namespace CMS_appBackend.Implementations.Services
                                 ImageUrl = blo.ImageUrl,
                                 CreatedOn = blo.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"), 
                                 Desccription = blo.Desccription,
-                                CommentDTOs = blo.Comments.Select(
-                                    com =>
-                                        new CommentDTO
-                                        {
-                                            UserName = com.UserName,
-                                            CommentInput = com.CommentInput,
-                                            Id = com.Id,
-                                        }
-                                ).ToList(),
                             }
                     )
                     .ToList(),
@@ -120,15 +111,6 @@ namespace CMS_appBackend.Implementations.Services
                     ImageUrl = blog.ImageUrl,
                     CreatedOn = blog.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"),
                     Desccription = blog.Desccription,
-                    CommentDTOs = blog.Comments.Select(
-                        com =>
-                            new CommentDTO
-                            {
-                                UserName = com.UserName,
-                                CommentInput = com.CommentInput,
-                                Id = com.Id,
-                            }
-                    ).ToList(),
                 },
                 Message = "Blog found successfully",
                 Success = true,
@@ -167,15 +149,6 @@ namespace CMS_appBackend.Implementations.Services
                                 ImageUrl = a.ImageUrl,
                                 CreatedOn = a.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"),
                                 Desccription = a.Desccription,
-                                CommentDTOs = a.Comments.Select(
-                                    com =>
-                                        new CommentDTO
-                                        {
-                                            UserName = com.UserName,
-                                            CommentInput = com.CommentInput,
-                                            Id = com.Id,
-                                        }
-                                ).ToList(),
                             }
                     )
                     .ToList(),
@@ -222,15 +195,6 @@ namespace CMS_appBackend.Implementations.Services
                     ImageUrl = blog.ImageUrl,
                     CreatedOn = blog.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"),
                     Desccription = blog.Desccription,
-                    CommentDTOs = blog.Comments.Select(
-                        com =>
-                            new CommentDTO
-                            {
-                                UserName = com.UserName,
-                                CommentInput = com.CommentInput,
-                                Id = com.Id,
-                            }
-                    ).ToList(),
                 },
                 Message = "Blog found successfully",
                 Success = true,
@@ -255,15 +219,6 @@ namespace CMS_appBackend.Implementations.Services
                             ImageUrl = blo.ImageUrl,
                             CreatedOn = blo.CreatedOn.ToString("yyyy-MM-dd HH:mm:ss"), // Adjust the format as needed
                             Desccription = blo.Desccription,
-                            CommentDTOs = blo.Comments.Select(
-                                com =>
-                                    new CommentDTO
-                                    {
-                                        UserName = com.UserName,
-                                        CommentInput = com.CommentInput,
-                                        Id = com.Id,
-                                    }
-                            ).ToList(),
                         }
                 )
                 .ToList();

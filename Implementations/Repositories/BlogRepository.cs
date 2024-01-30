@@ -16,7 +16,6 @@ namespace CMS_appBackend.Implementations.Repositories
         public async Task<List<Blog>> GetBlogsByDateAsync(DateTime date)
         {
             return await _Context.Blogs.Include(x => x.Images)
-            .Include(x => x.Comments)
             .Include(x => x.Posts)
             .Where(x => x.IsDeleted == false)
             .ToListAsync();
@@ -24,13 +23,13 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<List<Blog>> GetBlogsToDisplayAsync()
         {
-            var Blog = await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).Include(x => x.Comments).Where(x => x.IsDeleted == false).ToListAsync();
+            var Blog = await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).Where(x => x.IsDeleted == false).ToListAsync();
             return Blog;
         }
 
         public async Task<Blog> GetBlogByIdAsync(int id)
         {
-            var blog = await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).Include(x => x.Comments).Where(x => x.IsDeleted == false).FirstOrDefaultAsync(x => x.Id == id);
+            var blog = await _Context.Blogs.Include(x => x.Images).Include(x => x.Posts).Where(x => x.IsDeleted == false).FirstOrDefaultAsync(x => x.Id == id);
             return blog;
         }
 
@@ -44,7 +43,6 @@ namespace CMS_appBackend.Implementations.Repositories
             var blogs = await _Context.Blogs
                 .Include(x => x.Images)
                 .Include(x => x.Posts)
-                .Include(x => x.Comments)
                 .Where(x => x.IsDeleted == false)
                 .ToListAsync();
             return blogs;

@@ -9,10 +9,12 @@ namespace CMS_appBackend.Entities
 {
     public class Category : AuditableEntity
     {
-        public int Id {get; set;}
-        public string CategoryName {get; set;}
-        public string? Description {get; set;}
-        public List<RealEstate> RealEstates {get; set;}
-
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
+        public string? Image { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public string? Amount { get; set; }
+        public IList<Image> Images { get; set; } = new List<Image>();
     }
 }

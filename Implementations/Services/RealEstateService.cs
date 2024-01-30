@@ -57,7 +57,6 @@ namespace CMS_appBackend.Implementations.Services
                 NumberOfBathrooms = model.NumberOfBathrooms,
                 NumberOfFloors = model.NumberOfFloors,
                 Content = model.Content,
-                CategoryName = model.CategoryName,
             };
             var result = await _realEstateRepository.CreateAsync(re);
             return new BaseResponse { Message = "RealEstate Created Successfully", Success = true, };

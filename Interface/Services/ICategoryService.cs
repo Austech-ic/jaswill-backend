@@ -10,7 +10,6 @@ namespace CMS_appBackend.Interface.Services
         Task<CategoriesResponseModel> GetAll();
         Task<CategoryResponseModel> GetById(int id);
         Task<CategoryResponseModel> GetCategoriesByName(GetCategoriesByNameRequestModel model);
-        Task<CategoriesResponseModel> GetAllWithInfo();
         Task<BaseResponse> DeleteCategory(int id);
         Task<CategoriesResponseModel> GetCategoriesToDisplay();
     }

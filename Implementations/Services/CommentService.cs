@@ -36,7 +36,6 @@ namespace CMS_appBackend.Implementations.Services
             {
                 CommentInput = model.CommentInput,
                 UserName = model.UserName,
-                BlogId = model.BlogId,
             };
             await _commentRepository.CreateAsync(comment);
             return new BaseResponse

@@ -59,17 +59,6 @@ namespace CMS_appBackend.Controllers
             return Ok(catg);
         }
 
-        [HttpGet("GetAllCategoryWithInfo")]
-        public async Task<IActionResult> GetAllCategoryWithInfo()
-        {
-            var categories = await _categoryService.GetAllWithInfo();
-            if(categories.Success == false)
-            {
-                return BadRequest(categories);
-            }
-            return Ok(categories);
-        }
-
         [HttpGet("GetCategoriesToDisplay")]
         public async Task<IActionResult> GetCategoriesToDisplay()
         {

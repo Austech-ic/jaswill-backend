@@ -7,8 +7,6 @@ namespace CMS_appBackend.Entities
     {
         public string UserName { get; set; }
         public string CommentInput { get; set; }
-        public int BlogId { get; set; }
-        public Blog Blog { get; set; }
 
     }
 }

@@ -13,6 +13,5 @@ namespace CMS_appBackend.Entities
         public DateTime CreatedOn {get; set;}
        public List<Post> Posts {get; set;} 
        public IList<Image> Images{get; set;} = new List<Image>();
-       public List<Comment> Comments {get; set;}
     }
 }
