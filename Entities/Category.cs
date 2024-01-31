@@ -12,9 +12,8 @@ namespace CMS_appBackend.Entities
         public int Id { get; set; }
         public string CategoryName { get; set; }
         public string? Image { get; set; }
-        public string? Title { get; set; }
         public string? Description { get; set; }
-        public string? Amount { get; set; }
         public IList<Image> Images { get; set; } = new List<Image>();
+        public IList<RealEstate> RealEstates {get; set;} = new List<RealEstate>();
     }
 }

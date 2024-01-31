@@ -13,6 +13,8 @@ namespace CMS_appBackend.DTOs
         public string? Agreement { get; set; }
         public string? Caution { get; set; }
         public string? ServiceCharge { get; set; }
+        public int CategoryId {get; set;}
+        public string? CategoryName {get; set;}
         public string? Total { get; set; }
         public string Propertylocation { get; set; }
         public string NumberOfBedrooms { get; set; }

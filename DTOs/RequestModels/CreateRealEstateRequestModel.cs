@@ -25,4 +25,9 @@ namespace CMS_appBackend.DTOs.RequestModels
     {
         public string Type { get; set; }
     }
+
+    public class GetRealEstatesByCategoryNameRequestModel
+    {
+        public string CategoryName { get; set; }
+    }
 }

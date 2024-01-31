@@ -28,7 +28,7 @@ namespace CMS_appBackend.Implementations.Services
         public async Task<BaseResponse> CreateCategory(CreateCategoryRequestModel model)
         {
             var check = await _categoryRepository.GetAsync(
-                x => x.Title == model.Title && x.IsDeleted == false
+                x => x.CategoryName == model.CategoryName && x.IsDeleted == false
             );
             if (check != null)
             {
@@ -44,8 +44,6 @@ namespace CMS_appBackend.Implementations.Services
                 CategoryName = model.CategoryName,
                 Description = model.Description,
                 Image = cloudinaryUrl,
-                Title = model.Title,
-                Amount = model.Amount
             };
             await _categoryRepository.CreateAsync(category);
             return new BaseResponse { Message = "Category added successfully!", Success = true };
@@ -73,8 +71,31 @@ namespace CMS_appBackend.Implementations.Services
                                 CategoryName = x.CategoryName,
                                 Description = x.Description,
                                 Image = x.Image,
-                                Title = x.Title,
-                                Amount = x.Amount
+                                RealEstates = x.RealEstates.Select(
+                                    a =>
+                                        new RealEstateDto
+                                        {
+                                            Id = a.Id,
+                                            Title = a.Title,
+                                            Agency = a.Agency,
+                                            Description = a.Description,
+                                            Price = a.Price,
+                                            Agreement = a.Agreement,
+                                            Caution = a.Caution,
+                                            ServiceCharge = a.ServiceCharge,
+                                            Total = a.Total,
+                                            Propertylocation = a.Propertylocation,
+                                            NumberOfBedrooms = a.NumberOfBedrooms,
+                                            NumberOfBathrooms = a.NumberOfBathrooms,
+                                            NumberOfFloors = a.NumberOfFloors,
+                                            ImageUrl = a.ImageUrl,
+                                            CategoryId = a.CategoryId,
+                                            CategoryName = a.CategoryName,
+                                            Type = a.Type,
+                                            City = a.City,
+                                            Content = a.Content,
+                                        }
+                                ).ToList(),
                             }
                     )
                     .ToList(),
@@ -102,9 +123,32 @@ namespace CMS_appBackend.Implementations.Services
                 Id = category.Id,
                 CategoryName = category.CategoryName,
                 Description = category.Description,
-                Amount = category.Amount,
                 Image = category.Image,
-                Title = category.Title
+                RealEstates = category.RealEstates.Select(
+                    a =>
+                        new RealEstateDto
+                        {
+                            Id = a.Id,
+                            Title = a.Title,
+                            Agency = a.Agency,
+                            Description = a.Description,
+                            Price = a.Price,
+                            Agreement = a.Agreement,
+                            Caution = a.Caution,
+                            ServiceCharge = a.ServiceCharge,
+                            Total = a.Total,
+                            Propertylocation = a.Propertylocation,
+                            NumberOfBedrooms = a.NumberOfBedrooms,
+                            NumberOfBathrooms = a.NumberOfBathrooms,
+                            NumberOfFloors = a.NumberOfFloors,
+                            ImageUrl = a.ImageUrl,
+                            CategoryId = a.CategoryId,
+                            CategoryName = a.CategoryName,
+                            Type = a.Type,
+                            City = a.City,
+                            Content = a.Content,
+                        }
+                ).ToList(),
             };
             return new CategoryResponseModel
             {
@@ -132,9 +176,32 @@ namespace CMS_appBackend.Implementations.Services
                 Id = category.Id,
                 CategoryName = category.CategoryName,
                 Description = category.Description,
-                Amount = category.Amount,
                 Image = category.Image,
-                Title = category.Title
+                RealEstates = category.RealEstates.Select(
+                    a =>
+                        new RealEstateDto
+                        {
+                            Id = a.Id,
+                            Title = a.Title,
+                            Agency = a.Agency,
+                            Description = a.Description,
+                            Price = a.Price,
+                            Agreement = a.Agreement,
+                            Caution = a.Caution,
+                            ServiceCharge = a.ServiceCharge,
+                            Total = a.Total,
+                            Propertylocation = a.Propertylocation,
+                            NumberOfBedrooms = a.NumberOfBedrooms,
+                            NumberOfBathrooms = a.NumberOfBathrooms,
+                            NumberOfFloors = a.NumberOfFloors,
+                            ImageUrl = a.ImageUrl,
+                            CategoryId = a.CategoryId,
+                            CategoryName = a.CategoryName,
+                            Type = a.Type,
+                            City = a.City,
+                            Content = a.Content,
+                        }
+                ).ToList(),
             };
             return new CategoryResponseModel
             {
@@ -158,8 +225,6 @@ namespace CMS_appBackend.Implementations.Services
             }
             category.CategoryName = model.CategoryName ?? category.CategoryName;
             category.Description = model.Description ?? category.Description;
-            category.Title = model.Title ?? category.Title;
-            category.Amount = model.Amount ?? category.Amount;
             category.Image = cloudinaryUrl ?? category.Image;
             await _categoryRepository.UpdateAsync(category);
             return new BaseResponse { Message = "Category updated succdessfully", Success = true };
@@ -199,8 +264,31 @@ namespace CMS_appBackend.Implementations.Services
                                 CategoryName = a.CategoryName,
                                 Description = a.Description,
                                 Image = a.Image,
-                                Title = a.Title,
-                                Amount = a.Amount
+                                RealEstates = a.RealEstates.Select(
+                                    x =>
+                                        new RealEstateDto
+                                        {
+                                            Id = x.Id,
+                                            Title = x.Title,
+                                            Agency = x.Agency,
+                                            Description = x.Description,
+                                            Price = x.Price,
+                                            Agreement = x.Agreement,
+                                            Caution = x.Caution,
+                                            ServiceCharge = x.ServiceCharge,
+                                            Total = x.Total,
+                                            Propertylocation = x.Propertylocation,
+                                            NumberOfBedrooms = x.NumberOfBedrooms,
+                                            NumberOfBathrooms = x.NumberOfBathrooms,
+                                            NumberOfFloors = x.NumberOfFloors,
+                                            ImageUrl = x.ImageUrl,
+                                            CategoryId = x.CategoryId,
+                                            CategoryName = x.CategoryName,
+                                            Type = x.Type,
+                                            City = x.City,
+                                            Content = x.Content,
+                                        }
+                                ).ToList(),
                             }
                     )
                     .ToList(),

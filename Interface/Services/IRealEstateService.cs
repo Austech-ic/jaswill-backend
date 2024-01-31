@@ -13,5 +13,8 @@ namespace CMS_appBackend.Interface.Services
         Task<RealEstatesResponseModel> GetAllRealEstatesAsync();
         Task<RealEstatesResponseModel> GetRealEstatesByCategoryIdAsync(int id);
         Task<RealEstatesResponseModel> GetRealEstatesByTypeAsync(GetRealEstatesByTypeRequestModel model);
+        Task<RealEstatesResponseModel> GetRealEstateByCategoryNameAsync(GetRealEstatesByCategoryNameRequestModel model);
+        Task<RealEstatesResponseModel> GetRealEstateByCategoryIdAsync(int id);
+        Task<RealEstatesResponseModel> GetAllRealEstatesByCategoriesAsync();
     }
 }
