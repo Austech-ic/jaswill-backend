@@ -28,7 +28,7 @@ namespace CMS_appBackend.Implementations.Services
         public async Task<BaseResponse> CreateCategory(CreateCategoryRequestModel model)
         {
             var check = await _categoryRepository.GetAsync(
-                x => x.CategoryName == model.CategoryName && x.IsDeleted == false
+                x => x.Title == model.Title && x.IsDeleted == false
             );
             if (check != null)
             {
