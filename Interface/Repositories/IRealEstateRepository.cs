@@ -11,5 +11,6 @@ namespace CMS_appBackend.Interface.Repositories
         Task<IList<RealEstate>> GetRealEstateByCategoryName(string categoryName);
         Task<IList<RealEstate>> GetRealEstateByCategoryId (int id);
         Task<IList<RealEstate>> GetAllRealEstatesByCategories();
+        // Task<IList<RealEstate>> GetRealEstateByCategoryName(string categoryName);
     }
 }

@@ -14,13 +14,13 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<IList<Category>> GetAll()
         {
-            var categories = await _Context.Categories.Include(x => x.Images).Where(x => x.IsDeleted == false).ToListAsync();
+            var categories = await _Context.Categories.Include(x => x.Images).Include(x => x.RealEstates).Where(x => x.IsDeleted == false).ToListAsync();
             return categories;
         }
 
         public async Task<Category> GetCategory(int id)
         {
-            var category = await _Context.Categories.Include(x => x.Images).SingleOrDefaultAsync(x => x.Id == id);
+            var category = await _Context.Categories.Include(x => x.Images).Include(x => x.RealEstates).SingleOrDefaultAsync(x => x.Id == id);
             return category;
         }
 
@@ -33,13 +33,13 @@ namespace CMS_appBackend.Implementations.Repositories
 
         public async Task<IList<Category>> GetCategoriesToDisplay()
         {
-            var categories = await _Context.Categories.Include(x => x.Images).Where(x => x.IsDeleted == false).ToListAsync();
+            var categories = await _Context.Categories.Include(x => x.Images).Include(x => x.RealEstates).Where(x => x.IsDeleted == false).ToListAsync();
             return categories;
         }
 
         public async Task<Category> GetCategoryByName(string name)
         {
-            var category = await _Context.Categories.Include(x => x.Images).Where(x => x.IsDeleted == false).SingleOrDefaultAsync(x => x.CategoryName == name);
+            var category = await _Context.Categories.Include(x => x.Images).Include(x => x.RealEstates).Where(x => x.IsDeleted == false).SingleOrDefaultAsync(x => x.CategoryName == name);
             return category;
         }
     }
