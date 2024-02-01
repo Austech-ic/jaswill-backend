@@ -52,6 +52,8 @@ namespace CMS_appBackend.Implementations.Services
                 Caution = model.Caution,
                 ServiceCharge = model.ServiceCharge,
                 Total = model.Total,
+                CategoryId = model.CategoryId,
+                CategoryName = model.CategoryName,
                 Propertylocation = model.Propertylocation,
                 NumberOfBedrooms = model.NumberOfBedrooms,
                 NumberOfBathrooms = model.NumberOfBathrooms,
@@ -103,6 +105,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Caution = re.Caution,
                                 ServiceCharge = re.ServiceCharge,
                                 Total = re.Total,
+                                CategoryId = re.CategoryId,
+                                CategoryName = re.CategoryName,
                                 Propertylocation = re.Propertylocation,
                                 NumberOfBedrooms = re.NumberOfBedrooms,
                                 NumberOfBathrooms = re.NumberOfBathrooms,
@@ -140,6 +144,8 @@ namespace CMS_appBackend.Implementations.Services
                     Price = realEstate.Price,
                     Agency = realEstate.Agency,
                     Agreement = realEstate.Agreement,
+                    CategoryId = realEstate.CategoryId,
+                    CategoryName = realEstate.CategoryName,
                     Caution = realEstate.Caution,
                     ServiceCharge = realEstate.ServiceCharge,
                     Total = realEstate.Total,
@@ -216,6 +222,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Caution = re.Caution,
                                 ServiceCharge = re.ServiceCharge,
                                 Total = re.Total,
+                                CategoryId = re.CategoryId,
+                                CategoryName = re.CategoryName,
                                 Propertylocation = re.Propertylocation,
                                 NumberOfBedrooms = re.NumberOfBedrooms,
                                 NumberOfBathrooms = re.NumberOfBathrooms,
@@ -257,6 +265,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Agreement = re.Agreement,
                                 Caution = re.Caution,
                                 ServiceCharge = re.ServiceCharge,
+                                CategoryId = re.CategoryId,
+                                CategoryName = re.CategoryName,
                                 Total = re.Total,
                                 Propertylocation = re.Propertylocation,
                                 NumberOfBedrooms = re.NumberOfBedrooms,
@@ -292,6 +302,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Title = re.Title,
                                 ImageUrl = re.ImageUrl,
                                 Description = re.Description,
+                                CategoryId = re.CategoryId,
+                                CategoryName = re.CategoryName,
                                 Type = re.Type,
                                 City = re.City,
                                 Price = re.Price,
@@ -313,7 +325,7 @@ namespace CMS_appBackend.Implementations.Services
             };
         }
 
-        public async Task<RealEstatesResponseModel> GetRealEstateByCategoryIdAsync(int id)
+        public async  Task<RealEstatesResponseModel> GetRealEstateByCategoryIdAsync(int id)
         {
             var realEstate = await _realEstateRepository.GetRealEstateByCategoryId(id);
             if (realEstate == null)
@@ -334,6 +346,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Title = re.Title,
                                 ImageUrl = re.ImageUrl,
                                 Description = re.Description,
+                                CategoryId = re.CategoryId,
+                                CategoryName = re.CategoryName,
                                 Type = re.Type,
                                 City = re.City,
                                 Price = re.Price,
@@ -376,6 +390,8 @@ namespace CMS_appBackend.Implementations.Services
                                 Title = re.Title,
                                 ImageUrl = re.ImageUrl,
                                 Description = re.Description,
+                                CategoryId = re.CategoryId,
+                                CategoryName = re.CategoryName,
                                 Type = re.Type,
                                 City = re.City,
                                 Price = re.Price,
